@@ -1,14 +1,22 @@
 @import "tailwindcss";
 
-@theme{
-    --color-primary: #4f46e5;
-    --color-primary-500: #818cf8;
-    --color-secondary: #6366f1;
-    --color-accent: #818cf8;
-    --color-success: #10b981;
-    --color-warning: #f59e0b;   
+@theme {
+  /* Primary Color */
+  --color-primary: #111827; /* Matte Black */
+  --color-primary-500: #2f3A48; /* Dark Gray */
+
+  /* Secondary Color */
+  --color-secondary: #00674f; /* Emerald Green */
+  --color-secondary-500: #50c878; /* Light Emerald Green */
+
+  /* Accent Color */
+  --color-accent: #22d3ee; /* Neon Green */
+
+  /* Semantic Colors */
+  --color-success: #10b981; /* Emerald Green */
+  --color-warning: #f59e0b; /* Amber */
 }
 
-button{
-    cursor: pointer;
-}
+button {
+  cursor: pointer;
+}   
