@@ -1,0 +1,81 @@
+<nav class="bg-white shadow-sm w-full z-30">
+  <div
+    class="flex items-center space-x-8 py-2 px-4 md:px-8"
+  >
+    <div class="flex-none lg:flex-initial">
+      <a href="javascript:void(0)">
+        <img
+          src="https://www.floatui.com/logo.svg"
+          width="120"
+          height="50"
+          alt="Float UI logo"
+        />
+      </a>
+    </div>
+    <div class="flex-1 flex items-center justify-between">
+      
+      <div class="flex-1 flex items-center justify-end space-x-2 sm:space-x-6">
+        <!-- search bar -->
+        <form class="flex items-center space-x-2 border border-gray-300 rounded-md p-2">
+          <i class='bx bx-search'  ></i> 
+          <input
+            class="w-full outline-none appearance-none placeholder-gray-500 text-gray-500 sm:w-auto"
+            type="text"
+            placeholder="Search"
+          />
+        </form>
+
+        <!-- Notification -->
+        <div class="relative">
+          <button class="w-10 h-10 text-2xl rounded-full ring-offset-2 text-primary">
+            <i class="bx bx-bell"></i>
+          </button>
+          <ul
+            class="bg-white top-12 right-0 mt-5 w-48 absolute rounded shadow hidden"
+          >
+            <li class="hover:bg-gray-100 p-3">
+              <a href="javascript:void(0)" class="block text-gray-600"
+                >Dashboard</a
+              >
+            </li>
+          </ul>
+        </div>
+
+        <!-- Profile -->
+        <div class="relative">
+          <button
+            class="w-10 h-10 outline-none rounded-full ring-offset-2 ring-gray-200 ring-2 lg:focus:ring-secondary"
+          >
+            <img
+              src="https://randomuser.me/api/portraits/men/46.jpg"
+              class="w-full h-full rounded-full"
+              alt="Profile Image"
+            />
+          </button>
+          <ul
+            class="bg-white top-12 right-0 mt-5 w-48 absolute rounded shadow"
+          >
+            <li class="hover:bg-gray-100 p-3">
+              <a href="javascript:void(0)" class="block text-gray-600"
+                >Dashboard</a
+              >
+            </li>
+            <li class="hover:bg-gray-100 p-3">
+              <a href="javascript:void(0)" class="block text-gray-600"
+                >Settings</a
+              >
+            </li>
+            <li class="hover:bg-gray-100 p-3">
+              <a href="javascript:void(0)" class="block text-gray-600"
+                >Log out</a
+              >
+            </li>
+          </ul>
+        </div>
+        <button class="outline-none text-gray-400 block lg:hidden">
+          <i class="fas fa-menu"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</nav>
