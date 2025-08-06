@@ -14,11 +14,11 @@ export class SigninComponent {
   form: FormGroup;
 
   constructor(
-    private fb: FormBuilder,
+    private formBuilder: FormBuilder,
     private router: Router,
     private authService: AuthServiceService
   ) {
-    this.form = this.fb.group({
+    this.form = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
       remember: [false],
@@ -26,16 +26,11 @@ export class SigninComponent {
   }
 
   onSubmit() {
-    if (this.form.valid) {
+    
+    this.form.markAllAsTouched();
 
+    if (this.form.valid) {
       this.router.navigate(['/'])
-      // const { email, password, remember } = this.form.value;
-      // this.authService.login(email, password, remember).subscribe({
-      //   next: () => this.router.navigate(['/dashboard']),
-      //   error: (err) => console.error('Login failed', err),
-      // });
-    } else {
-      this.form.markAllAsTouched();
     }
   }
 }

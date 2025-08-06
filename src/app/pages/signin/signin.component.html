@@ -13,17 +13,14 @@
           formControlName="email"
           type="email"
           required
-          class="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
+          class="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-primary shadow-sm rounded-lg"
         />
-        @if (form.controls['email'].touched && form.controls['email'].invalid) {
-          <div class="text-red-500">
-            @if (form.controls['email'].hasError('required')) {
-              <small>Email is required.</small>
-            } @else if (form.controls['email'].hasError('email')) {
-              <small>Please enter a valid email.</small>
-            }
-          </div>
-        }
+        <small class="text-red-500 font-bold block mt-2">
+          @if (form.controls['email'].touched && form.controls['email'].invalid) {
+            {{ form.controls['email'].hasError('required')  ? 'Email is required.' : '' }}
+            {{ form.controls['email'].hasError('email')     ? 'Please enter a valid email.' : '' }}
+          }
+        </small>        
       </div>
       <div>
         <label class="font-medium">Password</label>
@@ -31,17 +28,14 @@
           formControlName="password"
           type="password"
           required
-          class="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
+          class="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-primary shadow-sm rounded-lg"
         />
-        @if (form.controls['password'].touched && form.controls['password'].invalid) {
-          <div class="text-red-500">
-            @if (form.controls['password'].hasError('required')) {
-              <small>Password is required.</small>
-            } @else if (form.controls['password'].hasError('minlength')) {
-              <small>Password must be at least 6 characters long.</small>
-            }
-          </div>
-        }
+        <small class="text-red-500 font-bold block mt-2">
+          @if (form.controls['password'].touched && form.controls['password'].invalid) {
+            {{ form.controls['password'].hasError('required')  ? 'password is required.' : '' }}
+            {{ form.controls['password'].hasError('minlength') ? 'Please enter a valid password.' : '' }}
+          }
+        </small>
       </div>
       <div class="flex items-center justify-between text-sm">
         <div class="flex items-center gap-x-3">
@@ -53,19 +47,19 @@
           />
           <label
             for="remember-me-checkbox"
-            class="relative flex w-5 h-5 bg-white peer-checked:bg-indigo-600 rounded-md border ring-offset-2 ring-indigo-600 duration-150 peer-active:ring cursor-pointer after:absolute after:inset-x-0 after:top-[3px] after:m-auto after:w-1.5 after:h-2.5 after:border-r-2 after:border-b-2 after:border-white after:rotate-45"
+            class="relative flex w-5 h-5 bg-white peer-checked:bg-primary rounded-md border ring-offset-2 ring-primary duration-150 peer-active:ring cursor-pointer after:absolute after:inset-x-0 after:top-[3px] after:m-auto after:w-1.5 after:h-2.5 after:border-r-2 after:border-b-2 after:border-white after:rotate-45"
           ></label>
           <span>Remember me</span>
         </div>
         <a
           href="javascript:void(0)"
-          class="text-center text-indigo-600 hover:text-indigo-500"
+          class="text-center text-primary hover:text-indigo-500"
           >Forgot password?</a
         >
       </div>
       <button
         type="submit"
-        class="w-full px-4 py-2 text-white font-medium bg-indigo-600 hover:bg-indigo-500 active:bg-indigo-600 rounded-lg duration-150"
+        class="w-full px-4 py-2 text-white font-medium bg-primary hover:bg-primary-500 disabled:bg-gray-300 rounded-lg duration-150"
         [disabled]="form.invalid"
       >
         Sign in
@@ -85,7 +79,7 @@
       Don't have an account?
       <a
         href="javascript:void(0)"
-        class="font-medium text-indigo-600 hover:text-indigo-500"
+        class="font-medium text-primary hover:text-indigo-500"
         >Sign up</a
       >
     </p>
