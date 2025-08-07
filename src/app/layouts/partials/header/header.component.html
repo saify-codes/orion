@@ -44,6 +44,14 @@
 
       <!-- Notification -->
       <div class="relative">
+
+        @if (notificaitions.length > 0) {
+          <span class="w-5 h-5 grid place-content-center absolute top-0 right-0 bg-red-500 rounded-full font-bold text-xs text-white">
+            {{ notificaitions.length > 9 ? '9+' : notificaitions.length }}
+          </span>
+        }
+
+
         <button class="w-10 h-10 text-2xl rounded-full ring-offset-2 text-gray-300">
           <i class="fas fa-bell"></i>
         </button>
