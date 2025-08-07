@@ -2,89 +2,96 @@
 
   
   <div class="flex items-center space-x-8 py-2 px-4 md:px-8">
-  <button
-    type="button"
-    class="py-2 px-3 inline-flex justify-center items-center gap-x-2 text-start bg-gray-800 border border-gray-800 text-white text-sm font-medium rounded-lg shadow-2xs align-middle hover:bg-gray-950 focus:outline-hidden focus:bg-gray-900 "
-    data-hs-overlay="#app-sidebar"
-  >
-    Open
-  </button>
 
-    <div class="flex-none lg:flex-initial">
-      <a href="javascript:void(0)">
-        <img
-          src="https://www.floatui.com/logo.svg"
-          width="120"
-          height="50"
-          alt="Float UI logo"
-        />
-      </a>
-    </div>
-    
-    <div class="flex-1 flex items-center justify-between">
-      
-      <div class="flex-1 flex items-center justify-end space-x-2 sm:space-x-6">
-        <!-- search bar -->
-        <form class="flex items-center space-x-2 border border-gray-300 rounded-md p-2">
-          <i class='bx bx-search'  ></i> 
-          <input
-            class="w-full outline-none appearance-none placeholder-gray-500 text-gray-500 sm:w-auto"
-            type="text"
-            placeholder="Search"
+    <div class="flex items-center gap-2">
+      <!-- Toggle sidebar button -->
+      <button
+        type="button"
+        class="py-2 px-3 inline-flex justify-center items-center gap-x-2 text-start font-medium rounded-lg"
+        data-hs-overlay="#app-sidebar"
+      >
+        <i class="fa-solid fa-bars-staggered"></i>
+      </button>
+  
+      <!-- logo -->
+      <div class="flex-none lg:flex-initial">
+        <a href="javascript:void(0)">
+          <img
+            src="https://www.floatui.com/logo.svg"
+            width="120"
+            height="50"
+            alt="Float UI logo"
           />
-        </form>
-
-        <!-- Notification -->
-        <div class="relative">
-          <button class="w-10 h-10 text-2xl rounded-full ring-offset-2 text-primary">
-            <i class="bx bx-bell"></i>
-          </button>
-          <ul
-            class="bg-white top-12 right-0 mt-5 w-48 absolute rounded shadow hidden"
-          >
-            <li class="hover:bg-gray-100 p-3">
-              <a href="javascript:void(0)" class="block text-gray-600"
-                >Dashboard</a
-              >
-            </li>
-          </ul>
-        </div>
-
-        <!-- Profile -->
-        <div class="relative">
-          <button
-            class="w-10 h-10 outline-none rounded-full ring-offset-2 ring-gray-200 ring-2 lg:focus:ring-secondary"
-          >
-            <img
-              src="https://randomuser.me/api/portraits/men/46.jpg"
-              class="w-full h-full rounded-full"
-              alt="Profile Image"
-            />
-          </button>
-          <ul
-            class="bg-white top-12 right-0 mt-5 w-48 absolute rounded shadow hidden"
-          >
-            <li class="hover:bg-gray-100 p-3">
-              <a href="javascript:void(0)" class="block text-gray-600"
-                >Dashboard</a
-              >
-            </li>
-            <li class="hover:bg-gray-100 p-3">
-              <a href="javascript:void(0)" class="block text-gray-600"
-                >Settings</a
-              >
-            </li>
-            <li class="hover:bg-gray-100 p-3">
-              <a href="javascript:void(0)" class="block text-gray-600"
-                >Log out</a
-              >
-            </li>
-          </ul>
-        </div>
-        <button class="outline-none text-gray-400 block lg:hidden">
-          <i class="fas fa-menu"></i>
-        </button>
+        </a>
       </div>
     </div>
+    
+    <!-- search bar -->
+    <div class="flex-1">
+
+      <form class="flex items-center gap-2 border border-gray-300 rounded-md p-2 max-w-96 mx-auto">
+        <i class='fas fa-search text-gray-300'></i> 
+        <input
+          class="w-full outline-none appearance-none placeholder-gray-500 text-gray-500"
+          type="text"
+          placeholder="Search..."
+        />
+      </form>
+
+    </div>
+
+    <div class="flex items-center gap-2">
+
+      <!-- Notification -->
+      <div class="relative">
+        <button class="w-10 h-10 text-2xl rounded-full ring-offset-2 text-gray-300">
+          <i class="fas fa-bell"></i>
+        </button>
+        <ul
+          class="bg-white top-12 right-0 mt-5 w-48 absolute rounded shadow hidden"
+        >
+          <li class="hover:bg-gray-100 p-3">
+            <a href="javascript:void(0)" class="block text-gray-600"
+              >Dashboard</a
+            >
+          </li>
+        </ul>
+      </div>
+
+      <!-- Profile -->
+      <div class="relative">
+        <button
+          class="w-10 h-10 outline-none rounded-full ring-offset-2 ring-gray-200 ring-2 lg:focus:ring-secondary"
+        >
+          <img
+            src="https://randomuser.me/api/portraits/men/46.jpg"
+            class="w-full h-full rounded-full"
+            alt="Profile Image"
+          />
+        </button>
+
+        <ul
+          class="bg-white top-12 right-0 mt-5 w-48 absolute rounded shadow hidden"
+        >
+          <li class="hover:bg-gray-100 p-3">
+            <a href="javascript:void(0)" class="block text-gray-600"
+              >Dashboard</a
+            >
+          </li>
+          <li class="hover:bg-gray-100 p-3">
+            <a href="javascript:void(0)" class="block text-gray-600"
+              >Settings</a
+            >
+          </li>
+          <li class="hover:bg-gray-100 p-3">
+            <a href="javascript:void(0)" class="block text-gray-600"
+              >Log out</a
+            >
+          </li>
+        </ul>
+      </div>
+      
+    </div>
+
   </div>
 </nav>
