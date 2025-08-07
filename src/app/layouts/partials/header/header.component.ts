@@ -8,14 +8,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit{
 
-  public notificaitions
+  public notificaitions: any[];
+  public isUserMenuOpen: boolean;
+  public isNotificationOpen: boolean; 
 
   constructor() {
-    this.notificaitions = [
-      { id: 1, message: 'New comment on your post', read: false },
-      { id: 2, message: 'Your profile was viewed', read: false },
-      { id: 3, message: 'New follower', read: true }
-    ];
+    this.notificaitions = [];
+    this.isUserMenuOpen = false;
+    this.isNotificationOpen = false;
+  }
+
+  toggleNotification() {
+    this.isNotificationOpen = !this.isNotificationOpen;
+    if (this.isNotificationOpen) this.isUserMenuOpen = false;
+  }
+  
+  toggleUserMenu() {
+    this.isUserMenuOpen = !this.isUserMenuOpen;
+    if (this.isUserMenuOpen) this.isNotificationOpen = false;
   }
 
   fetchNotifications() {
