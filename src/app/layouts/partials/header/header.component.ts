@@ -13,7 +13,11 @@ export class HeaderComponent implements OnInit{
   public isNotificationOpen: boolean; 
 
   constructor() {
-    this.notificaitions = [];
+    this.notificaitions = [
+      {},
+      {},
+      {},
+    ];
     this.isUserMenuOpen = false;
     this.isNotificationOpen = false;
   }
