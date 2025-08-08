@@ -68,7 +68,7 @@
           <li class="group">
             <a
               class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 "
-              href="#"
+              routerLink="/dashboard"
             >
              <i class='fas fa-fire text-lg group-hover:text-secondary'  ></i> 
               Dashboard
@@ -263,6 +263,7 @@
             <button
               type="button"
               class="w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100"
+              routerLinkActive="bg-secondary text-white"
               (click)="toggleMenu($event)"
             >
               <i class='fas fa-gear text-lg group-hover/parent:text-secondary'></i> 
@@ -279,7 +280,8 @@
                 <li class="group">
                   <a
                     class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 "
-                    href="#"
+                    routerLink="/settings/general"
+                    routerLinkActive="bg-secondary! text-white! active"
                   >
                   <i class='fas fa-circle-question text-lg group-hover:text-secondary'></i> 
                     General
