@@ -1,10 +1,8 @@
-<!-- Sidebar -->
 <div
   id="app-sidebar"
-  class="hs-overlay [--auto-close:lg] lg:block lg:translate-x-0 lg:end-auto lg:bottom-0 w-64 hs-overlay-open:translate-x-0 -translate-x-full transition-all duration-300 transform h-full hidden top-0 start-0 bottom-0 z-60 bg-white border-e border-gray-200 fixed lg:static"
+  class="[--auto-close:lg] lg:block lg:translate-x-0 lg:end-auto lg:bottom-0 w-64 hs-overlay-open:translate-x-0 -translate-x-full transition-all duration-300 transform h-full hidden top-0 start-0 bottom-0 z-60 bg-white border-e border-gray-200 fixed lg:static"
   role="dialog"
   tabindex="-1"
-  aria-label="Sidebar"
 >
   <div class="relative flex flex-col h-full max-h-full">
     <!-- Header -->
@@ -124,9 +122,9 @@
 
             </button>
 
-            <div class="w-full overflow-hidden transition-[height] duration-300 hidden group-[.open]/parent:block">
+            <div class="w-full my-5 overflow-hidden transition-[height] duration-300 hidden group-[.open]/parent:block">
               <ul
-                class="hs-accordion-group border-l-2 ml-5 pl-5"
+                class="border-gray-400 border-l-2 ml-5 pl-2.5"
               >
                 <li class="group">
                   <a
@@ -217,9 +215,9 @@
 
             </button>
 
-            <div class="w-full overflow-hidden transition-[height] duration-300 hidden group-[.open]/parent:block">
+            <div class="w-full my-5 overflow-hidden transition-[height] duration-300 hidden group-[.open]/parent:block">
               <ul
-                class="hs-accordion-group border-l-2 ml-5 pl-5"
+                class="border-gray-400 border-l-2 ml-5 pl-2.5"
               >
                 <li class="group">
                   <a
@@ -261,64 +259,77 @@
             </div>
           </li>
           
-          <li class="dropdown group/parent">
+          <li class="dropdown group/parent open">
             <button
               type="button"
-              class="w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 "
-              aria-expanded="true"
-              aria-controls="users-accordion-collapse-1"
+              class="w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100"
+              (click)="toggleMenu($event)"
             >
               <i class='fas fa-gear text-lg group-hover/parent:text-secondary'></i> 
               Settings
 
-              <i class="fa-solid fa-chevron-down ms-auto"></i>
-              <!-- <i class="fa-solid fa-chevron-up"></i> -->
+              <i class="fa-solid fa-chevron-down ms-auto group-[.open]/parent:rotate-180"></i>
 
             </button>
 
-            <div class="w-full overflow-hidden transition-[height] duration-300 hidden">
+            <div class="w-full my-5 overflow-hidden transition-[height] duration-300 hidden group-[.open]/parent:block">
               <ul
-                class="hs-accordion-group border-l-2 ml-5 pl-5"
+                class="border-gray-400 border-l-2 ml-5 pl-2.5"
               >
                 <li class="group">
                   <a
                     class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 "
                     href="#"
                   >
-                  <i class='fas fa-magnifying-glass-chart text-lg group-hover:text-secondary'></i> 
-                    SEO
+                  <i class='fas fa-circle-question text-lg group-hover:text-secondary'></i> 
+                    General
                   </a>
                 </li>
+
                 <li class="group">
                   <a
                     class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 "
                     href="#"
                   >
-                  <i class='fas fa-comments text-lg group-hover:text-secondary'></i> 
-                    Sms
+                  <i class='fas fa-map-location-dot text-lg group-hover:text-secondary'></i> 
+                    Branches
                   </a>
                 </li>
+
                 <li class="group">
                   <a
                     class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 "
                     href="#"
                   >
-                  <i class='fas fa-bell text-lg group-hover:text-secondary'></i> 
-                    Push Notifications
+                  <i class='fas fa-palette text-lg group-hover:text-secondary'></i> 
+                    Theme
                   </a>
                 </li>
+
                 <li class="group">
                   <a
                     class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 "
                     href="#"
                   >
-                  <i class='fas fa-arrow-trend-up text-lg group-hover:text-secondary'></i> 
-                    Sales Channel
+                  <i class='fas fa-sack-dollar text-lg group-hover:text-secondary'></i> 
+                    Tax
                   </a>
                 </li>
+
+                <li class="group">
+                  <a
+                    class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 "
+                    href="#"
+                  >
+                  <i class='fas fa-mobile text-lg group-hover:text-secondary'></i> 
+                    App
+                  </a>
+                </li>
+                
               </ul>
             </div>
-          </li>
+
+          </li>  
 
           <!-- Integrations -->
           <h6 class="font-bold text-neutral-400 uppercase text-sm px-2.5 py-2">Integrations</h6>
@@ -507,4 +518,3 @@
     <!-- End Footer -->
   </div>
 </div>
-<!-- End Sidebar -->

@@ -8,7 +8,7 @@ import { Component } from '@angular/core';
 })
 export class SidebarComponent {
 
-  toggleMenu(event: MouseEvent){
+  toggleMenu(event: MouseEvent) {
 
     const button = event.currentTarget as HTMLElement
     button.parentElement
