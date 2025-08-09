@@ -10,14 +10,12 @@ export class HeaderComponent implements OnInit{
 
   public currentOpenMenu: string|null;
   public notificaitions: any[];
+  public isFlushing: boolean
 
   constructor() {
     this.currentOpenMenu = null
-    this.notificaitions  = [
-      {},
-      {},
-      {},
-    ];
+    this.notificaitions  = [];
+    this.isFlushing      = false;
   }
 
   isOpen(id: string){
@@ -26,6 +24,14 @@ export class HeaderComponent implements OnInit{
   
   toggle(id: string) {
    this.currentOpenMenu = this.currentOpenMenu === id ? null : id
+  }
+
+  flushCache(){
+    this.isFlushing = true
+
+    setTimeout(() => {
+      this.isFlushing = false
+    }, 5000);
   }
 
   fetchNotifications() {

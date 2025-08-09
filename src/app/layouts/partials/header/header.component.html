@@ -14,7 +14,19 @@
     <input type="search" placeholder="Search..." class="w-full text-sm outline-none placeholder:text-neutral-300"  />
   </div>
 
-  <div class="flex items-center gap-5">
+  <div class="flex items-center gap-1">
+
+    <!-- Flush cache -->
+    <div class="relative group">
+      <button  class="w-10 h-10 align-middle grid place-content-center rounded-full hover:bg-gray-100" [disabled]="isFlushing" (click)="flushCache()">
+        @if (isFlushing) {
+          <i class="fa-duotone fa-solid fa-sync fa-spin text-[20px]"></i>
+        }@else{
+          <i class="fa-duotone fa-solid fa-broom-wide text-[20px]"></i>
+        }
+      </button>
+      <span class="bg-gray-800 hidden group-hover:block text-white text-xs p-1 rounded absolute -bottom-2 m-0 left-2/4 translate-y-full -translate-x-2/4 w-max">Flush cache</span>
+    </div>
 
     <!-- Notification -->
     <div class="relative">
@@ -29,10 +41,10 @@
       }
 
       <button 
-        class="w-8 h-8 text-2xl block rounded-full ring-offset-2 text-gray-300"
+        class="w-10 h-10 align-middle grid place-content-center rounded-full hover:bg-gray-100"
         (click)="toggle('notificaitions')"
       >
-        <i class="far fa-bell"></i>
+        <i class="fa-duotone fa-thin fa-bell text-[20px]"></i>
       </button>
       
       <ul 
@@ -50,7 +62,7 @@
     <!-- Profile -->
     <div class="relative">
       <button
-        class="w-8 h-8 outline-none rounded-full ring-offset-2 ring-gray-200 ring-2 lg:focus:ring-secondary"
+        class="w-10 h-10 align-middle outline-none rounded-full"
         (click)="toggle('profile')"
       >
         <img
