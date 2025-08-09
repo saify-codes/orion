@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
-import { BaseComponent } from "../../layouts/base/base.component";
 
 @Component({
   selector: 'app-home',
-  imports: [BaseComponent],
+  imports: [],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })

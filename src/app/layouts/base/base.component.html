@@ -1,9 +1,9 @@
 <div class="flex h-screen">
-    <app-sidebar/>
-    <div class="content flex-1 flex flex-col">
-        <app-header/>
-        <main class="flex-1 p-4 overflow-y-auto">
-            <ng-content></ng-content>
-        </main>
-    </div>
+  <app-sidebar></app-sidebar>
+  <div class="content flex-1 flex flex-col">
+    <app-header></app-header>
+    <main class="flex-1 p-4 overflow-y-auto">
+      <router-outlet />
+    </main>
+  </div>
 </div>

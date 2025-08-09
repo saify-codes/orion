@@ -7,14 +7,15 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.css'
 })
+
 export class SidebarComponent {
+  private open: Record<string, any> = {};
 
-  toggleDropdown(event: MouseEvent) {
-
-    const button = event.currentTarget as HTMLElement
-    button.parentElement
-      ?.classList
-      .toggle('open')
+  isOpen(id: string) {
+    return !!this.open[id];
   }
 
+  toggle(id: string) {
+    this.open[id] = !this.open[id]  
+  }
 }

@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
-import { BaseComponent } from "../../layouts/base/base.component";
 
 @Component({
   selector: 'app-dashboard',
-  imports: [BaseComponent],
+  imports: [],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
 })
