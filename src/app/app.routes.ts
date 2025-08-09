@@ -2,9 +2,40 @@ import { Routes } from '@angular/router';
 import { SigninComponent } from './pages/signin/signin.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { GeneralComponent } from './pages/settings/general/general.component';
+import { HomeComponent } from './pages/home/home.component';
 
 export const routes: Routes = [
-    { path: 'dashboard', component: DashboardComponent },
+    { path: '',         component: HomeComponent },
+    { path: 'dashboard',    component: DashboardComponent },
+    { path: 'orders',         component: GeneralComponent },
+    { path: 'pos',         component: GeneralComponent },
+    { path: 'customers',         component: GeneralComponent },
+    { path: 'inventory',         component: GeneralComponent },
+    { 
+        path: 'menu',
+        children: [
+            { path: 'items', component: GeneralComponent},
+            { path: 'item-category', component: GeneralComponent},
+            { path: 'sizes', component: GeneralComponent},
+            { path: 'addons', component: GeneralComponent},
+            { path: 'addon-category', component: GeneralComponent},
+        ]
+    },
+    { 
+        path: 'marketing',
+        children: [
+            { path: 'seo', component: GeneralComponent},
+            { path: 'sms', component: GeneralComponent},
+            { path: 'push-notifications', component: GeneralComponent},
+        ]
+    },
+    { 
+        path: 'promotions',
+        children: [
+            { path: 'vouchers', component: GeneralComponent},
+            { path: 'offers', component: GeneralComponent},
+        ]
+    },
     {
         path: 'settings',
         children: [

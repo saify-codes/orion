@@ -6,16 +6,10 @@
 >
   <div class="relative flex flex-col h-full max-h-full">
     <!-- Header -->
-    <header class="p-4 flex justify-between items-center gap-x-2">
-      <a
-        class="flex-none font-semibold text-xl text-black focus:outline-hidden focus:opacity-80 "
-        href="#"
-        aria-label="Brand"
-        >
-        Zapify
-        </a
-      >
-
+    <header class="py-4 px-2.5 flex justify-between items-center">
+      <a routerLink="/home">
+        <img class="h-15" src="/logo.png" alt="logo">
+      </a>
       <div class="lg:hidden -me-2">
         <!-- Close Button -->
         <button
@@ -46,397 +40,383 @@
     <!-- End Header -->
 
     <!-- Body -->
-    <nav
-      class="h-full overflow-y-auto [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300 "
-    >
-      <div
-        class="hs-accordion-group pb-0 px-2 w-full flex flex-col flex-wrap"
-        data-hs-accordion-always-open
-      >
-        <ul class="space-y-1">
+    <nav class="h-full overflow-y-auto [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300 ">
+      <ul class="space-y-1 px-2.5">
           
-          <li class="group">
-            <a
-              class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 "
-              href="#"
-            >
-             <i class='fas fa-home text-lg group-hover:text-secondary'  ></i> 
-              Home
-            </a>
-          </li>
+        <li class="group" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+          <a
+            class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 group-[&:not(.active)]:hover:bg-gray-100 font-semibold rounded-lg group-[.active]:bg-secondary"
+            routerLink="/"
+          >
+           <i class="fa-duotone fa-solid fa-house text-lg group-[.active]:text-white"></i>
+            Home
+          </a>
+        </li>
+        
+        <li class="group" routerLinkActive="active">
+          <a
+            class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 group-[&:not(.active)]:hover:bg-gray-100 font-semibold rounded-lg group-[.active]:bg-secondary"
+            routerLink="/dashboard"
+          >
+           <i class="fa-duotone fa-solid fa-fire text-lg group-[.active]:text-white"></i>
+            Dashboard
+          </a>
+        </li>
+        
+        <li class="group" routerLinkActive="active">
+          <a
+            class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 group-[&:not(.active)]:hover:bg-gray-100 font-semibold rounded-lg group-[.active]:bg-secondary"
+            routerLink="/orders"
+          >
+           <i class="fa-duotone fa-solid fa-shopping-cart text-lg group-[.active]:text-white"></i>
+            Orders
+           <span class="ms-auto py-0.5 px-1.5 text-xs bg-red-500 text-white rounded-full">43</span>
 
-          <li class="group">
-            <a
-              class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 "
-              routerLink="/dashboard"
-            >
-             <i class='fas fa-fire text-lg group-hover:text-secondary'  ></i> 
-              Dashboard
-            </a>
-          </li>
+          </a>
+        </li>
+        
+        <li class="group" routerLinkActive="active">
+          <a
+            class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 group-[&:not(.active)]:hover:bg-gray-100 font-semibold rounded-lg group-[.active]:bg-secondary"
+            routerLink="/pos"
+          >
+           <i class="fa-duotone fa-solid fa-utensils text-lg group-[.active]:text-white"></i>
+            Pos
+          </a>
+        </li>
+        
+        <li class="group" routerLinkActive="active">
+          <a
+            class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 group-[&:not(.active)]:hover:bg-gray-100 font-semibold rounded-lg group-[.active]:bg-secondary"
+            routerLink="/customers"
+          >
+           <i class="fa-duotone fa-solid fa-users text-lg group-[.active]:text-white"></i>
+            Customers
+          </a>
+        </li>
+        
+        <li class="group" routerLinkActive="active">
+          <a
+            class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 group-[&:not(.active)]:hover:bg-gray-100 font-semibold rounded-lg group-[.active]:bg-secondary"
+            routerLink="/inventory"
+          >
+           <i class="fa-duotone fa-solid fa-box-circle-check text-lg group-[.active]:text-white"></i>
+            Inventory
+          </a>
+        </li>
+
+        <!-- Menu -->
+        <li class="dropdown group/parent" routerLinkActive="active open">
           
-          <li class="group">
-            <a
-              class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 "
-              href="#"
-            >
-             <i class='fas fa-clipboard-list text-lg group-hover:text-secondary'></i> 
-              Orders
+          <button
+            type="button"
+            class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 group-[&:not(.active)]/parent:hover:bg-gray-100 group-[.active]/parent:bg-secondary font-semibold rounded-lg w-full"
+            (click)="toggleDropdown($event)"
+          >
+            <i class="fa-duotone fa-solid fa-clipboard text-lg group-[.active]/parent:text-white"></i>
 
-              <span class="ms-auto py-0.5 px-1.5 inline-flex items-center gap-x-1.5 text-xs bg-secondary text-white text-xs font-bold rounded-full">100+</span>
-            </a>
-          </li>
+            Menu
+
+            <i class="fa-solid fa-chevron-down ms-auto transition group-[.open]/parent:rotate-180"></i>
+
+          </button>
+
+          <div class="w-full my-5 overflow-hidden transition-[height] duration-300 hidden group-[.open]/parent:block">
+            <ul
+              class="border-gray-400 border-l-2 ml-5 pl-2.5"
+            >
+              <li class="group" routerLinkActive="active">
+                <a
+                  class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 group-[&:not(.active)]:hover:bg-gray-100 font-semibold rounded-lg group-[.active]:bg-secondary"
+                  routerLink="/menu/items"
+                >
+                <i class="fa-duotone fa-solid fa-burger-soda text-lg group-[.active]:text-white"></i>
+                  Items
+                </a>
+              </li>
+
+              <li class="group" routerLinkActive="active">
+                <a
+                  class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 group-[&:not(.active)]:hover:bg-gray-100 font-semibold rounded-lg group-[.active]:bg-secondary"
+                  routerLink="/menu/item-category"
+                >
+                <i class="fa-duotone fa-solid fa-plate-utensils text-lg group-[.active]:text-white"></i>
+                  Item category
+                </a>
+              </li>
+              
+              <li class="group" routerLinkActive="active">
+                <a
+                  class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 group-[&:not(.active)]:hover:bg-gray-100 font-semibold rounded-lg group-[.active]:bg-secondary"
+                  routerLink="/menu/sizes"
+                >
+                <i class="fa-duotone fa-solid fa-pizza text-lg group-[.active]:text-white"></i>
+                  Sizes
+                </a>
+              </li>
+
+              <li class="group" routerLinkActive="active">
+                <a
+                  class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 group-[&:not(.active)]:hover:bg-gray-100 font-semibold rounded-lg group-[.active]:bg-secondary"
+                  routerLink="/menu/addons"
+                >
+                <i class="fa-duotone fa-solid fa-pot-food text-lg group-[.active]:text-white"></i>
+                  Add-ons
+                </a>
+              </li>
+              
+              <li class="group" routerLinkActive="active">
+                <a
+                  class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 group-[&:not(.active)]:hover:bg-gray-100 font-semibold rounded-lg group-[.active]:bg-secondary"
+                  routerLink="/menu/addon-category"
+                >
+                <i class="fa-duotone fa-solid fa-olive-branch text-lg group-[.active]:text-white"></i>
+                  Addon category
+                </a>
+              </li>
+              
+            </ul>
+          </div>
+
+        </li>
+        
+        <!-- Marketing -->
+        <li class="dropdown group/parent" routerLinkActive="active open">
           
-          <li class="group">
-            <a
-              class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 "
-              href="#"
+          <button
+            type="button"
+            class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 group-[&:not(.active)]/parent:hover:bg-gray-100 group-[.active]/parent:bg-secondary font-semibold rounded-lg w-full"
+            (click)="toggleDropdown($event)"
+          >
+            <i class="fa-duotone fa-solid fa-bullhorn text-lg group-[.active]/parent:text-white"></i>
+
+            Marketing
+
+            <i class="fa-solid fa-chevron-down ms-auto transition group-[.open]/parent:rotate-180"></i>
+
+          </button>
+
+          <div class="w-full my-5 overflow-hidden transition-[height] duration-300 hidden group-[.open]/parent:block">
+            <ul
+              class="border-gray-400 border-l-2 ml-5 pl-2.5"
             >
-             <i class='fas fa-utensils text-lg group-hover:text-secondary'  ></i> 
-              POS
-            </a>
-          </li>
+              
+              <li class="group" routerLinkActive="active">
+                <a
+                  class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 group-[&:not(.active)]:hover:bg-gray-100 font-semibold rounded-lg group-[.active]:bg-secondary"
+                  routerLink="/marketing/seo"
+                >
+                <i class="fa-duotone fa-solid fa-magnifying-glass-chart text-lg group-[.active]:text-white"></i>
+                  Seo
+                </a>
+              </li>
+              
+              <li class="group" routerLinkActive="active">
+                <a
+                  class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 group-[&:not(.active)]:hover:bg-gray-100 font-semibold rounded-lg group-[.active]:bg-secondary"
+                  routerLink="/marketing/sms"
+                >
+                <i class="fa-duotone fa-solid fa-comments text-lg group-[.active]:text-white"></i>
+                  Sms
+                </a>
+              </li>
+              
+              <li class="group" routerLinkActive="active">
+                <a
+                  class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 group-[&:not(.active)]:hover:bg-gray-100 font-semibold rounded-lg group-[.active]:bg-secondary"
+                  routerLink="/marketing/push-notifications"
+                >
+                <i class="fa-duotone fa-solid fa-bell text-lg group-[.active]:text-white"></i>
+                  Push notifications
+                </a>
+              </li>
+              
+            </ul>
+          </div>
 
-          <li class="group">
-            <a
-              class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 "
-              href="#"
-            >
-             <i class='fas fa-user text-lg group-hover:text-secondary'  ></i> 
-              Customers
-            </a>
-          </li>
-
-          <li class="dropdown group/parent">
-            <button
-              type="button"
-              class="w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 "
-              aria-expanded="true"
-              aria-controls="users-accordion-collapse-1"
-              (click)="toggleMenu($event)"
-            >
-              <i class='fas fa-list text-lg group-hover/parent:text-secondary'></i> 
-              Catelogue
-
-              <i class="fa-solid fa-chevron-down ms-auto transition group-[.open]/parent:rotate-180"></i>
-
-            </button>
-
-            <div class="w-full my-5 overflow-hidden transition-[height] duration-300 hidden group-[.open]/parent:block">
-              <ul
-                class="border-gray-400 border-l-2 ml-5 pl-2.5"
-              >
-                <li class="group">
-                  <a
-                    class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 "
-                    href="#"
-                  >
-                  <i class='fas fa-boxes-stacked text-lg group-hover:text-secondary'></i> 
-                    Inventory
-                  </a>
-                </li>
-                <li class="group">
-                  <a
-                    class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 "
-                    href="#"
-                  >
-                  <i class='fas fa-burger text-lg group-hover:text-secondary'></i> 
-                    Items
-                  </a>
-                </li>
-                <li class="group">
-                  <a
-                    class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 "
-                    href="#"
-                  >
-                  <i class='fas fa-seedling text-lg group-hover:text-secondary'></i> 
-                    Addons
-                  </a>
-                </li>
-                <li class="group">
-                  <a
-                    class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 "
-                    href="#"
-                  >
-                  <i class='fas fa-wheat-awn-circle-exclamation text-lg group-hover:text-secondary'></i> 
-                    Categories
-                  </a>
-                </li>
-                <li class="group">
-                  <a
-                    class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 "
-                    href="#"
-                  >
-                  <i class='fas fa-wheat-awn-circle-exclamation text-lg group-hover:text-secondary'></i> 
-                    Addon Categories
-                  </a>
-                </li>
-                <li class="group">
-                  <a
-                    class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 "
-                    href="#"
-                  >
-                  <i class='fas fa-ruler text-lg group-hover:text-secondary'></i> 
-                    Sizes
-                  </a>
-                </li>
-                <li class="group">
-                  <a
-                    class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 "
-                    href="#"
-                  >
-                  <i class='fas fa-ranking-star text-lg group-hover:text-secondary'></i> 
-                    Offers
-                  </a>
-                </li>
-                <li class="group">
-                  <a
-                    class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 "
-                    href="#"
-                  >
-                  <i class='fas fa-ticket text-lg group-hover:text-secondary -rotate-45'></i> 
-                    Vouchers
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </li>
+        </li>
+        
+        <!-- Promotions -->
+        <li class="dropdown group/parent" routerLinkActive="active open">
           
-          <li class="dropdown group/parent">
-            <button
-              type="button"
-              class="w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100"
-              (click)="toggleMenu($event)"
+          <button
+            type="button"
+            class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 group-[&:not(.active)]/parent:hover:bg-gray-100 group-[.active]/parent:bg-secondary font-semibold rounded-lg w-full"
+            (click)="toggleDropdown($event)"
+          >
+            <i class="fa-duotone fa-solid fa-ad text-lg group-[.active]/parent:text-white"></i>
+
+            Promotions
+
+            <i class="fa-solid fa-chevron-down ms-auto transition group-[.open]/parent:rotate-180"></i>
+
+          </button>
+
+          <div class="w-full my-5 overflow-hidden transition-[height] duration-300 hidden group-[.open]/parent:block">
+            <ul
+              class="border-gray-400 border-l-2 ml-5 pl-2.5"
             >
-              <i class='fas fa-bullhorn text-lg group-hover/parent:text-secondary'></i> 
-              Marketing
+              
+              <li class="group" routerLinkActive="active">
+                <a
+                  class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 group-[&:not(.active)]:hover:bg-gray-100 font-semibold rounded-lg group-[.active]:bg-secondary"
+                  routerLink="/promotions/offers"
+                >
+                <i class="fa-duotone fa-solid fa-star text-lg group-[.active]:text-white"></i>
+                  Offers
+                </a>
+              </li>
+              
+              <li class="group" routerLinkActive="active">
+                <a
+                  class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 group-[&:not(.active)]:hover:bg-gray-100 font-semibold rounded-lg group-[.active]:bg-secondary"
+                  routerLink="/promotions/vouchers"
+                >
+                <i class="fa-duotone fa-solid fa-ticket text-lg group-[.active]:text-white"></i>
+                  Vouchers
+                </a>
+              </li>
+              
+            </ul>
+          </div>
 
-              <i class="fa-solid fa-chevron-down ms-auto group-[.open]/parent:rotate-180"></i>
+        </li>
+        
+        <li class="dropdown group/parent">
+          <button
+            type="button"
+            class="w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100"
+            routerLinkActive="bg-secondary text-white"
+            (click)="toggleDropdown($event)"
+          >
+            <i class='fas fa-gear text-lg group-hover/parent:text-secondary'></i> 
+            Settings
 
-            </button>
+            <i class="fa-solid fa-chevron-down ms-auto group-[.open]/parent:rotate-180"></i>
 
-            <div class="w-full my-5 overflow-hidden transition-[height] duration-300 hidden group-[.open]/parent:block">
-              <ul
-                class="border-gray-400 border-l-2 ml-5 pl-2.5"
-              >
-                <li class="group">
-                  <a
-                    class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 "
-                    href="#"
-                  >
-                  <i class='fas fa-magnifying-glass-chart text-lg group-hover:text-secondary'></i> 
-                    SEO
-                  </a>
-                </li>
-                <li class="group">
-                  <a
-                    class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 "
-                    href="#"
-                  >
-                  <i class='fas fa-comments text-lg group-hover:text-secondary'></i> 
-                    Sms
-                  </a>
-                </li>
-                <li class="group">
-                  <a
-                    class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 "
-                    href="#"
-                  >
-                  <i class='fas fa-bell text-lg group-hover:text-secondary'></i> 
-                    Push Notifications
-                  </a>
-                </li>
-                <li class="group">
-                  <a
-                    class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 "
-                    href="#"
-                  >
-                  <i class='fas fa-arrow-trend-up text-lg group-hover:text-secondary'></i> 
-                    Sales Channel
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </li>
+          </button>
+
+          <div class="w-full my-5 overflow-hidden transition-[height] duration-300 hidden group-[.open]/parent:block">
+            <ul
+              class="border-gray-400 border-l-2 ml-5 pl-2.5"
+            >
+              <li class="group" routerLinkActive="active">
+                <a
+                  class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100"
+                  routerLink="/settings/general"
+                >
+                <i class='fas fa-circle-question text-lg group-hover:text-secondary'></i> 
+                  General
+                </a>
+              </li>
+            </ul>
+          </div>
+
+        </li>  
+
+        <!-- Integrations -->
+        <h6 class="font-bold text-neutral-400 uppercase text-sm px-2.5 py-2">Integrations</h6>
+
+        <li class="group">
+          <a
+            class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 "
+            href="#"
+          >
+           <i class='fas fa-plug text-lg group-hover:text-secondary'  ></i> 
+            Postex
+          </a>
+        </li>
+        
+        <li class="group">
+          <a
+            class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 "
+            href="#"
+          >
+           <i class='fas fa-plug text-lg group-hover:text-secondary'  ></i> 
+            Bykea
+          </a>
+        </li>
+        
+        <li class="group">
+          <a
+            class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 "
+            href="#"
+          >
+           <i class='fas fa-plug text-lg group-hover:text-secondary'  ></i> 
+            TCS
+          </a>
+        </li>
+        
+        <!-- Payments -->
+        <h6 class="font-bold text-neutral-400 uppercase text-sm px-2.5 py-2">Payments</h6>
+
+        <li class="group">
+          <a
+            class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 "
+            href="#"
+          >
+           <i class='far fa-credit-card text-lg group-hover:text-secondary'  ></i> 
+            Stripe
+          </a>
+        </li>
+        
+        <li class="group">
+          <a
+            class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 "
+            href="#"
+          >
+           <i class='far fa-credit-card text-lg group-hover:text-secondary'  ></i> 
+            Payfast
+          </a>
+        </li>
+        
+        <li class="group">
+          <a
+            class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 "
+            href="#"
+          >
+           <i class='far fa-credit-card text-lg group-hover:text-secondary'  ></i> 
+            PayPal
+          </a>
+        </li>
+        
+        <!-- Logs -->
+        <h6 class="font-bold text-neutral-400 uppercase text-sm px-2.5 py-2">Logs</h6>
+
+        <li class="group">
+          <a
+            class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 "
+            href="#"
+          >
           
-          <li class="dropdown group/parent open">
-            <button
-              type="button"
-              class="w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100"
-              routerLinkActive="bg-secondary text-white"
-              (click)="toggleMenu($event)"
-            >
-              <i class='fas fa-gear text-lg group-hover/parent:text-secondary'></i> 
-              Settings
-
-              <i class="fa-solid fa-chevron-down ms-auto group-[.open]/parent:rotate-180"></i>
-
-            </button>
-
-            <div class="w-full my-5 overflow-hidden transition-[height] duration-300 hidden group-[.open]/parent:block">
-              <ul
-                class="border-gray-400 border-l-2 ml-5 pl-2.5"
-              >
-                <li class="group">
-                  <a
-                    class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 "
-                    routerLink="/settings/general"
-                    routerLinkActive="bg-secondary! text-white! active"
-                  >
-                  <i class='fas fa-circle-question text-lg group-hover:text-secondary'></i> 
-                    General
-                  </a>
-                </li>
-
-                <li class="group">
-                  <a
-                    class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 "
-                    href="#"
-                  >
-                  <i class='fas fa-map-location-dot text-lg group-hover:text-secondary'></i> 
-                    Branches
-                  </a>
-                </li>
-
-                <li class="group">
-                  <a
-                    class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 "
-                    href="#"
-                  >
-                  <i class='fas fa-palette text-lg group-hover:text-secondary'></i> 
-                    Theme
-                  </a>
-                </li>
-
-                <li class="group">
-                  <a
-                    class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 "
-                    href="#"
-                  >
-                  <i class='fas fa-sack-dollar text-lg group-hover:text-secondary'></i> 
-                    Tax
-                  </a>
-                </li>
-
-                <li class="group">
-                  <a
-                    class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 "
-                    href="#"
-                  >
-                  <i class='fas fa-mobile text-lg group-hover:text-secondary'></i> 
-                    App
-                  </a>
-                </li>
-                
-              </ul>
-            </div>
-
-          </li>  
-
-          <!-- Integrations -->
-          <h6 class="font-bold text-neutral-400 uppercase text-sm px-2.5 py-2">Integrations</h6>
-
-          <li class="group">
-            <a
-              class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 "
-              href="#"
-            >
-             <i class='fas fa-plug text-lg group-hover:text-secondary'  ></i> 
-              Postex
-            </a>
-          </li>
+           <i class='fas fa-clock-rotate-left text-lg group-hover:text-secondary'  ></i> 
+            Activity
+          </a>
+        </li>
+        
+        <li class="group">
+          <a
+            class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 "
+            href="#"
+          >
           
-          <li class="group">
-            <a
-              class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 "
-              href="#"
-            >
-             <i class='fas fa-plug text-lg group-hover:text-secondary'  ></i> 
-              Bykea
-            </a>
-          </li>
+           <i class='fas fa-clock-rotate-left text-lg group-hover:text-secondary'  ></i> 
+            Order
+          </a>
+        </li>
+        
+        <li class="group">
+          <a
+            class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 "
+            href="#"
+          >
           
-          <li class="group">
-            <a
-              class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 "
-              href="#"
-            >
-             <i class='fas fa-plug text-lg group-hover:text-secondary'  ></i> 
-              TCS
-            </a>
-          </li>
-          
-          <!-- Payments -->
-          <h6 class="font-bold text-neutral-400 uppercase text-sm px-2.5 py-2">Payments</h6>
-
-          <li class="group">
-            <a
-              class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 "
-              href="#"
-            >
-             <i class='far fa-credit-card text-lg group-hover:text-secondary'  ></i> 
-              Stripe
-            </a>
-          </li>
-          
-          <li class="group">
-            <a
-              class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 "
-              href="#"
-            >
-             <i class='far fa-credit-card text-lg group-hover:text-secondary'  ></i> 
-              Payfast
-            </a>
-          </li>
-          
-          <li class="group">
-            <a
-              class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 "
-              href="#"
-            >
-             <i class='far fa-credit-card text-lg group-hover:text-secondary'  ></i> 
-              PayPal
-            </a>
-          </li>
-          
-          <!-- Logs -->
-          <h6 class="font-bold text-neutral-400 uppercase text-sm px-2.5 py-2">Logs</h6>
-
-          <li class="group">
-            <a
-              class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 "
-              href="#"
-            >
-            
-             <i class='fas fa-clock-rotate-left text-lg group-hover:text-secondary'  ></i> 
-              Activity
-            </a>
-          </li>
-          
-          <li class="group">
-            <a
-              class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 "
-              href="#"
-            >
-            
-             <i class='fas fa-clock-rotate-left text-lg group-hover:text-secondary'  ></i> 
-              Order
-            </a>
-          </li>
-          
-          <li class="group">
-            <a
-              class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 "
-              href="#"
-            >
-            
-             <i class='fas fa-clock-rotate-left text-lg group-hover:text-secondary'  ></i> 
-              Rider
-            </a>
-          </li>
-          
-        </ul>
-      </div>
+           <i class='fas fa-clock-rotate-left text-lg group-hover:text-secondary'  ></i> 
+            Rider
+          </a>
+        </li>
+        
+      </ul>
     </nav>
     <!-- End Body -->
 

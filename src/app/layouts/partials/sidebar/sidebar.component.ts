@@ -9,7 +9,7 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 })
 export class SidebarComponent {
 
-  toggleMenu(event: MouseEvent) {
+  toggleDropdown(event: MouseEvent) {
 
     const button = event.currentTarget as HTMLElement
     button.parentElement
