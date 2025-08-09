@@ -5,11 +5,13 @@ import { GeneralComponent } from './pages/settings/general/general.component';
 import { HomeComponent } from './pages/home/home.component';
 
 export const routes: Routes = [
+    // Authenticated routes
     { path: '',         component: HomeComponent },
     { path: 'dashboard',    component: DashboardComponent },
     { path: 'orders',         component: GeneralComponent },
     { path: 'pos',         component: GeneralComponent },
     { path: 'customers',         component: GeneralComponent },
+    { path: 'staff',         component: GeneralComponent },
     { path: 'inventory',         component: GeneralComponent },
     { 
         path: 'menu',
@@ -39,8 +41,18 @@ export const routes: Routes = [
     {
         path: 'settings',
         children: [
-            { path: 'general', component: GeneralComponent}
+            { path: 'general', component: GeneralComponent},
+            { path: 'branches', component: GeneralComponent},
+            { path: 'theme', component: GeneralComponent},
+            { path: 'app', component: GeneralComponent},
+            { path: 'tax', component: GeneralComponent},
+            { path: 'tip', component: GeneralComponent},
         ]
     },
+    { path: 'integrations/:service',         component: GeneralComponent },
+    { path: 'payment-gateway/:gateway',         component: GeneralComponent },
+    { path: 'logs/:type',         component: GeneralComponent },
+
+    // Guest routes
     { path: 'signin', component: SigninComponent },
 ];
