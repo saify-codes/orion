@@ -20,22 +20,24 @@
     <div class="relative">
 
       @if (notificaitions.length > 0) {
-        <span class="w-4 h-4 absolute top-0 right-0 bg-red-500 rounded-full animate-ping"></span>
-        <span class="w-4 h-4 grid place-content-center absolute top-0 right-0 bg-red-500 rounded-full font-bold text-xs text-white">
-          {{ notificaitions.length > 9 ? '9+' : notificaitions.length }}
-        </span>
+        <div class="pointer-events-none">
+          <span class="w-4 h-4 absolute top-0 right-0 bg-red-500 rounded-full animate-ping"></span>
+          <span class="w-4 h-4 grid place-content-center absolute top-0 right-0 bg-red-500 rounded-full font-bold text-xs text-white">
+            {{ notificaitions.length > 9 ? '9+' : notificaitions.length }}
+          </span>
+        </div>
       }
-
 
       <button 
         class="w-8 h-8 text-2xl block rounded-full ring-offset-2 text-gray-300"
-        (click)="toggleNotification()"
+        (click)="toggle('notificaitions')"
       >
         <i class="far fa-bell"></i>
       </button>
+      
       <ul 
         class="bg-white top-12 right-0 mt-5 w-48 absolute rounded shadow"
-        [class.hidden]="!isNotificationOpen"
+        [class.hidden]="!isOpen('notificaitions')"
       >
         <li class="hover:bg-gray-100 p-3">
           <a href="javascript:void(0)" class="block text-gray-600"
@@ -49,7 +51,7 @@
     <div class="relative">
       <button
         class="w-8 h-8 outline-none rounded-full ring-offset-2 ring-gray-200 ring-2 lg:focus:ring-secondary"
-        (click)="toggleUserMenu()"
+        (click)="toggle('profile')"
       >
         <img
           src="https://randomuser.me/api/portraits/men/46.jpg"
@@ -59,24 +61,53 @@
       </button>
 
       <ul
-        class="bg-white top-12 right-0 mt-5 w-48 absolute rounded shadow"
-        [class.hidden]="!isUserMenuOpen"
+        class="bg-white top-12 right-0 mt-5 w-56 absolute rounded shadow"
+        [class.hidden]="!isOpen('profile')"
       >
-        <li class="hover:bg-gray-100 p-3">
-          <a href="javascript:void(0)" class="block text-gray-600"
-            >Dashboard</a
-          >
+
+        <li>
+          <!-- Avatar -->
+          <div class="flex gap-2 p-2">
+            <img class="inline-block size-8 rounded-full" src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=300&h=300&q=80" alt="Avatar">
+
+            <div>
+              <span class="font-semibold">M. Hammad khan</span>
+              <p class="text-xs break-all">{{'hammad23@gmail.com'}}</p>
+            </div>
+          </div>
+          <!-- End Avatar -->
         </li>
-        <li class="hover:bg-gray-100 p-3">
-          <a href="javascript:void(0)" class="block text-gray-600"
-            >Settings</a
-          >
+
+        <hr class="text-gray-200">
+        
+        <li class="hover:bg-gray-100 m-2 py-1 px-2 rounded">
+          <a href="javascript:void(0)" class="flex items-center gap-2 text-gray-600 text-sm">
+            <i class="fas fa-credit-card"></i>
+            Billing
+          </a>
         </li>
-        <li class="hover:bg-gray-100 p-3">
-          <a href="javascript:void(0)" class="block text-gray-600"
-            >Log out</a
-          >
+        <li class="hover:bg-gray-100 m-2 py-1 px-2 rounded">
+          <a href="javascript:void(0)" class="flex items-center gap-2 text-gray-600 text-sm">
+            <i class="fas fa-user"></i>
+            Profile
+          </a>
         </li>
+        <li class="hover:bg-gray-100 m-2 py-1 px-2 rounded">
+          <a href="javascript:void(0)" class="flex items-center gap-2 text-gray-600 text-sm">
+            <i class="fas fa-gear"></i>
+            Settings
+          </a>
+        </li>
+
+        <hr class="text-gray-200">
+
+        <li class="hover:bg-gray-100 m-2 py-1 px-2 rounded">
+          <a href="javascript:void(0)" class="flex items-center gap-2 text-gray-600 text-sm">
+            <i class="fas fa-arrow-left"></i>
+            Sign out
+          </a>
+        </li>
+
       </ul>
     </div>
     

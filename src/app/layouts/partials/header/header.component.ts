@@ -8,28 +8,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit{
 
+  public currentOpenMenu: string|null;
   public notificaitions: any[];
-  public isUserMenuOpen: boolean;
-  public isNotificationOpen: boolean; 
 
   constructor() {
-    this.notificaitions = [
+    this.currentOpenMenu = null
+    this.notificaitions  = [
       {},
       {},
       {},
     ];
-    this.isUserMenuOpen = false;
-    this.isNotificationOpen = false;
   }
 
-  toggleNotification() {
-    this.isNotificationOpen = !this.isNotificationOpen;
-    if (this.isNotificationOpen) this.isUserMenuOpen = false;
+  isOpen(id: string){
+    return this.currentOpenMenu == id
   }
   
-  toggleUserMenu() {
-    this.isUserMenuOpen = !this.isUserMenuOpen;
-    if (this.isUserMenuOpen) this.isNotificationOpen = false;
+  toggle(id: string) {
+   this.currentOpenMenu = this.currentOpenMenu === id ? null : id
   }
 
   fetchNotifications() {
