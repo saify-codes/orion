@@ -1,3 +1,92 @@
-@for (item of items; track $index){
-    <p>dashboard works!</p>
-}
+<nav class="flex flex-wrap gap-2.5 mb-10">
+  <div class="form-group grow basis-60">
+    <label class="text-gray-800 block mb-2">Select branch</label>
+    <select
+      name="sss"
+      class="py-3 px-4 border border-gray-200 pe-9 block rounded-lg text-sm w-full"
+    >
+      <option selected="">All</option>
+      <option>karachi</option>
+      <option>lahore</option>
+    </select>
+  </div>
+
+  <div class="form-group grow basis-60">
+    <label class="text-gray-800 block mb-2">Select city</label>
+    <select
+      name="sss"
+      class="py-3 px-4 border border-gray-200 pe-9 block rounded-lg text-sm w-full"
+    >
+      <option selected="">All</option>
+      <option>karachi</option>
+      <option>lahore</option>
+    </select>
+  </div>
+
+  <div class="form-group grow basis-60">
+    <label class="text-gray-800 block mb-2">Order source</label>
+    <select
+      name="sss"
+      class="py-3 px-4 border border-gray-200 pe-9 block rounded-lg text-sm w-full"
+    >
+      <option selected="">All</option>
+      <option>karachi</option>
+      <option>lahore</option>
+    </select>
+  </div>
+
+  <div class="form-group grow basis-60">
+    <label class="text-gray-800 block mb-2">Transaction type</label>
+    <select
+      name="sss"
+      class="py-3 px-4 border border-gray-200 pe-9 block rounded-lg text-sm w-full"
+    >
+      <option selected="">All</option>
+      <option>Pickup</option>
+      <option>Delivery</option>
+    </select>
+  </div>
+
+  <div class="form-group grow basis-60">
+    <label class="text-gray-800 block mb-2">Select date range</label>
+    <input
+      type="datetime-local"
+      class="py-3 px-4 border border-gray-200 pe-9 block rounded-lg text-sm w-full"
+    />
+  </div>
+</nav>
+
+<div class="grid grid-cols-4 gap-5">
+  <div class="flex flex-col bg-white border border-gray-200 rounded-xl ">
+    <div class="p-4 md:p-5">
+      <h3 class="font-semibold text-gray-800 ">
+        Total sales
+      </h3>
+      <p class="text-3xl font-bold text-secondary">932K PKR</p>
+    </div>
+  </div>
+  <div class="flex flex-col bg-white border border-gray-200 rounded-xl ">
+    <div class="p-4 md:p-5">
+      <h3 class="font-semibold text-gray-800 ">
+        Total orders
+      </h3>
+      <p class="text-3xl font-bold text-secondary">932K PKR</p>
+    </div>
+  </div>
+  <div class="flex flex-col bg-white border border-gray-200 rounded-xl ">
+    <div class="p-4 md:p-5">
+      <h3 class="font-semibold text-gray-800 ">
+        Average order amount
+      </h3>
+      <p class="text-3xl font-bold text-secondary">932K PKR</p>
+    </div>
+  </div>
+  <div class="flex flex-col bg-white border border-gray-200 rounded-xl ">
+    <div class="p-4 md:p-5">
+      <h3 class="font-semibold text-gray-800 ">
+        Total tip
+      </h3>
+      <p class="text-3xl font-bold text-secondary">932K PKR</p>
+    </div>
+  </div>
+</div>
