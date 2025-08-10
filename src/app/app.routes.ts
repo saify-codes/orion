@@ -55,7 +55,16 @@ export const routes: Routes = [
           { path: 'tip', component: GeneralComponent },
         ],
       },
-
+      {
+        path: 'reports',
+        children: [
+          { path: 'sales', component: GeneralComponent },
+          { path: 'sales-summary', component: GeneralComponent },
+          { path: 'powerbi', component: GeneralComponent },
+          { path: 'comparision', component: GeneralComponent },
+          { path: 'customer', component: GeneralComponent },
+        ],
+      },
       { path: 'integrations/:service', component: GeneralComponent },
       { path: 'payment-gateway/:gateway', component: GeneralComponent },
       { path: 'logs/:type', component: GeneralComponent },
