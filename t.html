@@ -1,228 +1,321 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
-  <body>
-    <div id="app"></div>
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Tiny Template Engine (Compiler-style)</title>
+  <style>
+    body { font-family: system-ui, Arial, sans-serif; padding: 16px; }
+    li { cursor: pointer; }
+  </style>
+</head>
+<body>
+
+    <div id="output"></div>
     <script>
-      class TemplateEngine {
-        constructor(opts = {}) {
-          this.cache = new Map();
-          this.opts = { autoEscape: false, ...opts };
-        }
-
-        render(tpl, data = {}) {
-          const fn = this.compile(tpl);
-          return fn(data).html;
-        }
-
-        renderInto(el, tpl, data = {}) {
-          const fn = this.compile(tpl);
-          const res = fn(data);
-          el.innerHTML = res.html;
-          this._mount(el, res.records, res.ctx);
-        }
-
-        _mount(root, records, ctx) {
-          const compiled = new Map();
-          for (const r of records) {
-            const sel = `[data-on-${r.evt}="${r.id}"]`;
-            root.querySelectorAll(sel).forEach((el) => {
-              let fn = compiled.get(r.expr);
-              if (!fn) {
-                fn = new Function(
-                  "event",
-                  "__ctx",
-                  "__locals",
-                  // Evaluate handler expression in the same scope; return its value
-                  "with(__locals){ with(__ctx){ return (" + r.expr + "); } }"
-                );
-                compiled.set(r.expr, fn);
-              }
-              el.addEventListener(r.evt, function (event) {
-                try {
-                  const result = fn.call(el, event, ctx, r.locals);
-                  if (typeof result === "function") {
-                    // Support arrow/inline handlers: () => addToCart(item)
-                    return result.call(el, event);
-                  }
-                  return result; // Support direct calls: addToCart(item)
-                } catch (e) {
-                  console.error("Handler error for:", r.expr, e);
-                }
-              });
-              el.removeAttribute(`data-on-${r.evt}`);
-            });
-          }
-        }
-
-        compile(tpl) {
-          if (this.cache.has(tpl)) return this.cache.get(tpl);
-
-          const tokens = tpl.split(/(\{\{[\s\S]*?\}\}|\{%[\s\S]*?%\})/g);
-          const code = [];
-          code.push('let __out=""; let __tmp;');
-          code.push("const __records=[]; const __ctx = ctx || {};");
-          code.push(
-            "let __locals = Object.create(null); const __stack=[]; let __id=1; let __forId=0;"
-          );
-          code.push(
-            "function __escape(v){return String(v).replace(/[&<>\"\\']/g," +
-              'c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\\"":"&quot;","\\' +
-              "'" +
-              '":"&#39;"}[c]));}'
-          );
-          code.push(
-            "function __process(html,__loc){const recs=[];" +
-              "html=String(html).replace(/x-on-([a-zA-Z\\-]+)\\s*=\\s*(['\"])([\\s\\S]*?)\\2/g," +
-              "(_,evt,q,expr)=>{const id=(__id++).toString(36);recs.push({id,evt,expr,locals:__loc});" +
-              'return "data-on-"+evt+"=\\""+id+"\\"";});' +
-              "return {html,records:recs};}"
-          );
-
-          const auto = this.opts.autoEscape ? "true" : "false";
-
-          for (const t of tokens) {
-            if (!t) continue;
-
-            if (t.startsWith("{{")) {
-              const expr = t.slice(2, -2).trim();
-              code.push(
-                "(function(){ with(__locals){ with(__ctx){ __tmp = (" +
-                  expr +
-                  "); } } })();" +
-                  '__out += (__tmp==null ? "" : (' +
-                  auto +
-                  " ? __escape(__tmp) : __tmp));"
-              );
-            } else if (t.startsWith("{%")) {
-              const stmt = t.slice(2, -2).trim();
-              let m;
-              if ((m = stmt.match(/^if\s+([\s\S]+)$/))) {
-                code.push(
-                  "if ((function(){ with(__locals){ with(__ctx){ return (" +
-                    m[1] +
-                    "); } } })()) {"
-                );
-              } else if ((m = stmt.match(/^(?:else\s*if|elif)\s+([\s\S]+)$/))) {
-                code.push(
-                  "} else if ((function(){ with(__locals){ with(__ctx){ return (" +
-                    m[1] +
-                    "); } } })()) {"
-                );
-              } else if (/^else$/.test(stmt)) {
-                code.push("} else {");
-              } else if (/^(?:end\s*if|endif)$/.test(stmt)) {
-                code.push("}");
-              } else if (
-                (m = stmt.match(
-                  /^for\s+([a-zA-Z_$][\\w$]*)\\s+in\\s+([\\s\\S]+)$/
-                ))
-              ) {
-                const v = m[1],
-                  list = m[2];
-                code.push(
-                  "const __arr" +
-                    " = (function(){ with(__locals){ with(__ctx){ return (" +
-                    list +
-                    "); } } })();"
-                ).splice; // dummy to keep formatter happy
-              } else if (
-                (m = stmt.match(/^for\s+([a-zA-Z_$][\w$]*)\s+in\s+([\s\S]+)$/))
-              ) {
-                const v = m[1],
-                  list = m[2];
-                code.push(
-                  "const __arr" +
-                    ++TemplateEngine.__gid +
-                    "=(function(){with(__locals){with(__ctx){return (" +
-                    list +
-                    ");}}})();" +
-                    "for (const " +
-                    v +
-                    " of __arr" +
-                    TemplateEngine.__gid +
-                    "){" +
-                    '__stack.push(__locals); __locals=Object.create(__locals); __locals["' +
-                    v +
-                    '"]=' +
-                    v +
-                    ";"
-                );
-              } else if (/^(?:end\s*for|endfor)$/.test(stmt)) {
-                code.push("__locals = __stack.pop(); }");
-              } else {
-                code.push(
-                  "/* unsupported tag: " + stmt.replace(/\*\//g, "") + " */"
-                );
-              }
-            } else {
-              const txt = TemplateEngine.__escText(t);
-              code.push(
-                'var __r = __process("' +
-                  txt +
-                  '", __locals);' +
-                  "__out += __r.html; __records.push.apply(__records, __r.records);"
-              );
-            }
-          }
-
-          code.push("return { html: __out, records: __records, ctx: __ctx };");
-
-          // build function
-          let src = code.join("");
-          // small fix: ensure __gid exists
-          src = "TemplateEngine.__gid=TemplateEngine.__gid||0;" + src;
-
-          let fn;
-          try {
-            fn = new Function("ctx", src);
-          } catch (e) {
-            console.error("TemplateEngine source:\\n" + src);
-            throw new Error("Template compile error: " + e.message);
-          }
-
-          this.cache.set(tpl, fn);
-          return fn;
-        }
-
-        static __escText(s) {
-          return s
-            .replace(/\\/g, "\\\\")
-            .replace(/"/g, '\\"')
-            .replace(/\r/g, "\\r")
-            .replace(/\n/g, "\\n")
-            .replace(/\t/g, "\\t")
-            .replace(/\u2028/g, "\\u2028")
-            .replace(/\u2029/g, "\\u2029");
+    class TemplateEngine {
+      constructor() {
+        this._records = [];     // event bindings recorded during render
+        this._uid = 1;          // unique ids for data-on-*
+        this._lastData = null;  // for hydrate()
+      }
+    
+      // ===== Public API =====
+      render(template, data) {
+        try {
+          this._records = [];
+          this._lastData = data;
+          const tokens = this._tokenize(template);
+          const ast = this._parse(tokens);
+          return this._generate(ast, data);
+        } catch (error) {
+          console.error("Template Engine Error:", error);
+          return `<p style="color:red">Error rendering template: ${error.message}</p>`;
         }
       }
-      TemplateEngine.__gid = 0;
-
-      // ===== Demo =====
-      const template = `
-        <ul>
-          {% for item in items %}
-            <li style="margin-left: 2rem;"
-                x-on-click="() => addToCart(item)">
-              {{ item.name }}
-            </li>
-          {% endfor %}
-        </ul>
-        `;
-
-      const data = {
-        items: [{ name: "Apple" }, { name: "Banana" }, { name: "Cherry" }],
-        addToCart(item) {
-          alert("Added: " + item.name);
-        },
-      };
-
-      const engine = new TemplateEngine();
-      engine.renderInto(document.getElementById("app"), template, data);
+    
+      renderInto(el, template, data) {
+        const html = this.render(template, data);
+        el.innerHTML = html;
+        this.hydrate(el, data);
+      }
+    
+      hydrate(container, data = this._lastData) {
+        for (const r of this._records) {
+          const sel = `[data-on-${r.evt}="${r.id}"]`;
+          container.querySelectorAll(sel).forEach((node) => {
+            node.addEventListener(r.evt, (event) => {
+              try {
+                const value = this._eval(r.expr, { ...data, ...r.locals });
+                if (typeof value === "function") {
+                  return value.call(node, event);
+                }
+                return value;
+              } catch (e) {
+                console.error("Handler error:", r.expr, e);
+              }
+            });
+            node.removeAttribute(`data-on-${r.evt}`);
+          });
+        }
+      }
+    
+      // ===== 1) TOKENIZE =====
+      _tokenize(template) {
+        // Produces: TEXT / EXPRESSION / TAG(name,value)
+        const re = /({{\s*([\s\S]*?)\s*}})|({%\s*([\s\S]*?)\s*%})|([\s\S]+?(?={{|{%|$))/g;
+        const tokens = [];
+        let m;
+        while ((m = re.exec(template)) !== null) {
+          const [, exprBlock, expr, tagBlock, tag, text] = m;
+          if (exprBlock) {
+            tokens.push({ type: "EXPRESSION", value: String(expr).trim() });
+          } else if (tagBlock) {
+            const raw = String(tag).trim();
+            const firstSpace = raw.indexOf(" ");
+            const name = firstSpace === -1 ? raw : raw.slice(0, firstSpace);
+            const value = firstSpace === -1 ? "" : raw.slice(firstSpace + 1).trim();
+            tokens.push({ type: "TAG", name, value });
+          } else if (text && text.length) {
+            tokens.push({ type: "TEXT", value: text });
+          }
+        }
+        return tokens;
+      }
+    
+      // ===== 2) PARSE → AST =====
+      _parse(tokens) {
+        // AST:
+        // Program{children[]}
+        // TEXT{value}
+        // EXPRESSION{value}
+        // IF{branches:[{test?:string, children:[]}, ...]}
+        // FOR{item:string, listExpr:string, children:[]}
+    
+        const root = { type: "Program", children: [] };
+    
+        // 'where to push children' stack (arrays)
+        const outStack = [root.children];
+    
+        // block stack (IF / FOR nodes)
+        const blockStack = [];
+    
+        const currentOut = () => outStack[outStack.length - 1];
+    
+        for (let i = 0; i < tokens.length; i++) {
+          const t = tokens[i];
+    
+          if (t.type === "TEXT" || t.type === "EXPRESSION") {
+            currentOut().push(t);
+            continue;
+          }
+    
+          if (t.type === "TAG") {
+            // --- IF ---
+            if (t.name === "if") {
+              const ifNode = { type: "IF", branches: [{ test: t.value, children: [] }] };
+              currentOut().push(ifNode);
+              blockStack.push({ kind: "IF", node: ifNode });
+              outStack.push(ifNode.branches[0].children);
+              continue;
+            }
+    
+            // --- ELSEIF / ELIF / ELSE IF ---
+            if (t.name === "elseif" || t.name === "elif" || (t.name === "else" && t.value.startsWith("if "))) {
+              if (!blockStack.length || blockStack[blockStack.length - 1].kind !== "IF") {
+                throw new Error("Unexpected elseif/elif without matching if");
+              }
+              outStack.pop(); // close current branch body
+              const ifNode = blockStack[blockStack.length - 1].node;
+              // Extract condition
+              let cond = t.value;
+              if (t.name === "else") cond = cond.replace(/^if\s+/, "");
+              const branch = { test: cond.trim(), children: [] };
+              ifNode.branches.push(branch);
+              outStack.push(branch.children);
+              continue;
+            }
+    
+            // --- ELSE ---
+            if (t.name === "else" && !t.value) {
+              if (!blockStack.length || blockStack[blockStack.length - 1].kind !== "IF") {
+                throw new Error("Unexpected else without matching if");
+              }
+              outStack.pop(); // close current branch body
+              const ifNode = blockStack[blockStack.length - 1].node;
+              const branch = { children: [] }; // no test → else
+              ifNode.branches.push(branch);
+              outStack.push(branch.children);
+              continue;
+            }
+    
+            // --- ENDIF ---
+            if (t.name === "endif") {
+              if (!blockStack.length || blockStack[blockStack.length - 1].kind !== "IF") {
+                throw new Error("endif without matching if");
+              }
+              outStack.pop(); // branch children
+              blockStack.pop(); // IF
+              continue;
+            }
+    
+            // --- FOR ---
+            if (t.name === "for") {
+              const m = t.value.match(/^([a-zA-Z_$][\w$]*)\s+in\s+([\s\S]+)$/);
+              if (!m) throw new Error("Bad for syntax: {% for " + t.value + " %}");
+              const forNode = { type: "FOR", item: m[1], listExpr: m[2], children: [] };
+              currentOut().push(forNode);
+              blockStack.push({ kind: "FOR", node: forNode });
+              outStack.push(forNode.children);
+              continue;
+            }
+    
+            // --- ENDFOR ---
+            if (t.name === "endfor") {
+              if (!blockStack.length || blockStack[blockStack.length - 1].kind !== "FOR") {
+                throw new Error("endfor without matching for");
+              }
+              outStack.pop();     // for children
+              blockStack.pop();   // FOR
+              continue;
+            }
+    
+            // Unknown tag → keep literal
+            currentOut().push({ type: "TEXT", value: `{% ${t.name}${t.value ? " " + t.value : ""} %}` });
+          }
+        }
+    
+        if (blockStack.length) {
+          throw new Error("Missing closing tag for a block");
+        }
+        return root;
+      }
+    
+      // ===== 3) GENERATE (walk AST and build HTML) =====
+      _generate(node, ctx) {
+        let out = "";
+        const children = node.children || [];
+    
+        for (const n of children) {
+          switch (n.type) {
+            case "TEXT":
+              out += this._processEventsInText(n.value, ctx);
+              break;
+    
+            case "EXPRESSION":
+              out += this._toStr(this._eval(n.value, ctx));
+              break;
+    
+            case "IF": {
+              let rendered = "";
+              for (const br of n.branches) {
+                if (br.test == null) {
+                  // else
+                  rendered = this._generate({ children: br.children }, ctx);
+                  break;
+                }
+                if (this._truthy(this._eval(br.test, ctx))) {
+                  rendered = this._generate({ children: br.children }, ctx);
+                  break;
+                }
+              }
+              out += rendered;
+              break;
+            }
+    
+            case "FOR": {
+              let list = this._eval(n.listExpr, ctx);
+              if (list == null) list = [];
+              if (Array.isArray(list)) {
+                for (const value of list) {
+                  const loopCtx = { ...ctx, [n.item]: value }; // shadow per iteration
+                  out += this._generate({ children: n.children }, loopCtx);
+                }
+              }
+              break;
+            }
+          }
+        }
+        return out;
+      }
+    
+      // ===== Helpers: eval, truthy, events =====
+      _eval(expression, scope) {
+        try {
+          const keys = Object.keys(scope);
+          const vals = Object.values(scope);
+          const fn = new Function(...keys, `return (${expression});`);
+          const res = fn(...vals);
+          return res === undefined || res === null ? "" : res;
+        } catch (e) {
+          console.warn(`Could not evaluate "${expression}": ${e.message}`);
+          return "";
+        }
+      }
+    
+      _truthy(v) { return !!v; }
+      _toStr(v) { return v == null ? "" : String(v); }
+    
+      // Replace x-on-* with data-on-* and record handlers with a locals snapshot
+      _processEventsInText(text, scope) {
+        const locals = { ...scope }; // snapshot for this text chunk
+        return text.replace(/x-on-([a-zA-Z\-]+)\s*=\s*(['"])([\s\S]*?)\2/g, (_m, evt, _q, expr) => {
+          const id = (this._uid++).toString(36);
+          this._records.push({ id, evt, expr, locals });
+          return `data-on-${evt}="${id}"`;
+        });
+      }
+    }
+    
+    /* ===== DEMO (with elseif + events) ===== */
+    const data = {
+      user: { name: "Alice", role: "admin", isLoggedIn: true },
+      age: 30,
+      items: [
+        { name: "Laptop",  price: 1200, inStock: true },
+        { name: "Mouse",   price: 25,   inStock: false },
+        { name: "Keyboard",price: 75,   inStock: true }
+      ],
+      footerText: "© 2024 Template Co.",
+      addToCart(item) { alert("Added: " + item.name); },
+      ping() { alert("Ping!"); }
+    };
+    
+    const template = `
+      <div class="container">
+        <h1>Welcome, {{ user.name && 88}}!</h1>
+    
+        {% if user.isLoggedIn %}
+          <p>Your role is: <span class="{{ user.role === 'admin' ? 'admin' : 'guest' }}">{{ user.role }}</span></p>
+          <p>Your age is greater than 25: <strong>{{ age > 25 }}</strong></p>
+    
+          <h2>Inventory Items</h2>
+          {% if items.length > 0 %}
+            <ul>
+            {% for item in items %}
+              <li style="margin-left: 1rem;" x-on-click="() => addToCart(item)">
+                {{ item.name }}
+              </li>
+            {% endfor %}
+            </ul>
+          {% else %}
+            <p>No items in inventory.</p>
+          {% endif %}
+        {% elseif !user.isLoggedIn %}
+          <p>Please log in to see your dashboard. {{ 78 && 55 }} </p>
+        {% endif %}
+    
+        <button x-on-click="ping()">Quick Ping</button>
+    
+        <div class="footer">
+          <p>{{ footerText.toUpperCase() }}</p>
+        </div>
+      </div>
+    `;
+    
+    const engine = new TemplateEngine();
+    engine.renderInto(document.getElementById("output"), template, data);
     </script>
-  </body>
+    
+
+</body>
 </html>
