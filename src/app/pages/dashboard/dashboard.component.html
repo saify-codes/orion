@@ -2,7 +2,8 @@
   <div class="form-group grow basis-60">
     <label class="text-gray-800 block mb-2">Select branch</label>
     <select
-      name="sss"
+      [(ngModel)]="filters.branch"
+      (change)="onFilterChange()"
       class="py-3 px-4 border border-gray-200 pe-9 block rounded-lg text-sm w-full"
     >
       <option selected="">All</option>
@@ -14,7 +15,8 @@
   <div class="form-group grow basis-60">
     <label class="text-gray-800 block mb-2">Select city</label>
     <select
-      name="sss"
+      [(ngModel)]="filters.city"
+      (change)="onFilterChange()"
       class="py-3 px-4 border border-gray-200 pe-9 block rounded-lg text-sm w-full"
     >
       <option selected="">All</option>
@@ -26,8 +28,10 @@
   <div class="form-group grow basis-60">
     <label class="text-gray-800 block mb-2">Order source</label>
     <select
-      name="sss"
       class="py-3 px-4 border border-gray-200 pe-9 block rounded-lg text-sm w-full"
+      [(ngModel)]="filters.source"
+      [disabled]="isFiltersDisable()"
+      (change)="onFilterChange()"
     >
       <option selected="">All</option>
       <option>karachi</option>
@@ -38,7 +42,8 @@
   <div class="form-group grow basis-60">
     <label class="text-gray-800 block mb-2">Transaction type</label>
     <select
-      name="sss"
+      [(ngModel)]="filters.txType"
+      (change)="onFilterChange()"
       class="py-3 px-4 border border-gray-200 pe-9 block rounded-lg text-sm w-full"
     >
       <option selected="">All</option>
@@ -57,36 +62,73 @@
 </nav>
 
 <div class="grid grid-cols-4 gap-5">
-  <div class="flex flex-col bg-white border border-gray-200 rounded-xl ">
+  <div class="relative bg-white border border-gray-200 rounded-xl">
     <div class="p-4 md:p-5">
-      <h3 class="font-semibold text-gray-800 ">
-        Total sales
-      </h3>
-      <p class="text-3xl font-bold text-secondary">932K PKR</p>
+      <h3 class="font-semibold text-gray-800">Total sales</h3>
+      <p class="text-3xl font-bold text-secondary">
+        {{ widgets["total_sales"].data }}
+      </p>
+      <button
+        class="absolute top-2.5 right-2.5 w-8 h-8 rounded-lg border border-gray-200 disabled:bg-gray-50"
+        [disabled]="widgets['total_sales'].isLoading"
+        (click)="fetchWidgetData('total_sales')"
+      >
+        @if (isLoading('total_sales')) {
+          <i class="fa-duotone fa-solid fa-rotate-right animate-spin" ></i>
+        }@else if (widgets['total_sales'].viewed) {
+          <i class="fa-duotone fa-solid fa-rotate-right"></i>
+        }@else {
+          <i class="fa-duotone fa-solid fa-eye"></i>
+        }
+
+      </button>
     </div>
   </div>
-  <div class="flex flex-col bg-white border border-gray-200 rounded-xl ">
+
+  <div class="relative bg-white border border-gray-200 rounded-xl">
     <div class="p-4 md:p-5">
-      <h3 class="font-semibold text-gray-800 ">
-        Total orders
-      </h3>
-      <p class="text-3xl font-bold text-secondary">932K PKR</p>
+      <h3 class="font-semibold text-gray-800">Total orders</h3>
+      <p class="text-3xl font-bold text-secondary">
+        {{ widgets["total_orders"].data }}
+      </p>
+      <button
+        class="absolute top-2.5 right-2.5 w-8 h-8 rounded-lg border border-gray-200 disabled:bg-gray-50"
+      >
+        <i
+          class="fa-duotone fa-solid fa-rotate-right"
+          [class.animate-spin]="isLoading('total_orders')"
+        ></i>
+      </button>
     </div>
   </div>
-  <div class="flex flex-col bg-white border border-gray-200 rounded-xl ">
+
+  <div class="relative bg-white border border-gray-200 rounded-xl">
     <div class="p-4 md:p-5">
-      <h3 class="font-semibold text-gray-800 ">
-        Average order amount
-      </h3>
+      <h3 class="font-semibold text-gray-800">Avg order amount</h3>
       <p class="text-3xl font-bold text-secondary">932K PKR</p>
+      <button
+        class="absolute top-2.5 right-2.5 w-8 h-8 rounded-lg border border-gray-200 disabled:bg-gray-50"
+      >
+        <i
+          class="fa-duotone fa-solid fa-rotate-right"
+          [class.animate-spin]="isLoading('avg_order_amount')"
+        ></i>
+      </button>
     </div>
   </div>
-  <div class="flex flex-col bg-white border border-gray-200 rounded-xl ">
+  <div class="relative bg-white border border-gray-200 rounded-xl">
     <div class="p-4 md:p-5">
-      <h3 class="font-semibold text-gray-800 ">
-        Total tip
-      </h3>
+      <h3 class="font-semibold text-gray-800">Total tip</h3>
       <p class="text-3xl font-bold text-secondary">932K PKR</p>
+      <button
+        class="absolute top-2.5 right-2.5 w-8 h-8 rounded-lg border border-gray-200 disabled:bg-gray-50"
+        [disabled]="isLoading('total_tip')"
+      >
+        <i
+          class="fa-duotone fa-solid fa-rotate-right"
+          [class.animate-spin]="isLoading('total_tip')"
+        ></i>
+      </button>
     </div>
   </div>
 </div>

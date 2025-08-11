@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script>
+      class TemplateEngine {
+        constructor(opts = {}) {
+          this.cache = new Map();
+          this.opts = { autoEscape: false, ...opts };
+        }
+
+        render(tpl, data = {}) {
+          const fn = this.compile(tpl);
+          return fn(data).html;
+        }
+
+        renderInto(el, tpl, data = {}) {
+          const fn = this.compile(tpl);
+          const res = fn(data);
+          el.innerHTML = res.html;
+          this._mount(el, res.records, res.ctx);
+        }
+
+        _mount(root, records, ctx) {
+          const compiled = new Map();
+          for (const r of records) {
+            const sel = `[data-on-${r.evt}="${r.id}"]`;
+            root.querySelectorAll(sel).forEach((el) => {
+              let fn = compiled.get(r.expr);
+              if (!fn) {
+                fn = new Function(
+                  "event",
+                  "__ctx",
+                  "__locals",
+                  // Evaluate handler expression in the same scope; return its value
+                  "with(__locals){ with(__ctx){ return (" + r.expr + "); } }"
+                );
+                compiled.set(r.expr, fn);
+              }
+              el.addEventListener(r.evt, function (event) {
+                try {
+                  const result = fn.call(el, event, ctx, r.locals);
+                  if (typeof result === "function") {
+                    // Support arrow/inline handlers: () => addToCart(item)
+                    return result.call(el, event);
+                  }
+                  return result; // Support direct calls: addToCart(item)
+                } catch (e) {
+                  console.error("Handler error for:", r.expr, e);
+                }
+              });
+              el.removeAttribute(`data-on-${r.evt}`);
+            });
+          }
+        }
+
+        compile(tpl) {
+          if (this.cache.has(tpl)) return this.cache.get(tpl);
+
+          const tokens = tpl.split(/(\{\{[\s\S]*?\}\}|\{%[\s\S]*?%\})/g);
+          const code = [];
+          code.push('let __out=""; let __tmp;');
+          code.push("const __records=[]; const __ctx = ctx || {};");
+          code.push(
+            "let __locals = Object.create(null); const __stack=[]; let __id=1; let __forId=0;"
+          );
+          code.push(
+            "function __escape(v){return String(v).replace(/[&<>\"\\']/g," +
+              'c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\\"":"&quot;","\\' +
+              "'" +
+              '":"&#39;"}[c]));}'
+          );
+          code.push(
+            "function __process(html,__loc){const recs=[];" +
+              "html=String(html).replace(/x-on-([a-zA-Z\\-]+)\\s*=\\s*(['\"])([\\s\\S]*?)\\2/g," +
+              "(_,evt,q,expr)=>{const id=(__id++).toString(36);recs.push({id,evt,expr,locals:__loc});" +
+              'return "data-on-"+evt+"=\\""+id+"\\"";});' +
+              "return {html,records:recs};}"
+          );
+
+          const auto = this.opts.autoEscape ? "true" : "false";
+
+          for (const t of tokens) {
+            if (!t) continue;
+
+            if (t.startsWith("{{")) {
+              const expr = t.slice(2, -2).trim();
+              code.push(
+                "(function(){ with(__locals){ with(__ctx){ __tmp = (" +
+                  expr +
+                  "); } } })();" +
+                  '__out += (__tmp==null ? "" : (' +
+                  auto +
+                  " ? __escape(__tmp) : __tmp));"
+              );
+            } else if (t.startsWith("{%")) {
+              const stmt = t.slice(2, -2).trim();
+              let m;
+              if ((m = stmt.match(/^if\s+([\s\S]+)$/))) {
+                code.push(
+                  "if ((function(){ with(__locals){ with(__ctx){ return (" +
+                    m[1] +
+                    "); } } })()) {"
+                );
+              } else if ((m = stmt.match(/^(?:else\s*if|elif)\s+([\s\S]+)$/))) {
+                code.push(
+                  "} else if ((function(){ with(__locals){ with(__ctx){ return (" +
+                    m[1] +
+                    "); } } })()) {"
+                );
+              } else if (/^else$/.test(stmt)) {
+                code.push("} else {");
+              } else if (/^(?:end\s*if|endif)$/.test(stmt)) {
+                code.push("}");
+              } else if (
+                (m = stmt.match(
+                  /^for\s+([a-zA-Z_$][\\w$]*)\\s+in\\s+([\\s\\S]+)$/
+                ))
+              ) {
+                const v = m[1],
+                  list = m[2];
+                code.push(
+                  "const __arr" +
+                    " = (function(){ with(__locals){ with(__ctx){ return (" +
+                    list +
+                    "); } } })();"
+                ).splice; // dummy to keep formatter happy
+              } else if (
+                (m = stmt.match(/^for\s+([a-zA-Z_$][\w$]*)\s+in\s+([\s\S]+)$/))
+              ) {
+                const v = m[1],
+                  list = m[2];
+                code.push(
+                  "const __arr" +
+                    ++TemplateEngine.__gid +
+                    "=(function(){with(__locals){with(__ctx){return (" +
+                    list +
+                    ");}}})();" +
+                    "for (const " +
+                    v +
+                    " of __arr" +
+                    TemplateEngine.__gid +
+                    "){" +
+                    '__stack.push(__locals); __locals=Object.create(__locals); __locals["' +
+                    v +
+                    '"]=' +
+                    v +
+                    ";"
+                );
+              } else if (/^(?:end\s*for|endfor)$/.test(stmt)) {
+                code.push("__locals = __stack.pop(); }");
+              } else {
+                code.push(
+                  "/* unsupported tag: " + stmt.replace(/\*\//g, "") + " */"
+                );
+              }
+            } else {
+              const txt = TemplateEngine.__escText(t);
+              code.push(
+                'var __r = __process("' +
+                  txt +
+                  '", __locals);' +
+                  "__out += __r.html; __records.push.apply(__records, __r.records);"
+              );
+            }
+          }
+
+          code.push("return { html: __out, records: __records, ctx: __ctx };");
+
+          // build function
+          let src = code.join("");
+          // small fix: ensure __gid exists
+          src = "TemplateEngine.__gid=TemplateEngine.__gid||0;" + src;
+
+          let fn;
+          try {
+            fn = new Function("ctx", src);
+          } catch (e) {
+            console.error("TemplateEngine source:\\n" + src);
+            throw new Error("Template compile error: " + e.message);
+          }
+
+          this.cache.set(tpl, fn);
+          return fn;
+        }
+
+        static __escText(s) {
+          return s
+            .replace(/\\/g, "\\\\")
+            .replace(/"/g, '\\"')
+            .replace(/\r/g, "\\r")
+            .replace(/\n/g, "\\n")
+            .replace(/\t/g, "\\t")
+            .replace(/\u2028/g, "\\u2028")
+            .replace(/\u2029/g, "\\u2029");
+        }
+      }
+      TemplateEngine.__gid = 0;
+
+      // ===== Demo =====
+      const template = `
+        <ul>
+          {% for item in items %}
+            <li style="margin-left: 2rem;"
+                x-on-click="() => addToCart(item)">
+              {{ item.name }}
+            </li>
+          {% endfor %}
+        </ul>
+        `;
+
+      const data = {
+        items: [{ name: "Apple" }, { name: "Banana" }, { name: "Cherry" }],
+        addToCart(item) {
+          alert("Added: " + item.name);
+        },
+      };
+
+      const engine = new TemplateEngine();
+      engine.renderInto(document.getElementById("app"), template, data);
+    </script>
+  </body>
+</html>
