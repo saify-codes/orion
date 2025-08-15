@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { withLoader } from '../../utils';
+import { withLoader } from '../../../utils';
 
 @Component({
   selector: 'app-dashboard',

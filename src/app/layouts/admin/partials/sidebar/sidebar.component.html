@@ -1,0 +1,568 @@
+<div id="app-sidebar" class="[--auto-close:lg] lg:block lg:translate-x-0 lg:end-auto lg:bottom-0 w-64 hs-ovey-open:translate-x-0 -translate-x-full transition-all duration-300 transform h-full hidden top-0 start-0 bottom-0 z-60 bg-white border-e border-gray-200 fixed lg:static">
+  <div class="relative flex flex-col h-full max-h-full">
+    <header class="py-4 px-2.5 flex justify-between items-center">
+      <a routerLink="/home">
+        <img class="h-15" src="/logo.png" alt="logo">
+      </a>
+      <div class="lg:hidden -me-2">
+        <!-- Close Button -->
+        <button
+          type="button"
+          class="flex justify-center items-center gap-x-3 size-6 bg-white border border-gray-200 text-sm text-gray-600 hover:bg-gray-100 rounded-full disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden focus:bg-gray-100 "
+          data-hs-ovey="#app-sidebar"
+        >
+          <svg
+            class="shrink-0 size-4"
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M18 6 6 18" />
+            <path d="m6 6 12 12" />
+          </svg>
+          <span class="sr-only">Close</span>
+        </button>
+        <!-- End Close Button -->
+      </div>
+    </header>
+
+    <nav class="h-full overflow-y-auto [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300 ">
+      <ul class="space-y-1 px-2.5">
+        
+        <h6 class="font-bold text-neutral-400 uppercase text-sm px-2.5 py-2">Main</h6>
+
+        <li class="group" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+          <a
+            class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 group-[&:not(.active)]:hover:bg-gray-100 font-semibold rounded-lg group-[.active]:bg-secondary"
+            routerLink="/"
+          >
+           <i class="fa-duotone fa-solid fa-house text-lg group-[.active]:text-white"></i>
+            Home
+          </a>
+        </li>
+        
+        <li class="group" routerLinkActive="active">
+          <a
+            class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 group-[&:not(.active)]:hover:bg-gray-100 font-semibold rounded-lg group-[.active]:bg-secondary"
+            routerLink="/dashboard"
+          >
+           <i class="fa-duotone fa-solid fa-fire text-lg group-[.active]:text-white"></i>
+            Dashboard
+          </a>
+        </li>
+        
+        <h6 class="font-bold text-neutral-400 uppercase text-sm px-2.5 py-2">Management</h6>
+        
+        <li class="group" routerLinkActive="active">
+          <a
+            class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 group-[&:not(.active)]:hover:bg-gray-100 font-semibold rounded-lg group-[.active]:bg-secondary"
+            routerLink="/admin/merchants"
+          >
+           <i class="fa-duotone fa-solid fa-users text-lg group-[.active]:text-white"></i>
+            Merchants
+          </a>
+        </li>
+        
+        <li class="group" routerLinkActive="active">
+          <a
+            class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 group-[&:not(.active)]:hover:bg-gray-100 font-semibold rounded-lg group-[.active]:bg-secondary"
+            routerLink="/staff"
+          >
+           <i class="fa-duotone fa-solid fa-user-tie text-lg group-[.active]:text-white"></i>
+            Staff
+          </a>
+        </li>
+        
+        <li class="group" routerLinkActive="active">
+          <a
+            class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 group-[&:not(.active)]:hover:bg-gray-100 font-semibold rounded-lg group-[.active]:bg-secondary"
+            routerLink="/inventory"
+          >
+           <i class="fa-duotone fa-solid fa-box-circle-check text-lg group-[.active]:text-white"></i>
+            Inventory
+          </a>
+        </li>
+
+        <!-- Menu -->
+        <li
+          class="dropdown group/parent"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: false }"
+          #Menu="routerLinkActive"
+          [class.open]="isOpen('menu') || Menu.isActive"
+        >
+          <button
+            type="button"
+            class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800
+                  group-[&:not(.active)]/parent:hover:bg-gray-100
+                  group-[.active]/parent:bg-secondary font-semibold rounded-lg w-full"
+            (click)="toggle('menu')"
+          >
+            <i class="fa-duotone fa-solid fa-clipboard text-lg group-[.active]/parent:text-white"></i>
+            Menu
+            <i class="fa-solid fa-chevron-down ms-auto transition group-[.open]/parent:rotate-180"></i>
+          </button>
+
+          <div class="w-full my-5 overflow-hidden transition-[height] duration-300 hidden group-[.open]/parent:block">
+            <ul class="border-gray-400 border-l-2 ml-5 pl-2.5 space-y-1">
+              <li class="group" routerLinkActive="active">
+                <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 group-[&:not(.active)]:hover:bg-gray-100 font-semibold rounded-lg group-[.active]:bg-secondary"
+                  routerLink="/menu/items">
+                  <i class="fa-duotone fa-solid fa-burger-soda text-lg group-[.active]:text-white"></i>
+                  Items
+                </a>
+              </li>
+
+              <li class="group" routerLinkActive="active">
+                <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 group-[&:not(.active)]:hover:bg-gray-100 font-semibold rounded-lg group-[.active]:bg-secondary"
+                  routerLink="/menu/item-category">
+                  <i class="fa-duotone fa-solid fa-plate-utensils text-lg group-[.active]:text-white"></i>
+                  Item category
+                </a>
+              </li>
+
+              <li class="group" routerLinkActive="active">
+                <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 group-[&:not(.active)]:hover:bg-gray-100 font-semibold rounded-lg group-[.active]:bg-secondary"
+                  routerLink="/menu/sizes">
+                  <i class="fa-duotone fa-solid fa-pizza text-lg group-[.active]:text-white"></i>
+                  Sizes
+                </a>
+              </li>
+
+              <li class="group" routerLinkActive="active">
+                <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 group-[&:not(.active)]:hover:bg-gray-100 font-semibold rounded-lg group-[.active]:bg-secondary"
+                  routerLink="/menu/addons">
+                  <i class="fa-duotone fa-solid fa-pot-food text-lg group-[.active]:text-white"></i>
+                  Add-ons
+                </a>
+              </li>
+
+              <li class="group" routerLinkActive="active">
+                <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 group-[&:not(.active)]:hover:bg-gray-100 font-semibold rounded-lg group-[.active]:bg-secondary"
+                  routerLink="/menu/addon-category">
+                  <i class="fa-duotone fa-solid fa-olive-branch text-lg group-[.active]:text-white"></i>
+                  Addon category
+                </a>
+              </li>
+            </ul>
+          </div>
+        </li>
+
+
+        <h6 class="font-bold text-neutral-400 uppercase text-sm px-2.5 py-2">Marketing & promotion</h6>
+        
+        <!-- Marketing -->
+        <li
+          class="dropdown group/parent"
+          routerLinkActive="active"
+          #marketing="routerLinkActive"
+          [class.open]="isOpen('marketing') || marketing.isActive"
+        >
+          <button
+            type="button"
+            class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800
+                  group-[&:not(.active)]/parent:hover:bg-gray-100
+                  group-[.active]/parent:bg-secondary font-semibold rounded-lg w-full"
+            (click)="toggle('marketing')"
+          >
+            <i class="fa-duotone fa-solid fa-bullhorn text-lg group-[.active]/parent:text-white"></i>
+            Marketing
+            <i class="fa-solid fa-chevron-down ms-auto transition group-[.open]/parent:rotate-180"></i>
+          </button>
+
+          <div class="w-full my-5 overflow-hidden transition-[height] duration-300 hidden group-[.open]/parent:block">
+            <ul class="border-gray-400 border-l-2 ml-5 pl-2.5 space-y-1">
+              <li class="group" routerLinkActive="active">
+                <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 group-[&:not(.active)]:hover:bg-gray-100 font-semibold rounded-lg group-[.active]:bg-secondary"
+                  routerLink="/marketing/seo">
+                  <i class="fa-duotone fa-solid fa-magnifying-glass-chart text-lg group-[.active]:text-white"></i>
+                  Seo
+                </a>
+              </li>
+              <li class="group" routerLinkActive="active">
+                <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 group-[&:not(.active)]:hover:bg-gray-100 font-semibold rounded-lg group-[.active]:bg-secondary"
+                  routerLink="/marketing/sms">
+                  <i class="fa-duotone fa-solid fa-comments text-lg group-[.active]:text-white"></i>
+                  Sms
+                </a>
+              </li>
+              <li class="group" routerLinkActive="active">
+                <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 group-[&:not(.active)]:hover:bg-gray-100 font-semibold rounded-lg group-[.active]:bg-secondary"
+                  routerLink="/marketing/push-notifications">
+                  <i class="fa-duotone fa-solid fa-bell text-lg group-[.active]:text-white"></i>
+                  Push notifications
+                </a>
+              </li>
+            </ul>
+          </div>
+        </li>
+
+        
+        <!-- Promotions -->
+        <li
+          class="dropdown group/parent"
+          routerLinkActive="active"
+          #promotions="routerLinkActive"
+          [class.open]="isOpen('promotions') || promotions.isActive"
+        >
+          <button
+            type="button"
+            class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800
+                  group-[&:not(.active)]/parent:hover:bg-gray-100
+                  group-[.active]/parent:bg-secondary font-semibold rounded-lg w-full"
+            (click)="toggle('promotions')"
+          >
+            <i class="fa-duotone fa-solid fa-ad text-lg group-[.active]/parent:text-white"></i>
+            Promotions
+            <i class="fa-solid fa-chevron-down ms-auto transition group-[.open]/parent:rotate-180"></i>
+          </button>
+
+          <div class="w-full my-5 overflow-hidden transition-[height] duration-300 hidden group-[.open]/parent:block">
+            <ul class="border-gray-400 border-l-2 ml-5 pl-2.5 space-y-1">
+              <li class="group" routerLinkActive="active">
+                <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 group-[&:not(.active)]:hover:bg-gray-100 font-semibold rounded-lg group-[.active]:bg-secondary"
+                  routerLink="/promotions/offers">
+                  <i class="fa-duotone fa-solid fa-tags text-lg group-[.active]:text-white"></i>
+                  Offers
+                </a>
+              </li>
+              <li class="group" routerLinkActive="active">
+                <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 group-[&:not(.active)]:hover:bg-gray-100 font-semibold rounded-lg group-[.active]:bg-secondary"
+                  routerLink="/promotions/vouchers">
+                  <i class="fa-duotone fa-solid fa-ticket text-lg group-[.active]:text-white rotate-45"></i>
+                  Vouchers
+                </a>
+              </li>
+            </ul>
+          </div>
+        </li>
+
+        <h6 class="font-bold text-neutral-400 uppercase text-sm px-2.5 py-2">Settings</h6>
+       
+        <!-- Settings -->
+        <li
+          class="dropdown group/parent"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: false }"
+          #settings="routerLinkActive"
+          [class.open]="isOpen('settings') || settings.isActive"
+        >
+          <button
+            type="button"
+            class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800
+                  group-[&:not(.active)]/parent:hover:bg-gray-100
+                  group-[.active]/parent:bg-secondary font-semibold rounded-lg w-full"
+            (click)="toggle('settings')"
+          >
+            <i class="fa-duotone fa-solid fa-gear text-lg group-[.active]/parent:text-white"></i>
+            Settings
+            <i class="fa-solid fa-chevron-down ms-auto transition group-[.open]/parent:rotate-180"></i>
+          </button>
+
+          <div class="w-full my-5 overflow-hidden transition-[height] duration-300 hidden group-[.open]/parent:block">
+            <ul class="border-gray-400 border-l-2 ml-5 pl-2.5 space-y-1">
+              <li class="group" routerLinkActive="active">
+                <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 group-[&:not(.active)]:hover:bg-gray-100 font-semibold rounded-lg group-[.active]:bg-secondary"
+                  routerLink="/settings/general">
+                  <i class="fa-duotone fa-solid fa-info-circle text-lg group-[.active]:text-white"></i>
+                  General
+                </a>
+              </li>
+              <li class="group" routerLinkActive="active">
+                <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 group-[&:not(.active)]:hover:bg-gray-100 font-semibold rounded-lg group-[.active]:bg-secondary"
+                  routerLink="/settings/branches">
+                  <i class="fa-duotone fa-solid fa-map-location-dot text-lg group-[.active]:text-white"></i>
+                  Branches
+                </a>
+              </li>
+              <li class="group" routerLinkActive="active">
+                <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 group-[&:not(.active)]:hover:bg-gray-100 font-semibold rounded-lg group-[.active]:bg-secondary"
+                  routerLink="/settings/theme">
+                  <i class="fa-duotone fa-solid fa-grid-2 text-lg group-[.active]:text-white"></i>
+                  Theme
+                </a>
+              </li>
+              <li class="group" routerLinkActive="active">
+                <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 group-[&:not(.active)]:hover:bg-gray-100 font-semibold rounded-lg group-[.active]:bg-secondary"
+                  routerLink="/settings/app">
+                  <i class="fa-duotone fa-solid fa-mobile-button text-lg group-[.active]:text-white"></i>
+                  App
+                </a>
+              </li>
+              <li class="group" routerLinkActive="active">
+                <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 group-[&:not(.active)]:hover:bg-gray-100 font-semibold rounded-lg group-[.active]:bg-secondary"
+                  routerLink="/settings/tax">
+                  <i class="fa-duotone fa-solid fa-percent text-lg group-[.active]:text-white"></i>
+                  Tax
+                </a>
+              </li>
+              <li class="group" routerLinkActive="active">
+                <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 group-[&:not(.active)]:hover:bg-gray-100 font-semibold rounded-lg group-[.active]:bg-secondary"
+                  routerLink="/settings/tip">
+                  <i class="fa-duotone fa-solid fa-hand-holding-dollar text-lg group-[.active]:text-white"></i>
+                  Tip
+                </a>
+              </li>
+            </ul>
+          </div>
+        </li>
+
+        <!-- Settings -->
+        <li
+          class="dropdown group/parent"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: false }"
+          #reports="routerLinkActive"
+          [class.open]="isOpen('reports') || reports.isActive"
+        >
+          <button
+            type="button"
+            class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800
+                  group-[&:not(.active)]/parent:hover:bg-gray-100
+                  group-[.active]/parent:bg-secondary font-semibold rounded-lg w-full"
+            (click)="toggle('reports')"
+          >
+            <i class="fa-duotone fa-solid fa-clipboard-check text-lg group-[.active]/parent:text-white"></i>
+            Reports
+            <i class="fa-solid fa-chevron-down ms-auto transition group-[.open]/parent:rotate-180"></i>
+          </button>
+
+          <div class="w-full my-5 overflow-hidden transition-[height] duration-300 hidden group-[.open]/parent:block">
+            <ul class="border-gray-400 border-l-2 ml-5 pl-2.5 space-y-1">
+              <li class="group" routerLinkActive="active">
+                <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 group-[&:not(.active)]:hover:bg-gray-100 font-semibold rounded-lg group-[.active]:bg-secondary"
+                  routerLink="/reports/sales">
+                  <i class="fa-duotone fa-solid fa-file-lines text-lg group-[.active]:text-white"></i>
+                  Sales
+                </a>
+              </li>
+              <li class="group" routerLinkActive="active">
+                <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 group-[&:not(.active)]:hover:bg-gray-100 font-semibold rounded-lg group-[.active]:bg-secondary"
+                  routerLink="/reports/sales-summary">
+                  <i class="fa-duotone fa-solid fa-file-lines text-lg group-[.active]:text-white"></i>
+                  Sales summary
+                </a>
+              </li>
+              <li class="group" routerLinkActive="active">
+                <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 group-[&:not(.active)]:hover:bg-gray-100 font-semibold rounded-lg group-[.active]:bg-secondary"
+                  routerLink="/reports/powerbi">
+                  <i class="fa-duotone fa-solid fa-file-lines text-lg group-[.active]:text-white"></i>
+                  Powerbi
+                </a>
+              </li>
+              <li class="group" routerLinkActive="active">
+                <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 group-[&:not(.active)]:hover:bg-gray-100 font-semibold rounded-lg group-[.active]:bg-secondary"
+                  routerLink="/reports/comparision">
+                  <i class="fa-duotone fa-solid fa-file-lines text-lg group-[.active]:text-white"></i>
+                  Comparision
+                </a>
+              </li>
+              
+              <li class="group" routerLinkActive="active">
+                <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 group-[&:not(.active)]:hover:bg-gray-100 font-semibold rounded-lg group-[.active]:bg-secondary"
+                  routerLink="/reports/customer">
+                  <i class="fa-duotone fa-solid fa-file-lines text-lg group-[.active]:text-white"></i>
+                  Customer
+                </a>
+              </li>
+
+            </ul>
+          </div>
+        </li>
+
+        <!-- Integrations -->
+        <h6 class="font-bold text-neutral-400 uppercase text-sm px-2.5 py-2">Integrations</h6>
+        
+        <li class="group" routerLinkActive="active">
+          <a
+            class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 group-[&:not(.active)]:hover:bg-gray-100 font-semibold rounded-lg group-[.active]:bg-secondary"
+            routerLink="/integrations/postex"
+          >
+           <i class="fa-duotone fa-solid fa-plug-circle-bolt text-lg group-[.active]:text-white"></i>
+            Postex
+          </a>
+        </li>
+        
+        <li class="group" routerLinkActive="active">
+          <a
+            class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 group-[&:not(.active)]:hover:bg-gray-100 font-semibold rounded-lg group-[.active]:bg-secondary"
+            routerLink="/integrations/onesignal"
+          >
+           <i class="fa-duotone fa-solid fa-plug-circle-bolt text-lg group-[.active]:text-white"></i>
+            One signal
+          </a>
+        </li>
+        
+        <li class="group" routerLinkActive="active">
+          <a
+            class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 group-[&:not(.active)]:hover:bg-gray-100 font-semibold rounded-lg group-[.active]:bg-secondary"
+            routerLink="/integrations/technosys"
+          >
+           <i class="fa-duotone fa-solid fa-plug-circle-bolt text-lg group-[.active]:text-white"></i>
+            Technosys
+          </a>
+        </li>
+        
+        <!-- Payment gateways -->
+        <h6 class="font-bold text-neutral-400 uppercase text-sm px-2.5 py-2">Payment gateways</h6>
+        
+        <li class="group" routerLinkActive="active">
+          <a
+            class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 group-[&:not(.active)]:hover:bg-gray-100 font-semibold rounded-lg group-[.active]:bg-secondary"
+            routerLink="/payment-gateway/stripe"
+          >
+           <i class="fa-duotone fa-solid fa-building-columns text-lg group-[.active]:text-white"></i>
+            Stripe
+          </a>
+        </li>
+        
+        <li class="group" routerLinkActive="active">
+          <a
+            class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 group-[&:not(.active)]:hover:bg-gray-100 font-semibold rounded-lg group-[.active]:bg-secondary"
+            routerLink="/payment-gateway/alfala"
+          >
+           <i class="fa-duotone fa-solid fa-building-columns text-lg group-[.active]:text-white"></i>
+            Alfala
+          </a>
+        </li>
+        
+        <li class="group" routerLinkActive="active">
+          <a
+            class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 group-[&:not(.active)]:hover:bg-gray-100 font-semibold rounded-lg group-[.active]:bg-secondary"
+            routerLink="/payment-gateway/telr"
+          >
+           <i class="fa-duotone fa-solid fa-building-columns text-lg group-[.active]:text-white"></i>
+            Telr
+          </a>
+        </li>
+        
+        <li class="group" routerLinkActive="active">
+          <a
+            class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 group-[&:not(.active)]:hover:bg-gray-100 font-semibold rounded-lg group-[.active]:bg-secondary"
+            routerLink="/payment-gateway/google-pay"
+          >
+           <i class="fa-duotone fa-solid fa-building-columns text-lg group-[.active]:text-white"></i>
+            Google pay
+          </a>
+        </li>
+       
+        <!-- Logs -->
+        <h6 class="font-bold text-neutral-400 uppercase text-sm px-2.5 py-2">Logs</h6>
+
+        <li class="group" routerLinkActive="active">
+          <a
+            class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 group-[&:not(.active)]:hover:bg-gray-100 font-semibold rounded-lg group-[.active]:bg-secondary"
+            routerLink="/logs/activity"
+          >
+           <i class="fa-duotone fa-solid fa-clock-rotate-left text-lg group-[.active]:text-white"></i>
+            Activity
+          </a>
+        </li>
+        
+        <li class="group" routerLinkActive="active">
+          <a
+            class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 group-[&:not(.active)]:hover:bg-gray-100 font-semibold rounded-lg group-[.active]:bg-secondary"
+            routerLink="/logs/orders"
+          >
+           <i class="fa-duotone fa-solid fa-clock-rotate-left text-lg group-[.active]:text-white"></i>
+            Orders
+          </a>
+        </li>
+        
+        <li class="group" routerLinkActive="active">
+          <a
+            class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 group-[&:not(.active)]:hover:bg-gray-100 font-semibold rounded-lg group-[.active]:bg-secondary"
+            routerLink="/payment-gateway/staff"
+          >
+           <i class="fa-duotone fa-solid fa-clock-rotate-left text-lg group-[.active]:text-white"></i>
+            Staff
+          </a>
+        </li>
+        
+      </ul>
+    </nav>
+
+    <footer
+      class="mt-auto p-2 border-t border-gray-200 "
+    >
+      <!-- Account Dropdown -->
+      <div
+        class="hs-dropdown [--strategy:absolute] [--auto-close:inside] relative w-full inline-flex"
+      >
+        <button
+          id="hs-sidebar-footer-example-with-dropdown"
+          type="button"
+          class="w-full inline-flex shrink-0 items-center gap-x-2 p-2 text-start text-sm text-gray-800 rounded-md hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 "
+          aria-haspopup="menu"
+          aria-expanded="false"
+          aria-label="Dropdown"
+        >
+          <img
+            class="shrink-0 size-5 rounded-full"
+            src="https://images.unsplash.com/photo-1734122415415-88cb1d7d5dc0?q=80&w=320&h=320&auto=format&fit=facearea&facepad=3&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            alt="Avatar"
+          />
+          Mia Hudson
+          <svg
+            class="shrink-0 size-3.5 ms-auto"
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="m7 15 5 5 5-5" />
+            <path d="m7 9 5-5 5 5" />
+          </svg>
+        </button>
+
+        <!-- Account Dropdown -->
+        <div
+          class="hs-dropdown-menu hs-dropdown-open:opacity-100 w-60 transition-[opacity,margin] duration opacity-0 hidden z-20 bg-white border border-gray-200 rounded-lg shadow-lg "
+          role="menu"
+          aria-orientation="vertical"
+          aria-labelledby="hs-sidebar-footer-example-with-dropdown"
+        >
+          <div class="p-1">
+            <a
+              class="flex items-center gap-x-3 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden focus:bg-gray-100 "
+              href="#"
+            >
+              My account
+            </a>
+            <a
+              class="flex items-center gap-x-3 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden focus:bg-gray-100 "
+              href="#"
+            >
+              Settings
+            </a>
+            <a
+              class="flex items-center gap-x-3 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden focus:bg-gray-100 "
+              href="#"
+            >
+              Billing
+            </a>
+            <a
+              class="flex items-center gap-x-3 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden focus:bg-gray-100 "
+              href="#"
+            >
+              Sign out
+            </a>
+          </div>
+        </div>
+        <!-- End Account Dropdown -->
+      </div>
+      <!-- End Account Dropdown -->
+    </footer>
+  </div>
+</div>

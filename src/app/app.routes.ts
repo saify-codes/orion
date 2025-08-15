@@ -1,15 +1,31 @@
 import { Routes } from '@angular/router';
-import { SigninComponent } from './pages/signin/signin.component';
-import { DashboardComponent } from './pages/dashboard/dashboard.component';
-import { GeneralComponent } from './pages/settings/general/general.component';
-import { HomeComponent } from './pages/home/home.component';
-import { BaseComponent } from './layouts/base/base.component';
+import { MerchantLayout } from './layouts/merchant/merchant.component';
+import { SigninComponent } from './pages/merchant/signin/signin.component';
+import { DashboardComponent } from './pages/merchant/dashboard/dashboard.component';
+import { GeneralComponent } from './pages/merchant/settings/general/general.component';
+import { HomeComponent } from './pages/merchant/home/home.component';
+
+import { AdminLayout } from './layouts/admin/admin.component';
+import { AdminHomeComponent } from './pages/admin/admin-home/admin-home.component';
+import { AdminMerchantsComponent } from './pages/admin/admin-merchants/admin-merchants.component';
+import { AdminSigninComponent } from './pages/admin/admin-signin/admin-signin.component';
+import { NotFoundComponent } from './pages/not-found/not-found.component';
 
 export const routes: Routes = [
-  // Shell with persistent header/sidebar
+  // admin routes
+  {
+    path: 'admin',
+    component: AdminLayout,
+    children: [
+      { path: '', component: AdminHomeComponent },
+      { path: 'merchants', component: AdminMerchantsComponent },
+    ],
+  },
+
+  // merchant routes
   {
     path: '',
-    component: BaseComponent,
+    component: MerchantLayout,
     children: [
       { path: '', component: HomeComponent },
       { path: 'dashboard', component: DashboardComponent },
@@ -18,7 +34,6 @@ export const routes: Routes = [
       { path: 'customers', component: GeneralComponent },
       { path: 'staff', component: GeneralComponent },
       { path: 'inventory', component: GeneralComponent },
-
       {
         path: 'menu',
         children: [
@@ -71,9 +86,11 @@ export const routes: Routes = [
     ],
   },
 
-  // Guest route (outside the shell)
+  // Admin guest route (outside the shell)
+  { path: 'admin/auth/signin', component: AdminSigninComponent },
+
+  // Merchant guest route (outside the shell)
   { path: 'signin', component: SigninComponent },
 
-  // Optional: not-found
-  // { path: '**', redirectTo: '' },
+  { path: '**', component: NotFoundComponent },
 ];
