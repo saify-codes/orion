@@ -63,23 +63,20 @@ export class AdminMerchantsComponent implements OnInit {
   // ---------- Context menu handlers ----------
 
   toggleMenu(id: any) {
-    
+    this.currentOpenMenu = this.currentOpenMenu == id ? null : id
   }
 
-  closeMenu() {
-    
+  isOpen(id:any){
+    return id == this.currentOpenMenu
   }
 
   @HostListener('document:click')
-  onDocumentClick() {
-    // closes when clicking anywhere outside the menu/button
-    this.closeMenu();
+  closeMenu() {
+    this.currentOpenMenu = null
   }
 
-  // ---------- Actions ----------
-
   confirmDelete(merchant: Merchant) {
-    
+    this.merchants = this.merchants.filter(_merchant => _merchant != merchant)
   }
 
   autoLogin(merchant: Merchant) {

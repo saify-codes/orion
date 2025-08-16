@@ -89,8 +89,8 @@
                   class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800"
                 >
                 <span
-                class="inline-flex items-center gap-x-1.5 py-1.5 px-3 rounded-full text-xs font-medium"
-                [class]="statusBadgeClasses[merchant.status] || 'bg-gray-100 text-gray-800 ring-1 ring-inset ring-gray-200'"
+                  class="inline-flex items-center gap-x-1.5 py-1.5 px-3 rounded-full text-xs font-medium"
+                  [class]="statusBadgeClasses[merchant.status] || 'bg-gray-100 text-gray-800 ring-1 ring-inset ring-gray-200'"
                 >
                   {{ merchant.status }}
                 </span>
@@ -103,11 +103,34 @@
                       type="button"
                       class="inline-flex items-center justify-center w-8 h-8 rounded-md hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-secondary"
                       (click)="toggleMenu(merchant.id); $event.stopPropagation()"
-                      (keydown.escape)="closeMenu()"
                     >
                       <i class="fa-solid fa-ellipsis-vertical text-lg"></i>
                     </button>
 
+                    @if (isOpen(merchant.id)) {
+                      <nav class="absolute bg-white top-full translate-y-2 right-0 z-10 p-2 rounded shadow">
+                        <ul class="space-y-1">
+                          <li>
+                            <a routerLink="/admin/merchant/{{merchant.id}}" class="block px-2 py-1 hover:bg-green-100 hover:text-green-800 rounded w-full text-start">
+                              <i class="fa-light fa-pen-to-square"></i>
+                              Edit
+                            </a>
+                          </li>
+                          <li>
+                            <button class="px-2 py-1 hover:bg-red-100 hover:text-red-500 rounded w-full text-start" (click)="confirmDelete(merchant)">
+                              <i class="fa-light fa-trash"></i>
+                              Delete
+                            </button>
+                          </li>
+                          <li>
+                            <button class="px-2 py-1 hover:bg-amber-100 hover:text-amber-800 rounded w-full text-start">
+                              <i class="fa-light fa-key"></i>
+                              Auto login
+                            </button>
+                          </li>
+                        </ul>
+                      </nav>
+                    }
                   </div>
                 </td>
               </tr>
