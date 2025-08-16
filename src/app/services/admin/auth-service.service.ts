@@ -14,7 +14,7 @@ export type AdminUser = {
 const COOKIE_KEY = 'admin_auth_session';          // persistent (remember me)
 
 @Injectable({ providedIn: 'root' })
-export class AuthService {
+export class AdminAuthService {
   
   public  user:  AdminUser | null = null;
   public  token: string    | null = null;

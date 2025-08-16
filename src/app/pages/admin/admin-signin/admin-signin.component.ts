@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from '../../../services/admin/auth-service.service';
+import { AdminAuthService } from '../../../services/admin/auth-service.service';
 
 @Component({
   selector: 'app-admin-signin',
@@ -13,7 +13,7 @@ export class AdminSigninComponent {
   
   public form: FormGroup;
   public loading: boolean = true;
-  private auth = inject(AuthService)
+  private auth = inject(AdminAuthService)
   
   constructor(
     private formBuilder: FormBuilder,
