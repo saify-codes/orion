@@ -19,17 +19,22 @@ interface Merchant {
   templateUrl: './admin-merchants.component.html',
   styleUrl: './admin-merchants.component.css'
 })
+
 export class AdminMerchantsComponent implements OnInit {
 
   public  currentOpenMenu: string|null;
   public  merchants: Merchant[];
+  public  statusBadgeClasses: Record<string, string>
   private http:HttpClient;
-  private foo:any = null
 
   constructor(){
-    this.currentOpenMenu = null
-    this.merchants       = []
-    this.http            = inject(HttpClient)
+    this.currentOpenMenu    = null
+    this.merchants          = []
+    this.http               = inject(HttpClient)
+    this.statusBadgeClasses = {
+      ACTIVE:   'bg-green-100 text-green-800 ring-1 ring-inset ring-green-200',
+      UNAPPROVED: 'bg-red-100 text-red-800 ring-1 ring-inset ring-red-200',
+    }
   }
 
   ngOnInit(): void {
