@@ -76,29 +76,38 @@ export class AdminMerchantsComponent implements OnInit {
     this.currentOpenMenu = null
   }
 
-  confirmDelete(merchant: Merchant) {
+  deleteMerchant(merchant: Merchant) {
     Swal.fire({
-      title: 'Are you sure?',
-      text: 'You won\'t be able to revert this!',
+      title: `Delete "${merchant.name}"?`,
+      text: `You won't be able to revert this!`,
       icon: 'warning',
       showCancelButton: true,
       confirmButtonText: 'Yes, delete it!',
-      cancelButtonText: 'No, cancel!',
-      reverseButtons: true
+      cancelButtonText: 'Cancel',
+      reverseButtons: true,
+  
+      // 🔽 shows a spinner on the confirm button
+      showLoaderOnConfirm: true,
+  
+      // 🔽 run async work here (simulated 3s API)
+      preConfirm: () => this.fakeDeleteRequest(merchant.id),
+  
+      // 🔽 keep the modal open while loading
+      allowOutsideClick: () => !Swal.isLoading()
     }).then((result) => {
       if (result.isConfirmed) {
-        this.merchants = this.merchants.filter(_merchant => _merchant != merchant)
-        Swal.fire(
-          'Deleted!',
-          'Merchant deleted',
-          'success'
-        );
+        // optimistic update after the "API" finishes
+        this.merchants = this.merchants.filter(m => m.id !== merchant.id);
+
+        Swal.fire('Deleted!', 'Merchant deleted', 'success');
       }
     });
   }
-
-  autoLogin(merchant: Merchant) {
-    
+  
+  /** Simulate a 3s API call */
+  private fakeDeleteRequest(id: number): Promise<void> {
+    return new Promise((resolve) => setTimeout(resolve, 3000));
   }
+  
 
 }
