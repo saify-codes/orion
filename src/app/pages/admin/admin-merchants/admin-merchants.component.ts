@@ -78,13 +78,12 @@ export class AdminMerchantsComponent implements OnInit {
 
   deleteMerchant(merchant: Merchant) {
     Swal.fire({
-      title: `Delete "${merchant.name}"?`,
+      title: `Delete ${merchant.name}?`,
       text: `You won't be able to revert this!`,
       icon: 'warning',
       showCancelButton: true,
       confirmButtonText: 'Yes, delete it!',
       cancelButtonText: 'Cancel',
-      reverseButtons: true,
   
       // 🔽 shows a spinner on the confirm button
       showLoaderOnConfirm: true,
