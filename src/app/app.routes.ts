@@ -10,12 +10,14 @@ import { AdminHomeComponent } from './pages/admin/admin-home/admin-home.componen
 import { AdminMerchantsComponent } from './pages/admin/admin-merchants/admin-merchants.component';
 import { AdminSigninComponent } from './pages/admin/admin-signin/admin-signin.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
+import { authGuardGuard } from './guards/admin/auth-guard.guard';
 
 export const routes: Routes = [
   // admin routes
   {
     path: 'admin',
     component: AdminLayout,
+    canActivate: [authGuardGuard],
     children: [
       { path: '', component: AdminHomeComponent },
       { path: 'dashboard', component: AdminMerchantsComponent },

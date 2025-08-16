@@ -1,24 +1,32 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
+import { computed, signal } from '@angular/core';
 
-@Injectable({
-  providedIn: 'root'
-})
+export type User = { id: string; email: string; roles: string[]; token: string; exp?: number };
 
-export class AuthServiceService {
+export class AuthService {
 
-  constructor(private router: Router, private http: HttpClient) { }
+  private _user = signal<User | null>(this.loadUser());
+  user       = computed(() => this._user());
+  isLoggedIn = computed(() => !!this._user());
+  roles      = computed(() => this._user()?.roles ?? []);
+  token      = computed(() => this._user()?.token ?? null);
 
-  signin(email:string, password:string, remember: boolean = false){
-    
+  login(user: User) {
+    localStorage.setItem('auth_user', JSON.stringify(user));
+    this._user.set(user);
   }
 
-  signout(){
-
+  logout() {
+    localStorage.removeItem('auth_user');
+    this._user.set(null);
   }
 
-  signoutFromAll(){
+  hasRole(role: string) { return this.roles().includes(role); }
+  hasAnyRole(required: string[]) { return required.some(r => this.hasRole(r)); }
 
+  private loadUser(): User | null {
+    try {
+      const raw = localStorage.getItem('auth_user');
+      return raw ? JSON.parse(raw) as User : null;
+    } catch { return null; }
   }
 }
