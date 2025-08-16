@@ -2,6 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Component, HostListener, inject, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { debounce } from '../../../decorators/debounce';
+import Swal from 'sweetalert2'; // Import SweetAlert2
 
 interface Merchant {
   id: number;
@@ -76,7 +77,24 @@ export class AdminMerchantsComponent implements OnInit {
   }
 
   confirmDelete(merchant: Merchant) {
-    this.merchants = this.merchants.filter(_merchant => _merchant != merchant)
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'You won\'t be able to revert this!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'No, cancel!',
+      reverseButtons: true
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.merchants = this.merchants.filter(_merchant => _merchant != merchant)
+        Swal.fire(
+          'Deleted!',
+          'Merchant deleted',
+          'success'
+        );
+      }
+    });
   }
 
   autoLogin(merchant: Merchant) {
