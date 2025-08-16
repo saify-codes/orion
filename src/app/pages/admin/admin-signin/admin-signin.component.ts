@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthService } from '../../../services/admin/auth-service.service';
 
 @Component({
   selector: 'app-admin-signin',
@@ -12,6 +13,7 @@ export class AdminSigninComponent {
   
   public form: FormGroup;
   public loading: boolean = true;
+  private auth = inject(AuthService)
   
   constructor(
     private formBuilder: FormBuilder,
@@ -24,11 +26,19 @@ export class AdminSigninComponent {
     });
   }
 
-  onSubmit() {
-    this.form.markAllAsTouched();
+  async onSubmit() {
 
-    if (this.form.valid) {
-      // this.router.navigate(['/']);
+    const {email, password, remember } = this.form.value
+
+    try {
+      console.log(this.form.value);
+      
+      await this.auth.login(email, password, remember)
+      // this.router.navigate(['/admin'])
+      
+    } catch (error: any) {
+      alert(error.message)
     }
+
   }
 }

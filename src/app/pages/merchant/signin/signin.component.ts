@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { AuthServiceService } from '../../../services/admin/auth-service.service';
 
 @Component({
   selector: 'app-signin',
@@ -16,7 +15,6 @@ export class SigninComponent {
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
-    private authService: AuthServiceService
   ) {
     this.form = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],

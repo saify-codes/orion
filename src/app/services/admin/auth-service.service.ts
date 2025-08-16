@@ -1,7 +1,6 @@
 import { Injectable, inject } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { firstValueFrom } from 'rxjs';
-import { environment } from '../../../environments/environment';
+import { HttpClient } from '@angular/common/http';
+import { Cookie } from '../../utils/cookie';
 
 export type AdminUser = {
   name: string;
@@ -11,20 +10,16 @@ export type AdminUser = {
   permissions: string[];
 };
 
-type AuthState = { token: string; user: AdminUser } | null;
-type LoginResponse = { token: string; user: AdminUser };
-
 // Storage keys
-const LS_KEY = 'admin_auth';          // persistent (remember me)
-const SS_KEY = 'admin_auth_session';  // tab/session-only
+const COOKIE_KEY = 'admin_auth_session';          // persistent (remember me)
 
 @Injectable({ providedIn: 'root' })
-
 export class AuthService {
-  public user: AdminUser | null = null;
-  public token: string | null = null;
-
-  private http = inject(HttpClient);
+  
+  public  user:  AdminUser | null = null;
+  public  token: string    | null = null;
+  public  status: string          = 'loading';
+  private http: HttpClient        = inject(HttpClient);
 
   // ----------- Lifecycle -----------
 
@@ -33,77 +28,57 @@ export class AuthService {
    * Use APP_INITIALIZER to call this and block bootstrap until it resolves.
    */
   async init(): Promise<void> {
-    const saved = this.loadPersisted();
-    if (!saved?.token) return;
-
-    this.token = saved.token;
-    this.user = saved.user;
-
+    console.log(Cookie.get(COOKIE_KEY));
+    
   }
 
   isAuthenticated(): boolean {
-    return !!this.user && !!this.token;
+    return !!this.user;
   }
 
   // ----------- Actions -----------
 
   async login(email: string, password: string, remember: boolean): Promise<void> {
-    const res = await firstValueFrom(
-      this.http.post<LoginResponse>(this.url('/admin/login'), { email, password, remember })
-    );
-    this.user = res.user;
-    this.token = res.token;
-    this.persist({ token: res.token, user: res.user }, remember);
+
+    return new Promise((resolve, reject) => {
+      this
+        .http
+        .post('http://localhost:8000/api/admin/auth/login', { email, password, remember })
+        .subscribe({
+          next: (res:any) => {
+            const { user, token, maxAge } = res.data
+            this.user   = user
+            this.token  = token
+            this.status = 'authenticated' 
+
+            Cookie.set(COOKIE_KEY, {user, token}, { maxAge })
+
+            resolve()
+          },
+          error: ({error}) => {
+            reject(error)
+          }
+        })
+    })
+
   }
 
   async logout(): Promise<void> {
-    try {
-      await firstValueFrom(this.http.post(this.url('/admin/logout'), {}, { headers: this.authHeaders() }));
-    } catch { /* ignore network/server errors on logout */ }
-    this.clearAuth();
+    this.clearAuthSession();
   }
 
   async logoutAll(): Promise<void> {
-    try {
-      await firstValueFrom(this.http.post(this.url('/admin/logout-all'), {}, { headers: this.authHeaders() }));
-    } catch { /* ignore */ }
-    this.clearAuth();
+   
+    this.clearAuthSession();
   }
 
   // ----------- Helpers -----------
 
-  private url(path: string): string {
-    const base = environment.apiBaseUrl?.replace(/\/$/, '') || '';
-    return `${base}${path.startsWith('/') ? '' : '/'}${path}`;
-  }
+  private clearAuthSession() {
+    this.user   = null;
+    this.token  = null;
+    this.status = 'unauthenticated'
 
-  private authHeaders(): HttpHeaders {
-    return new HttpHeaders(this.token ? { Authorization: `Bearer ${this.token}` } : {});
-  }
-
-  private persist(state: AuthState, remember: boolean) {
-    // Clear both, then write to chosen storage
-    localStorage.removeItem(LS_KEY);
-    sessionStorage.removeItem(SS_KEY);
-    const json = JSON.stringify(state);
-    (remember ? localStorage : sessionStorage).setItem(remember ? LS_KEY : SS_KEY, json);
-  }
-
-  private loadPersisted(): AuthState {
-    try {
-      const raw = localStorage.getItem(LS_KEY) ?? sessionStorage.getItem(SS_KEY);
-      return raw ? (JSON.parse(raw) as AuthState) : null;
-    } catch {
-      localStorage.removeItem(LS_KEY);
-      sessionStorage.removeItem(SS_KEY);
-      return null;
-    }
-  }
-
-  private clearAuth() {
-    this.user = null;
-    this.token = null;
-    localStorage.removeItem(LS_KEY);
-    sessionStorage.removeItem(SS_KEY);
+    Cookie.delete(COOKIE_KEY)
   }
 }
