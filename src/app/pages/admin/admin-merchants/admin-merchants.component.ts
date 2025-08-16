@@ -26,12 +26,14 @@ export class AdminMerchantsComponent implements OnInit {
   public  currentOpenMenu: string|null;
   public  merchants: Merchant[];
   public  statusBadgeClasses: Record<string, string>
+  public  contextMenuStyle: Partial<CSSStyleDeclaration>;
   private http:HttpClient;
 
   constructor(){
     this.currentOpenMenu    = null
     this.merchants          = []
     this.http               = inject(HttpClient)
+    this.contextMenuStyle   = {}
     this.statusBadgeClasses = {
       ACTIVE:   'bg-green-100 text-green-800 ring-1 ring-inset ring-green-200',
       UNAPPROVED: 'bg-red-100 text-red-800 ring-1 ring-inset ring-red-200',
@@ -61,9 +63,14 @@ export class AdminMerchantsComponent implements OnInit {
       });
   }
 
-  // ---------- Context menu handlers ----------
+  toggleMenu(id: any, event:MouseEvent) {
 
-  toggleMenu(id: any) {
+    const rect = (event.currentTarget as HTMLElement).getBoundingClientRect();
+    this.contextMenuStyle = {
+      top:  `${rect.bottom + 10}px`,
+      left: `${rect.right}px`,
+      transform: `translateX(-100%)`
+    };
     this.currentOpenMenu = this.currentOpenMenu == id ? null : id
   }
 
@@ -103,10 +110,8 @@ export class AdminMerchantsComponent implements OnInit {
     });
   }
   
-  /** Simulate a 3s API call */
   private fakeDeleteRequest(id: number): Promise<void> {
     return new Promise((resolve) => setTimeout(resolve, 3000));
   }
-  
 
 }

@@ -19,7 +19,7 @@ export const routes: Routes = [
     children: [
       { path: '', component: AdminHomeComponent },
       { path: 'dashboard', component: AdminMerchantsComponent },
-      { path: 'merchants', component: AdminMerchantsComponent },
+      { path: 'merchant', component: AdminMerchantsComponent },
     ],
   },
 

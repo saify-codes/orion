@@ -64,76 +64,82 @@
 
             <tbody class="divide-y divide-gray-200">
               @for (merchant of merchants; track $index) {
-              <tr>
-                <td
-                  class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800"
-                >
-                  {{ merchant.id }}
-                </td>
-                <td
-                  class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800"
-                >
-                  {{ merchant.username }}
-                </td>
-                <td
-                  class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800"
-                >
-                  {{ merchant.name }}
-                </td>
-                <td
-                  class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800"
-                >
-                  {{ merchant.email }}
-                </td>
-                <td
-                  class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800"
-                >
-                <span
-                  class="inline-flex items-center gap-x-1.5 py-1.5 px-3 rounded-full text-xs font-medium"
-                  [class]="statusBadgeClasses[merchant.status] || 'bg-gray-100 text-gray-800 ring-1 ring-inset ring-gray-200'"
-                >
-                  {{ merchant.status }}
-                </span>
-                
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 text-end">
+                <tr>
+                  <td
+                    class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800"
+                  >
+                    {{ merchant.id }}
+                  </td>
+                  <td
+                    class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800"
+                  >
+                    {{ merchant.username }}
+                  </td>
+                  <td
+                    class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800"
+                  >
+                    {{ merchant.name }}
+                  </td>
+                  <td
+                    class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800"
+                  >
+                    {{ merchant.email }}
+                  </td>
+                  <td
+                    class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800"
+                  >
+                  <span
+                    class="inline-flex items-center gap-x-1.5 py-1.5 px-3 rounded-full text-xs font-medium"
+                    [class]="statusBadgeClasses[merchant.status] || 'bg-gray-100 text-gray-800 ring-1 ring-inset ring-gray-200'"
+                  >
+                    {{ merchant.status }}
+                  </span>
                   
-                  <div class="relative inline-block text-left">
-                    <button
-                      type="button"
-                      class="inline-flex items-center justify-center w-8 h-8 rounded-md hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-secondary"
-                      (click)="toggleMenu(merchant.id); $event.stopPropagation()"
-                    >
-                      <i class="fa-solid fa-ellipsis-vertical text-lg"></i>
-                    </button>
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 text-end">
+                    
+                    <div class="relative inline-block text-left">
+                      <button
+                        type="button"
+                        class="inline-flex items-center justify-center w-8 h-8 rounded-md hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-secondary"
+                        (click)="toggleMenu(merchant.id, $event); $event.stopPropagation()"
+                      >
+                        <i class="fa-solid fa-ellipsis-vertical text-lg"></i>
+                      </button>
 
-                    @if (isOpen(merchant.id)) {
-                      <nav class="absolute bg-white top-full translate-y-2 right-0 z-10 p-2 rounded shadow">
-                        <ul class="space-y-1">
-                          <li>
-                            <a routerLink="/admin/merchant/{{merchant.id}}" class="block px-2 py-1 hover:bg-green-100 hover:text-green-800 rounded w-full text-start">
-                              <i class="fa-light fa-pen-to-square"></i>
-                              Edit
-                            </a>
-                          </li>
-                          <li>
-                            <button class="px-2 py-1 hover:bg-red-100 hover:text-red-500 rounded w-full text-start" (click)="deleteMerchant(merchant)">
-                              <i class="fa-light fa-trash"></i>
-                              Delete
-                            </button>
-                          </li>
-                          <li>
-                            <button class="px-2 py-1 hover:bg-amber-100 hover:text-amber-800 rounded w-full text-start">
-                              <i class="fa-light fa-key"></i>
-                              Auto login
-                            </button>
-                          </li>
-                        </ul>
-                      </nav>
-                    }
-                  </div>
-                </td>
-              </tr>
+                      @if (isOpen(merchant.id)) {
+                        <nav class="fixed bg-white right-0 z-50 p-2 rounded shadow w-32" [style]="contextMenuStyle">
+                          <ul class="space-y-1">
+                            <li>
+                              <a routerLink="/admin/merchant/{{merchant.id}}" class="block px-2 py-1 hover:bg-green-100 hover:text-green-800 rounded w-full text-start">
+                                <i class="fa-light fa-pen-to-square"></i>
+                                Edit
+                              </a>
+                            </li>
+                            <li>
+                              <button class="px-2 py-1 hover:bg-red-100 hover:text-red-500 rounded w-full text-start" (click)="deleteMerchant(merchant)">
+                                <i class="fa-light fa-trash"></i>
+                                Delete
+                              </button>
+                            </li>
+                            <li>
+                              <button class="px-2 py-1 hover:bg-amber-100 hover:text-amber-800 rounded w-full text-start">
+                                <i class="fa-light fa-key"></i>
+                                Auto login
+                              </button>
+                            </li>
+                          </ul>
+                        </nav>
+                      }
+                    </div>
+                  </td>
+                </tr>
+              }
+
+              @if(merchants.length === 0){
+                <tr>
+                  <td colspan="6" class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 text-center">No records.</td>
+                </tr>
               }
             </tbody>
           </table>
@@ -144,7 +150,7 @@
           <div class="hidden justify-between text-sm md:flex">
             <div>1-10 of 120</div>
             <div class="flex items-center gap-12" aria-label="Pagination">
-              <a href="#" class="hover:text-indigo-600"> Previous </a>
+              <a href="#" class="hover:text-indigo-600"> <i class="fa-light fa-arrow-left"></i> </a>
               <ul class="flex items-center gap-1">
                 <li>
                   <a
@@ -171,35 +177,9 @@
                     3
                   </a>
                 </li>
-                <li>
-                  <div>...</div>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    class="px-3 py-2 rounded-lg duration-150 hover:text-white hover:bg-indigo-600"
-                  >
-                    8
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    class="px-3 py-2 rounded-lg duration-150 hover:text-white hover:bg-indigo-600"
-                  >
-                    9
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    class="px-3 py-2 rounded-lg duration-150 hover:text-white hover:bg-indigo-600"
-                  >
-                    10
-                  </a>
-                </li>
+                
               </ul>
-              <a href="#" class="hover:text-indigo-600"> Next </a>
+              <a href="#" class="hover:text-indigo-600"> <i class="fa-light fa-arrow-right"></i> </a>
             </div>
           </div>
 
@@ -219,6 +199,7 @@
             >
           </div>
         </div>
+
       </div>
     </div>
   </div>
