@@ -2,7 +2,8 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Component, HostListener, inject, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { debounce } from '../../../decorators/debounce';
-import Swal from 'sweetalert2'; // Import SweetAlert2
+import Swal from 'sweetalert2';
+import { PaginationComponent } from "../../../components/pagination/pagination.component"; // Import SweetAlert2
 
 interface Merchant {
   id: number;
@@ -16,7 +17,7 @@ interface Merchant {
 @Component({
   selector: 'app-admin-merchants',
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterLink, PaginationComponent],
   templateUrl: './admin-merchants.component.html',
   styleUrl: './admin-merchants.component.css'
 })
