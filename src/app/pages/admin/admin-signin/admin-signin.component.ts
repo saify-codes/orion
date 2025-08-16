@@ -11,30 +11,23 @@ import { AdminAuthService } from '../../../services/admin/auth-service.service';
 })
 export class AdminSigninComponent {
   
-  public form: FormGroup;
-  public loading: boolean = true;
-  private auth = inject(AdminAuthService)
+  public  loading         = true;
+  private auth            = inject(AdminAuthService)
+  private router          = inject(Router)
+  public  form:FormGroup  = inject(FormBuilder).group({
+    email:    ['', [Validators.required, Validators.email]],
+    password: ['', [Validators.required, Validators.minLength(6)]],
+    remember: [false],
+  })
   
-  constructor(
-    private formBuilder: FormBuilder,
-    private router: Router,
-  ) {
-    this.form = this.formBuilder.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
-      remember: [false],
-    });
-  }
 
   async onSubmit() {
 
     const {email, password, remember } = this.form.value
 
-    try {
-      console.log(this.form.value);
-      
+    try {      
       await this.auth.login(email, password, remember)
-      // this.router.navigate(['/admin'])
+      this.router.navigate(['/admin'])
       
     } catch (error: any) {
       alert(error.message)
