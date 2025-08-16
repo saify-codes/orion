@@ -19,6 +19,7 @@ const LS_KEY = 'admin_auth';          // persistent (remember me)
 const SS_KEY = 'admin_auth_session';  // tab/session-only
 
 @Injectable({ providedIn: 'root' })
+
 export class AuthService {
   public user: AdminUser | null = null;
   public token: string | null = null;
@@ -36,21 +37,8 @@ export class AuthService {
     if (!saved?.token) return;
 
     this.token = saved.token;
+    this.user = saved.user;
 
-    // Optional but recommended: validate token & refresh the user
-    // If you want fast boot trusting local user, uncomment the next line and
-    // remove the API call below.
-    // this.user = saved.user;
-
-    try {
-      const me = await firstValueFrom(
-        this.http.get<AdminUser>(this.url('/admin/me'), { headers: this.authHeaders() })
-      );
-      this.user = me;
-    } catch {
-      // invalid / expired token
-      this.clearAuth();
-    }
   }
 
   isAuthenticated(): boolean {
