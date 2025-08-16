@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 export class AdminSigninComponent {
   
   public form: FormGroup;
+  public loading: boolean = true;
   
   constructor(
     private formBuilder: FormBuilder,

@@ -1,1 +1,196 @@
-<p>admin-merchants works!</p>
+<div class="flex flex-col">
+  <div class="-m-1.5 overflow-x-auto">
+    <div class="p-1.5 min-w-full inline-block align-middle">
+      <div class="border border-gray-200 rounded-lg divide-y divide-gray-200">
+        <div class="py-3 px-4">
+          <div class="relative max-w-xs">
+            <label class="sr-only">Search</label>
+            <input
+              name="search"
+              type="text"
+              class="py-1.5 sm:py-2 px-3 ps-9 block w-full border border-gray-200 rounded-lg sm:text-sm outline-0"
+              placeholder="Search for merchants"
+              (input)="handleMerchantSearch($event)"
+            />
+            <div
+              class="absolute inset-y-0 start-0 flex items-center pointer-events-none ps-3"
+            >
+              <i class="fa-light fa-magnifying-glass"></i>
+            </div>
+          </div>
+        </div>
+        <div class="overflow-hidden">
+          <table class="min-w-full divide-y divide-gray-200">
+            <thead class="bg-gray-50">
+              <tr>
+                <th
+                  scope="col"
+                  class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase"
+                >
+                  merchant id
+                </th>
+                <th
+                  scope="col"
+                  class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase"
+                >
+                  username
+                </th>
+                <th
+                  scope="col"
+                  class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase"
+                >
+                  name
+                </th>
+                <th
+                  scope="col"
+                  class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase"
+                >
+                  email
+                </th>
+                <th
+                  scope="col"
+                  class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase"
+                >
+                  status
+                </th>
+                <th
+                  scope="col"
+                  class="px-6 py-3 text-end text-xs font-medium text-gray-500 uppercase"
+                >
+                  action
+                </th>
+              </tr>
+            </thead>
+
+            <tbody class="divide-y divide-gray-200">
+              @for (merchant of merchants; track $index) {
+              <tr>
+                <td
+                  class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800"
+                >
+                  {{ merchant.id }}
+                </td>
+                <td
+                  class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800"
+                >
+                  {{ merchant.username }}
+                </td>
+                <td
+                  class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800"
+                >
+                  {{ merchant.name }}
+                </td>
+                <td
+                  class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800"
+                >
+                  {{ merchant.email }}
+                </td>
+                <td
+                  class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800"
+                >
+                  {{ merchant.status }}
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 text-end">
+                  
+                  <div class="relative inline-block text-left">
+                    <button
+                      type="button"
+                      class="inline-flex items-center justify-center w-8 h-8 rounded-md hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-secondary"
+                      (click)="toggleMenu(merchant.id); $event.stopPropagation()"
+                      (keydown.escape)="closeMenu()"
+                    >
+                      <i class="fa-solid fa-ellipsis-vertical text-lg"></i>
+                    </button>
+
+                  </div>
+                </td>
+              </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+
+        <!-- pagination -->
+        <div class="p-5">
+          <div class="hidden justify-between text-sm md:flex">
+            <div>1-10 of 120</div>
+            <div class="flex items-center gap-12" aria-label="Pagination">
+              <a href="#" class="hover:text-indigo-600"> Previous </a>
+              <ul class="flex items-center gap-1">
+                <li>
+                  <a
+                    href="#"
+                    aria-current="page"
+                    class="px-3 py-2 rounded-lg duration-150 hover:text-white hover:bg-indigo-600 bg-indigo-600 text-white font-medium"
+                  >
+                    1
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    class="px-3 py-2 rounded-lg duration-150 hover:text-white hover:bg-indigo-600"
+                  >
+                    2
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    class="px-3 py-2 rounded-lg duration-150 hover:text-white hover:bg-indigo-600"
+                  >
+                    3
+                  </a>
+                </li>
+                <li>
+                  <div>...</div>
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    class="px-3 py-2 rounded-lg duration-150 hover:text-white hover:bg-indigo-600"
+                  >
+                    8
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    class="px-3 py-2 rounded-lg duration-150 hover:text-white hover:bg-indigo-600"
+                  >
+                    9
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    class="px-3 py-2 rounded-lg duration-150 hover:text-white hover:bg-indigo-600"
+                  >
+                    10
+                  </a>
+                </li>
+              </ul>
+              <a href="#" class="hover:text-indigo-600"> Next </a>
+            </div>
+          </div>
+
+          <div
+            class="flex items-center justify-between text-sm text-gray-600 font-medium md:hidden"
+          >
+            <a
+              href="#"
+              class="px-4 py-2 border rounded-lg duration-150 hover:bg-gray-50"
+              >Previous</a
+            >
+            <div class="font-medium">SHOWING 1-10 OF 120</div>
+            <a
+              href="#"
+              class="px-4 py-2 border rounded-lg duration-150 hover:bg-gray-50"
+              >Next</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
