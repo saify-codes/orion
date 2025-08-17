@@ -10,7 +10,7 @@ import { withLoader } from '../../../utils';
   templateUrl: './admin-signin.component.html',
   styleUrl: './admin-signin.component.css',
 })
-export class AdminSigninComponent {
+export class AdminLoginComponent {
   
   public  loading         = false;
   private auth            = inject(AdminAuthService)
@@ -37,7 +37,6 @@ export class AdminSigninComponent {
       await withLoader(() => this.auth.login(email, password, remember), (isLoading: boolean) => {
         this.loading  = isLoading
       })
-      this.router.navigate(['/admin'])
       
     } catch (error: any) {
       this.alert.show = true

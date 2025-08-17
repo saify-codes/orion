@@ -1,6 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Cookie } from '../../utils/cookie';
+import { Router } from '@angular/router';
 
 export type AdminUser = {
   name: string;
@@ -20,6 +21,7 @@ export class AdminAuthService {
   public  token: string    | null = null;
   public  status: string          = 'loading';
   private http: HttpClient        = inject(HttpClient);
+  private router: Router          = inject(Router)
 
   // ----------- Lifecycle -----------
 
@@ -56,8 +58,10 @@ export class AdminAuthService {
             this.user   = user
             this.token  = token
             this.status = 'authenticated' 
-
+            
             Cookie.set(COOKIE_KEY, {user, token}, { maxAge })
+            
+            this.router.navigate(['admin/'])
 
             resolve()
           },
@@ -71,11 +75,14 @@ export class AdminAuthService {
 
   async logout(): Promise<void> {
     this.clearAuthSession();
+    this.router.navigate(['admin/auth/login'])
   }
 
   async logoutAll(): Promise<void> {
    
     this.clearAuthSession();
+    this.router.navigate(['admin/auth/login'])
+
   }
 
   // ----------- Helpers -----------

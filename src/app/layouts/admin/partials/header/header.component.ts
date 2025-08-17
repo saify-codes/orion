@@ -1,27 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { AdminAuthService } from '../../../../services/admin/auth-service.service';
 
 @Component({
   selector: 'app-header',
   imports: [],
   templateUrl: './header.component.html',
-  styleUrl: './header.component.css'
+  styleUrl: './header.component.css',
 })
-export class HeaderComponent implements OnInit{
+export class HeaderComponent {
 
-  public currentOpenMenu: string|null;
-  public notificaitions: any[];
+  public currentOpenMenu: string | null = null;
+  public notificaitions: any[] = [];
+  public auth: AdminAuthService = inject(AdminAuthService)
 
-  constructor() {
-    this.currentOpenMenu = null
-    this.notificaitions  = [];
+  isOpen(id: string) {
+    return this.currentOpenMenu == id;
   }
 
-  isOpen(id: string){
-    return this.currentOpenMenu == id
-  }
-  
   toggle(id: string) {
-   this.currentOpenMenu = this.currentOpenMenu === id ? null : id
+    this.currentOpenMenu = this.currentOpenMenu === id ? null : id;
   }
 
   fetchNotifications() {
@@ -29,8 +26,7 @@ export class HeaderComponent implements OnInit{
     return this.notificaitions;
   }
 
-  ngOnInit(): void {
-    
+  logout(){
+    this.auth.logout()
   }
-
 }
