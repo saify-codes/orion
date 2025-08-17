@@ -11,6 +11,7 @@ import { AdminMerchantsComponent } from './pages/admin/admin-merchants/admin-mer
 import { AdminLoginComponent } from './pages/admin/admin-signin/admin-signin.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { authGuardGuard } from './guards/admin/auth-guard.guard';
+import { DatatableComponent } from './components/datatable/datatable.component';
 
 export const routes: Routes = [
   // admin routes
@@ -20,7 +21,7 @@ export const routes: Routes = [
     canActivate: [authGuardGuard],
     children: [
       { path: '', component: AdminHomeComponent },
-      { path: 'dashboard', component: AdminMerchantsComponent },
+      { path: 'dashboard', component: DatatableComponent },
       { path: 'merchant', component: AdminMerchantsComponent },
     ],
   },

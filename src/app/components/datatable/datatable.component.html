@@ -1,0 +1,96 @@
+<div class="flex flex-col">
+    <div class="-m-1.5 overflow-x-auto">
+      <div class="p-1.5 min-w-full inline-block align-middle">
+        <div class="border border-gray-200 rounded-lg divide-y divide-gray-200">
+          <div class="py-3 px-4">
+            <div class="flex items-center gap-2">
+              <div class="relative max-w-xs">
+                <input
+                  name="search"
+                  type="text"
+                  class="py-1.5 sm:py-2 px-3 ps-9 block w-full border border-gray-200 rounded-lg sm:text-sm outline-0"
+                  placeholder="Search for merchants"
+                  
+                />
+                <div
+                  class="absolute inset-y-0 start-0 flex items-center pointer-events-none ps-3"
+                >
+                  <i class="fa-light fa-magnifying-glass"></i>
+                </div>
+              </div>
+              <select
+                class="py-1.5 sm:py-2 px-3 block border border-gray-200 rounded-lg sm:text-sm outline-0"
+               
+              >
+                <option value="10">10</option>
+                <option value="25">25</option>
+                <option value="50">50</option>
+                <option value="100">100</option>
+                <option value="500">500</option>
+              </select>
+              @if(loading){
+              <div
+                class="animate-spin inline-block align-middle size-6 border-2 border-current border-t-transparent text-gray-800 rounded-full"
+              >
+                <span class="sr-only">Loading...</span>
+              </div>
+              }
+            </div>
+          </div>
+          <div class="max-h-[700px] overflow-y-auto">
+            <table class="min-w-full divide-y divide-gray-200">
+              <thead class="bg-gray-50">
+                <tr>
+                  <th
+                    scope="col"
+                    class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase cursor-pointer"
+                  >
+                    id
+                  </th>
+                 
+                  <th
+                    scope="col"
+                    class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase cursor-pointer"
+                  >
+                    name
+                  </th>
+                  <th
+                    scope="col"
+                    class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase"
+                  >
+                    email
+                  </th>
+                  
+                </tr>
+              </thead>
+  
+              <tbody class="divide-y divide-gray-200">
+                @for (record of records; track $index) {
+                    <tr>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800">{{record.id}}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800">test</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800">action</td>
+                    </tr>
+                } 
+                
+                @if(records.length === 0 && !loading){
+                <tr>
+                  <td
+                    colspan="6"
+                    class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 text-center"
+                  >
+                    No records.
+                  </td>
+                </tr>
+                }
+              </tbody>
+            </table>
+          </div>
+          <!-- pagination -->
+          <div class="p-5">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
