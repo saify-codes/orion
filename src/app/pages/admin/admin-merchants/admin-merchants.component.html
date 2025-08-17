@@ -3,7 +3,6 @@
     <div class="p-1.5 min-w-full inline-block align-middle">
       <div class="border border-gray-200 rounded-lg divide-y divide-gray-200">
         <div class="py-3 px-4">
-
           <div class="flex items-center gap-2">
             <div class="relative max-w-xs">
               <input
@@ -20,18 +19,25 @@
                 <i class="fa-light fa-magnifying-glass"></i>
               </div>
             </div>
-            <select 
-              class="py-1.5 sm:py-2 px-3 block border border-gray-200 rounded-lg sm:text-sm outline-0" 
+            <select
+              class="py-1.5 sm:py-2 px-3 block border border-gray-200 rounded-lg sm:text-sm outline-0"
               [(ngModel)]="limit"
-              (change)="handleLimitChange()">
+              (change)="handleLimitChange()"
+            >
               <option value="10">10</option>
               <option value="25">25</option>
               <option value="50">50</option>
               <option value="100">100</option>
               <option value="500">500</option>
             </select>
+            @if(loading){
+            <div
+              class="animate-spin inline-block align-middle size-6 border-3 border-current border-t-transparent text-gray-800 rounded-full"
+            >
+              <span class="sr-only">Loading...</span>
+            </div>
+            }
           </div>
-
         </div>
         <div class="max-h-[700px] overflow-y-auto" (scroll)="closeMenu()">
           <table class="min-w-full divide-y divide-gray-200">
@@ -67,10 +73,8 @@
                   scope="col"
                   class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase cursor-pointer"
                   (click)="handleSort('status')"
-
                 >
                   status
-                  
                 </th>
                 <th
                   scope="col"
@@ -83,101 +87,116 @@
 
             <tbody class="divide-y divide-gray-200">
               @for (merchant of merchants; track $index) {
-                <tr>
-                  <td
-                    class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800"
-                  >
-                    {{ merchant.id }}
-                  </td>
-                  <td
-                    class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800"
-                  >
-                    {{ merchant.username }}
-                  </td>
-                  <td
-                    class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800"
-                  >
-                    {{ merchant.name }}
-                  </td>
-                  <td
-                    class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800"
-                  >
-                    {{ merchant.email }}
-                  </td>
-                  <td
-                    class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800"
-                  >
+              <tr>
+                <td
+                  class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800"
+                >
+                  {{ merchant.id }}
+                </td>
+                <td
+                  class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800"
+                >
+                  {{ merchant.username }}
+                </td>
+                <td
+                  class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800"
+                >
+                  {{ merchant.name }}
+                </td>
+                <td
+                  class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800"
+                >
+                  {{ merchant.email }}
+                </td>
+                <td
+                  class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800"
+                >
                   <span
                     class="inline-flex items-center gap-x-1.5 py-1.5 px-3 rounded-full text-xs font-medium"
-                    [class]="statusBadgeClasses[merchant.status] || 'bg-gray-100 text-gray-800 ring-1 ring-inset ring-gray-200'"
+                    [class]="
+                      statusBadgeClasses[merchant.status] ||
+                      'bg-gray-100 text-gray-800 ring-1 ring-inset ring-gray-200'
+                    "
                   >
                     {{ merchant.status }}
                   </span>
-                  
-                  </td>
-                  <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 text-end">
-                    
-                    <div class="relative inline-block text-left">
-                      <button
-                        type="button"
-                        class="inline-flex items-center justify-center w-8 h-8 rounded-md hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-secondary"
-                        (click)="toggleMenu(merchant.id, $event); $event.stopPropagation()"
-                      >
-                        <i class="fa-solid fa-ellipsis-vertical text-lg"></i>
-                      </button>
+                </td>
+                <td
+                  class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 text-end"
+                >
+                  <div class="relative inline-block text-left">
+                    <button
+                      type="button"
+                      class="inline-flex items-center justify-center w-8 h-8 rounded-md hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-secondary"
+                      (click)="
+                        toggleMenu(merchant.id, $event);
+                        $event.stopPropagation()
+                      "
+                    >
+                      <i class="fa-solid fa-ellipsis-vertical text-lg"></i>
+                    </button>
 
-                      @if (isOpen(merchant.id)) {
-                        <nav class="fixed bg-white right-0 z-50 p-2 rounded shadow w-32" [style]="contextMenuStyle">
-                          <ul class="space-y-1">
-                            <li>
-                              <a routerLink="/admin/merchant/{{merchant.id}}" class="block px-2 py-1 hover:bg-green-100 hover:text-green-800 rounded w-full text-start">
-                                <i class="fa-light fa-pen-to-square"></i>
-                                Edit
-                              </a>
-                            </li>
-                            <li>
-                              <button class="px-2 py-1 hover:bg-red-100 hover:text-red-500 rounded w-full text-start" (click)="deleteMerchant(merchant)">
-                                <i class="fa-light fa-trash"></i>
-                                Delete
-                              </button>
-                            </li>
-                            <li>
-                              <button class="px-2 py-1 hover:bg-amber-100 hover:text-amber-800 rounded w-full text-start">
-                                <i class="fa-light fa-key"></i>
-                                Auto login
-                              </button>
-                            </li>
-                          </ul>
-                        </nav>
-                      }
-                    </div>
-                  </td>
-                </tr>
-              }
-
-              @if(loading){
-                <tr>
-                  <td colspan="6" class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 text-center">
-                    <div class="animate-spin inline-block align-middle size-6 border-3 border-current border-t-transparent text-gray-800 rounded-full">
-                      <span class="sr-only">Loading...</span>
-                    </div>
-                  </td>
-                </tr>
-              }
-
-              @if(merchants.length === 0 && !loading){
-                <tr>
-                  <td colspan="6" class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 text-center">No records.</td>
-                </tr>
+                    @if (isOpen(merchant.id)) {
+                    <nav
+                      class="fixed bg-white right-0 z-50 p-2 rounded shadow w-32"
+                      [style]="contextMenuStyle"
+                    >
+                      <ul class="space-y-1">
+                        <li>
+                          <a
+                            routerLink="/admin/merchant/{{ merchant.id }}"
+                            class="block px-2 py-1 hover:bg-green-100 hover:text-green-800 rounded w-full text-start"
+                          >
+                            <i class="fa-light fa-pen-to-square"></i>
+                            Edit
+                          </a>
+                        </li>
+                        <li>
+                          <button
+                            class="px-2 py-1 hover:bg-red-100 hover:text-red-500 rounded w-full text-start"
+                            (click)="deleteMerchant(merchant)"
+                          >
+                            <i class="fa-light fa-trash"></i>
+                            Delete
+                          </button>
+                        </li>
+                        <li>
+                          <button
+                            class="px-2 py-1 hover:bg-amber-100 hover:text-amber-800 rounded w-full text-start"
+                          >
+                            <i class="fa-light fa-key"></i>
+                            Auto login
+                          </button>
+                        </li>
+                      </ul>
+                    </nav>
+                    }
+                  </div>
+                </td>
+              </tr>
+              } @if(merchants.length === 0 && !loading){
+              <tr>
+                <td
+                  colspan="6"
+                  class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 text-center"
+                >
+                  No records.
+                </td>
+              </tr>
               }
             </tbody>
           </table>
         </div>
         <!-- pagination -->
         <div class="p-5">
-          <app-pagination/>
+          <app-pagination
+            [(page)]="page"
+            (pageChange)="onPageChange($event)"
+            [totalPages]="totalPages"
+            [totalRecords]="totalRecords"
+            [limit]="limit"
+          />
         </div>
-
       </div>
     </div>
   </div>

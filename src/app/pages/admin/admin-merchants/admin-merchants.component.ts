@@ -24,6 +24,9 @@ interface Merchant {
   styleUrl: './admin-merchants.component.css',
 })
 export class AdminMerchantsComponent implements OnInit {
+  public page = 1;
+  public totalRecords: number = 0;
+  public totalPages: number = 0;
   public sort: { key: string; dir: 'asc' | 'desc' } = { key: 'id', dir: 'asc' };
   public search: string = '';
   public limit: number = 10;
@@ -52,32 +55,44 @@ export class AdminMerchantsComponent implements OnInit {
     this.getMerchantList();
   }
 
-  handleSort(key:string) {
-
+  handleSort(key: string) {
     if (key === this.sort.key) {
-      this.sort.dir = this.sort.dir === 'asc' ? 'desc' : 'asc'
-    }else{
-      this.sort = {key, dir: 'asc'}
+      this.sort.dir = this.sort.dir === 'asc' ? 'desc' : 'asc';
+    } else {
+      this.sort = { key, dir: 'asc' };
     }
 
     this.getMerchantList();
   }
 
+  onPageChange(nextPage: number) {
+    this.page = nextPage;
+    this.getMerchantList();
+  }
+
   getMerchantList() {
     const params = new HttpParams()
+      .set('page', this.page)
       .set('search', this.search)
       .set('limit', this.limit)
       .set('sort_by', this.sort.key)
-      .set('sort_dir', this.sort.dir)
+      .set('sort_dir', this.sort.dir);
 
     this.loading = true;
     this.http
-      .get<{ data: Merchant[] }>(`http://localhost:8000/api/admin/merchant`, {
-        params,
-      })
+      .get<{ data: Merchant[]; pagination: any }>(
+        `http://localhost:8000/api/admin/merchant`,
+        {
+          params,
+        }
+      )
       .pipe(finalize(() => (this.loading = false)))
       .subscribe({
-        next: (res) => (this.merchants = res?.data || []),
+        next: (res) => {
+          this.merchants = res?.data || [];
+          this.totalRecords = res?.pagination.total;
+          this.totalPages = res?.pagination.total_pages;
+        },
         error: (err) => {
           console.error(err);
           this.merchants = [];

@@ -1,44 +1,63 @@
-<div class="hidden items-center justify-between text-sm md:flex">
-  <div>1-10 of 120</div>
+@if (totalPages() > 0) {
+  <div class="hidden items-center justify-between text-sm md:flex">
+    <div>{{ startIndex() }}-{{ endIndex() }} of {{ totalRecords() }}</div>
 
-  <div class="flex items-center gap-12" aria-label="Pagination">
-    
-    <button class="hover:text-secondary rounded" [disabled]="currentPage === 1" (click)="prevPage()">
-      <i class="fa-light fa-arrow-left"></i>
-    </button>
+    <div class="flex items-center gap-12" aria-label="Pagination">
+      <button
+        class="hover:text-secondary rounded disabled:opacity-40"
+        [disabled]="page() === 1"
+        (click)="prevPage()"
+        aria-label="Previous page"
+      >
+        <i class="fa-light fa-arrow-left"></i>
+      </button>
 
-    <ul class="flex items-center gap-1">
-      @for (page of pages; track $index) {
-      <li>
-        <button
-          href="#"
-          class="px-3 py-2 rounded-lg duration-150 not-[:disabled]:hover:text-white not-[:disabled]:hover:bg-secondary text-gray-800 font-medium"
-          [class] = "page === currentPage ? 'bg-secondary text-white' : ''"
-          [disabled]="page === '...'"
-          (click)="goToPage(page)"
+      <ul class="flex items-center gap-1">
+        @for (p of pages(); track $index) {
+          <li>
+            <button
+              type="button"
+              class="px-3 py-2 rounded-lg duration-150 not-[:disabled]:hover:text-white not-[:disabled]:hover:bg-secondary text-gray-800 font-medium"
+              [class]="p === page() ? 'bg-secondary text-white' : ''"
+              [disabled]="p === '...'"
+              (click)="goToPage(p)"
+            >
+              {{ p }}
+            </button>
+          </li>
+        }
+      </ul>
 
-        >
-          {{page}}
-        </button>
-      </li>
-      }
-    </ul>
-
-    <button class="hover:text-secondary"  [disabled]="currentPage === totalPages" (click)="nextPage()">
-      <i class="fa-light fa-arrow-right"></i>
-    </button>
-
+      <button
+        class="hover:text-secondary rounded disabled:opacity-40"
+        [disabled]="page() === totalPages()"
+        (click)="nextPage()"
+        aria-label="Next page"
+      >
+        <i class="fa-light fa-arrow-right"></i>
+      </button>
+    </div>
   </div>
-</div>
 
-<div
-  class="flex items-center justify-between text-sm text-gray-600 font-medium md:hidden"
->
-  <a href="#" class="px-4 py-2 border rounded-lg duration-150 hover:bg-gray-50"
-    >Previous</a
-  >
-  <div class="font-medium">SHOWING 1-10 OF 120</div>
-  <a href="#" class="px-4 py-2 border rounded-lg duration-150 hover:bg-gray-50"
-    >Next</a
-  >
-</div>
+  <div class="flex items-center justify-between text-sm text-gray-600 font-medium md:hidden">
+    <button
+      type="button"
+      class="px-4 py-2 border rounded-lg duration-150 hover:bg-gray-50 disabled:opacity-40"
+      [disabled]="page() === 1"
+      (click)="prevPage()"
+    >
+      Previous
+    </button>
+    <div class="font-medium">
+      SHOWING {{ startIndex() }}-{{ endIndex() }} OF {{ totalRecords() }}
+    </div>
+    <button
+      type="button"
+      class="px-4 py-2 border rounded-lg duration-150 hover:bg-gray-50 disabled:opacity-40"
+      [disabled]="page() === totalPages()"
+      (click)="nextPage()"
+    >
+      Next
+    </button>
+  </div>
+}
