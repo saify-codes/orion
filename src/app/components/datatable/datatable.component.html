@@ -88,6 +88,47 @@
           </div>
           <!-- pagination -->
           <div class="p-5">
+            @if (pagination.totalPages > 0) {
+                <div class="hidden items-center justify-between text-sm md:flex">
+                  <div>{{ (pagination.currentPage - 1) * pagination.limit + 1 }}-{{ pagination.currentPage * pagination.limit }} of {{ pagination.total }}</div>
+              
+                  <div class="flex items-center gap-12" aria-label="Pagination">
+                    <button
+                      class="hover:text-secondary rounded disabled:opacity-40"
+                      [disabled]="pagination.currentPage === 1"
+                      (click)="prev()"
+                    >
+                      <i class="fa-light fa-arrow-left"></i>
+                    </button>
+              
+                    <ul class="flex items-center gap-1">
+                      @for (p of buildPages(); track $index) {
+                        <li>
+                          <button
+                            type="button"
+                            class="px-3 py-2 rounded-lg duration-150 not-[:disabled]:hover:text-white not-[:disabled]:hover:bg-secondary text-gray-800 font-medium"
+                            [class]="p === pagination.currentPage ? 'bg-secondary text-white' : ''"
+                            [disabled]="p === '...'"
+                            (click)="goto(p)"
+                          >
+                            {{ p }}
+                          </button>
+                        </li>
+                      }
+                    </ul>
+              
+                    <button
+                      class="hover:text-secondary rounded disabled:opacity-40"
+                      [disabled]="pagination.currentPage === pagination.totalPages"
+                      (click)="next()"
+                    >
+                      <i class="fa-light fa-arrow-right"></i>
+                    </button>
+                  </div>
+                </div>
+              
+                
+              }              
           </div>
         </div>
       </div>

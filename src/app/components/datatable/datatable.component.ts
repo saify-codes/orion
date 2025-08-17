@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-datatable',
@@ -6,7 +6,10 @@ import { Component } from '@angular/core';
   templateUrl: './datatable.component.html',
   styleUrl: './datatable.component.css',
 })
-export class DatatableComponent {
+export class DatatableComponent implements OnInit{
+
+  public x:any[] = []
+
   public dataSourceURL = null;
   public serverSide = false;
   public loading = false;
@@ -21,19 +24,26 @@ export class DatatableComponent {
 
   constructor(){
 
-    for (let i = 0; i < 100; i++) {
-      this.records.push({
+    for (let i = 0; i < 1000; i++) {
+      this.x.push({
         id: i,
         name: 'test',
         email: 'test@gmail.com'
       })
     }
 
+    this.pagination.total = this.x.length
+    this.pagination.totalPages = Math.ceil(this.x.length / this.pagination.limit)
+
+  }
+
+  ngOnInit(): void {
+    this.getRecords()
   }
 
   getRecords() {
 
-
+    this.records = this.x.slice((this.pagination.currentPage - 1) * this.pagination.limit , (this.pagination.currentPage - 1) * this.pagination.limit + this.pagination.limit)
 
   }
 
@@ -42,13 +52,13 @@ export class DatatableComponent {
   buildPages(){
 
     const { currentPage, totalPages } = this.pagination
-    const pages:any = []
+    const pages:any[] = []
     const range = 2
     const start = Math.max(currentPage - range, 1)
     const end   = Math.min(currentPage + range, totalPages)
 
-    if (start > currentPage) {
-      pages.concat(1, '...')
+    if (start > 1) {
+      pages.push(1, '...')
     }
 
     for (let i = start; i <= end; i++) {
@@ -56,7 +66,7 @@ export class DatatableComponent {
     }
 
     if (end < totalPages) {
-      pages.concat('...', totalPages)
+      pages.push('...', totalPages)
     }
 
     return pages
