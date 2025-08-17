@@ -18,9 +18,9 @@
     />
   </div>
 
-  <div class="flex items-center gap-1">
+  <div class="flex items-center">
     <!-- Notification -->
-    <div class="relative">
+    <div class="relative group">
       @if (notificaitions.length > 0) {
       <div class="pointer-events-none">
         <span
@@ -40,6 +40,11 @@
       >
         <i class="fa-light fa-bell text-[15px]"></i>
       </button>
+
+      <span
+        class="bg-gray-800 hidden group-hover:block text-white text-xs p-1 rounded absolute -bottom-2 m-0 left-2/4 translate-y-full -translate-x-2/4 w-max"
+        >Notifications</span
+      >
 
       <!-- Dropdown -->
       <div
@@ -146,7 +151,7 @@
     </div>
 
     <!-- Profile -->
-    <div class="relative">
+    <div class="relative ms-2">
       <button
         class="w-8 h-8 align-middle outline-none rounded-full border-2 border-secondary"
         (click)="toggle('profile')"
@@ -159,7 +164,7 @@
       </button>
 
       <ul
-        class="bg-white top-12 right-0 mt-5 w-56 absolute rounded shadow z-50"
+        class="bg-white top-12 right-0 mt-5 w-56 absolute rounded shadow"
         [class.hidden]="!isOpen('profile')"
       >
         <li>
