@@ -37,7 +37,7 @@ export class AdminSigninComponent {
       await withLoader(() => this.auth.login(email, password, remember), (isLoading: boolean) => {
         this.loading  = isLoading
       })
-      // this.router.navigate(['/admin'])
+      this.router.navigate(['/admin'])
       
     } catch (error: any) {
       this.alert.show = true

@@ -28,10 +28,16 @@ export class AdminAuthService {
    * Use APP_INITIALIZER to call this and block bootstrap until it resolves.
    */
   async init(): Promise<void> {
-    console.log(Cookie.get(COOKIE_KEY));
-    
-  }
+    const cookie = Cookie.get(COOKIE_KEY) ?? {};   // {} if null
+    const { user = null, token = null } = cookie as { user?: any; token?: string };
+  
+    this.user = user;
+    this.token = token;
+    this.status = user ? 'authenticated' : 'unauthenticated';
 
+  }
+  
+  
   isAuthenticated(): boolean {
     return !!this.user;
   }

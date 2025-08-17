@@ -4,7 +4,7 @@ import { SidebarComponent } from "./partials/sidebar/sidebar.component";
 import { RouterOutlet } from '@angular/router';
 
 @Component({
-  selector: 'app-base',
+  selector: 'merchant-app',
   imports: [HeaderComponent, SidebarComponent, RouterOutlet],
   templateUrl: './merchant.component.html',
   styleUrl: './merchant.component.css'
