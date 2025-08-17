@@ -14,53 +14,159 @@
     <input type="search" placeholder="Search..." class="w-full text-sm outline-none placeholder:text-neutral-300"  />
   </div>
 
-  <div class="flex items-center gap-1">
+  <div class="flex items-center">
+
+    <!-- Support -->
+    <div class="relative group">
+      <button  class="w-10 h-10 align-middle grid place-content-center rounded-full hover:bg-gray-100" [disabled]="isFlushing" (click)="flushCache()">
+        <i class="fa-light fa-circle-info"></i>
+      </button>
+      <span class="bg-gray-800 hidden group-hover:block text-white text-xs p-1 rounded absolute -bottom-2 m-0 left-2/4 translate-y-full -translate-x-2/4 w-max">Support</span>
+    </div>
 
     <!-- Flush cache -->
     <div class="relative group">
       <button  class="w-10 h-10 align-middle grid place-content-center rounded-full hover:bg-gray-100" [disabled]="isFlushing" (click)="flushCache()">
         @if (isFlushing) {
-          <i class="fa-duotone fa-solid fa-sync fa-spin text-[20px]"></i>
+          <i class="fa-light fa-sync fa-spin text-[15px]"></i>
         }@else{
-          <i class="fa-duotone fa-solid fa-broom-wide text-[20px]"></i>
+          <i class="fa-light fa-broom-wide text-[15px]"></i>
         }
       </button>
       <span class="bg-gray-800 hidden group-hover:block text-white text-xs p-1 rounded absolute -bottom-2 m-0 left-2/4 translate-y-full -translate-x-2/4 w-max">Flush cache</span>
     </div>
 
     <!-- Notification -->
-    <div class="relative">
-
+    <div class="relative group">
       @if (notificaitions.length > 0) {
-        <div class="pointer-events-none">
-          <span class="w-4 h-4 absolute top-0 right-0 bg-red-500 rounded-full animate-ping"></span>
-          <span class="w-4 h-4 grid place-content-center absolute top-0 right-0 bg-red-500 rounded-full font-bold text-xs text-white">
-            {{ notificaitions.length > 9 ? '9+' : notificaitions.length }}
-          </span>
-        </div>
+      <div class="pointer-events-none">
+        <span
+          class="w-4 h-4 absolute top-0 right-0 bg-red-500 rounded-full animate-ping"
+        ></span>
+        <span
+          class="w-4 h-4 grid place-content-center absolute top-0 right-0 bg-red-500 rounded-full font-bold text-xs text-white"
+        >
+          {{ notificaitions.length > 9 ? "9+" : notificaitions.length }}
+        </span>
+      </div>
       }
 
-      <button 
+      <button
         class="w-10 h-10 align-middle grid place-content-center rounded-full hover:bg-gray-100"
         (click)="toggle('notificaitions')"
       >
-        <i class="fa-duotone fa-thin fa-bell text-[20px]"></i>
+        <i class="fa-light fa-bell text-[15px]"></i>
       </button>
-      
-      <ul 
-        class="bg-white top-12 right-0 mt-5 w-48 absolute rounded shadow"
+
+      <span class="bg-gray-800 hidden group-hover:block text-white text-xs p-1 rounded absolute -bottom-2 m-0 left-2/4 translate-y-full -translate-x-2/4 w-max">Notifications</span>
+
+
+      <!-- Dropdown -->
+      <div
+        class="absolute right-0 top-12 w-[22rem] bg-white rounded-2xl shadow-xl border border-gray-200 overflow-hidden z-50"
         [class.hidden]="!isOpen('notificaitions')"
       >
-        <li class="hover:bg-gray-100 p-3">
-          <a href="javascript:void(0)" class="block text-gray-600"
-            >Dashboard</a
-          >
-        </li>
-      </ul>
+        <!-- List -->
+        <ul class="max-h-96 overflow-auto py-5" role="list">
+          <!-- Item 1 (unread) -->
+          <li class="p-3">
+            <div class="flex gap-3">
+              <div class="relative">
+                <img
+                  class="h-9 w-9 rounded-full object-cover"
+                  src="https://randomuser.me/api/portraits/women/68.jpg"
+                  alt="Eilis Warner"
+                />
+                <span
+                  class="absolute -left-1 top-1 h-2 w-2 rounded-full bg-blue-500"
+                ></span>
+              </div>
+
+              <div class="min-w-0 flex-1">
+                <div class="text-[12px] text-gray-400 mb-0.5">2 hours ago</div>
+                <p class="text-sm">
+                  <span class="font-semibold">Eilis Warner</span>
+                  <span class="text-gray-700"> changed an issue from </span>
+                  <span class="font-medium">'In Progress'</span>
+                  <span class="text-gray-700"> to </span>
+                  <span class="font-medium">'Review'</span>
+                </p>
+              </div>
+            </div>
+          </li>
+
+          <!-- Item 2 with message -->
+          <li class="p-3">
+            <div class="flex gap-3">
+              <div
+                class="h-9 w-9 rounded-full bg-gray-100 text-gray-600 grid place-items-center font-medium"
+              >
+                C
+              </div>
+              <div class="min-w-0 flex-1">
+                <div class="text-[12px] text-gray-400 mb-0.5">3 days ago</div>
+                <p class="text-sm">
+                  <span class="font-semibold">Clara Becker</span>
+                  <span class="text-gray-700"> mentioned you in a cwxgf</span>
+                </p>
+                <blockquote
+                  class="mt-2 pl-3 border-l-2 border-gray-200 text-sm text-gray-700"
+                >
+                  Nice work, love! You really nailed it. Keep it up!
+                </blockquote>
+              </div>
+            </div>
+          </li>
+
+          <!-- Item 3 with mini card -->
+          <li class="p-3">
+            <div class="flex gap-3">
+              <div
+                class="h-9 w-9 rounded-full bg-gray-100 text-gray-600 grid place-items-center font-medium"
+              >
+                P
+              </div>
+              <div class="min-w-0 flex-1">
+                <div class="text-[12px] text-gray-400 mb-0.5">5 Jan 2023</div>
+                <p class="text-sm font-semibold">New Update on Preline</p>
+                <p class="text-sm text-gray-700">
+                  Add yourself to our new “Hire Page”. Let visitors know you’re
+                  open to freelance or full-time work.
+                </p>
+
+                <a
+                  href="javascript:void(0)"
+                  class="mt-3 flex items-center gap-3 p-2 rounded-xl border border-gray-200 bg-gray-50 hover:bg-gray-100"
+                >
+                  <img
+                    src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=100&h=100&fit=crop"
+                    class="h-12 w-12 rounded-lg object-cover"
+                    alt=""
+                  />
+                  <div class="flex-1">
+                    <div class="text-sm font-semibold">Get hired!</div>
+                    <div class="text-xs text-gray-500">Get started</div>
+                  </div>
+                  <i class="fa-solid fa-chevron-right text-gray-400"></i>
+                </a>
+              </div>
+            </div>
+          </li>
+        </ul>
+
+        <!-- Footer -->
+        <button
+          type="button"
+          class="w-full flex items-center justify-center gap-2 py-3 text-sm text-gray-600 hover:bg-gray-50"
+        >
+          <i class="fa-light fa-check"></i>
+          Mark all as read
+        </button>
+      </div>
     </div>
 
     <!-- Profile -->
-    <div class="relative">
+    <div class="relative ms-2">
       <button
         class="w-8 h-8 align-middle outline-none rounded-full border-2 border-secondary"
         (click)="toggle('profile')"
