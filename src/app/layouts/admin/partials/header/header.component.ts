@@ -26,7 +26,4 @@ export class HeaderComponent {
     return this.notificaitions;
   }
 
-  logout(){
-    this.auth.logout()
-  }
 }
