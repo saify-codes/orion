@@ -5,6 +5,7 @@ import { debounce } from '../../../decorators/debounce';
 import { PaginationComponent } from '../../../components/pagination/pagination.component'; // Import SweetAlert2
 import { finalize } from 'rxjs';
 import Swal from 'sweetalert2';
+import { FormsModule } from '@angular/forms';
 
 interface Merchant {
   id: number;
@@ -18,12 +19,14 @@ interface Merchant {
 @Component({
   selector: 'app-admin-merchants',
   standalone: true,
-  imports: [RouterLink, PaginationComponent],
+  imports: [RouterLink, PaginationComponent, FormsModule],
   templateUrl: './admin-merchants.component.html',
   styleUrl: './admin-merchants.component.css',
 })
 export class AdminMerchantsComponent implements OnInit {
 
+  public search:string    = ''
+  public limit:number     = 10
   public loading: boolean = false;
   public currentOpenMenu: any = null;
   public merchants: Merchant[] = [];
@@ -41,13 +44,19 @@ export class AdminMerchantsComponent implements OnInit {
   }
 
   @debounce(300)
-  handleMerchantSearch(e: Event) {
-    const value = (e.target as HTMLInputElement).value;
-    this.getMerchantList(value);
+  handleSearch() {
+    this.getMerchantList();
+  }
+  
+  handleLimitChange() {
+    this.getMerchantList();
   }
 
-  getMerchantList(search = '') {
-    const params = new HttpParams().set('search', search).set('limit', 50000)
+  getMerchantList() {
+    const params = new HttpParams()
+      .set('search', this.search)
+      .set('limit', this.limit)
+
     this.loading = true
     this.http
       .get<{ data: Merchant[] }>(`http://localhost:8000/api/admin/merchant`, {params})

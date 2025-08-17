@@ -11,7 +11,8 @@
                 type="text"
                 class="py-1.5 sm:py-2 px-3 ps-9 block w-full border border-gray-200 rounded-lg sm:text-sm outline-0"
                 placeholder="Search for merchants"
-                (input)="handleMerchantSearch($event)"
+                [(ngModel)]="search"
+                (input)="handleSearch()"
               />
               <div
                 class="absolute inset-y-0 start-0 flex items-center pointer-events-none ps-3"
@@ -19,7 +20,10 @@
                 <i class="fa-light fa-magnifying-glass"></i>
               </div>
             </div>
-            <select class="py-1.5 sm:py-2 px-3 block border border-gray-200 rounded-lg sm:text-sm outline-0">
+            <select 
+              class="py-1.5 sm:py-2 px-3 block border border-gray-200 rounded-lg sm:text-sm outline-0" 
+              [(ngModel)]="limit"
+              (change)="handleLimitChange()">
               <option value="10">10</option>
               <option value="25">25</option>
               <option value="50">50</option>
