@@ -47,7 +47,7 @@ export class AdminMerchantsComponent implements OnInit {
   }
 
   getMerchantList(search = '') {
-    const params = new HttpParams().set('search', search);
+    const params = new HttpParams().set('search', search).set('limit', 50000)
     this.loading = true
     this.http
       .get<{ data: Merchant[] }>(`http://localhost:8000/api/admin/merchant`, {params})
