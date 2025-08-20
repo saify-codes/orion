@@ -46,8 +46,8 @@
                   } 
                 </tr>
               </thead>
-  
-              <tbody class="divide-y divide-gray-200">
+                <ng-content foo="jjj"/>
+              <!-- <tbody class="divide-y divide-gray-200">
                 @for (record of records; track $index) {
                     <tr>
                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800">{{record.id}}</td>
@@ -66,7 +66,7 @@
                   </td>
                 </tr>
                 }
-              </tbody>
+              </tbody> -->
             </table>
           </div>
           <!-- pagination -->

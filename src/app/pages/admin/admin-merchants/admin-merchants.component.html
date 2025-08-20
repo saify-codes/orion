@@ -137,39 +137,39 @@
                     </button>
 
                     @if (isOpen(merchant.id)) {
-                    <nav
-                      class="fixed bg-white right-0 z-50 p-2 rounded shadow w-32"
-                      [style]="contextMenuStyle"
-                    >
-                      <ul class="space-y-1">
-                        <li>
-                          <a
-                            routerLink="/admin/merchant/{{ merchant.id }}"
-                            class="block px-2 py-1 hover:bg-green-100 hover:text-green-800 rounded w-full text-start"
-                          >
-                            <i class="fa-light fa-pen-to-square"></i>
-                            Edit
-                          </a>
-                        </li>
-                        <li>
-                          <button
-                            class="px-2 py-1 hover:bg-red-100 hover:text-red-500 rounded w-full text-start"
-                            (click)="deleteMerchant(merchant)"
-                          >
-                            <i class="fa-light fa-trash"></i>
-                            Delete
-                          </button>
-                        </li>
-                        <li>
-                          <button
-                            class="px-2 py-1 hover:bg-amber-100 hover:text-amber-800 rounded w-full text-start"
-                          >
-                            <i class="fa-light fa-key"></i>
-                            Auto login
-                          </button>
-                        </li>
-                      </ul>
-                    </nav>
+                      <nav
+                        class="fixed bg-white right-0 z-50 p-2 rounded shadow w-32"
+                        [style]="contextMenuStyle"
+                      >
+                        <ul class="space-y-1">
+                          <li>
+                            <a
+                              routerLink="/admin/merchant/{{ merchant.id }}"
+                              class="block px-2 py-1 hover:bg-green-100 hover:text-green-800 rounded w-full text-start"
+                            >
+                              <i class="fa-light fa-pen-to-square"></i>
+                              Edit
+                            </a>
+                          </li>
+                          <li>
+                            <button
+                              class="px-2 py-1 hover:bg-red-100 hover:text-red-500 rounded w-full text-start"
+                              (click)="deleteMerchant(merchant)"
+                            >
+                              <i class="fa-light fa-trash"></i>
+                              Delete
+                            </button>
+                          </li>
+                          <li>
+                            <button
+                              class="px-2 py-1 hover:bg-amber-100 hover:text-amber-800 rounded w-full text-start"
+                            >
+                              <i class="fa-light fa-key"></i>
+                              Auto login
+                            </button>
+                          </li>
+                        </ul>
+                      </nav>
                     }
                   </div>
                 </td>
