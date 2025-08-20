@@ -80,12 +80,7 @@ export class AdminMerchantsComponent implements OnInit {
 
     this.loading = true;
     this.http
-      .get<{ data: Merchant[]; pagination: any }>(
-        `http://localhost:8000/api/admin/merchant`,
-        {
-          params,
-        }
-      )
+      .get<{ data: Merchant[]; pagination: any }>(`admin/merchant`,{ params })
       .pipe(finalize(() => (this.loading = false)))
       .subscribe({
         next: (res) => {

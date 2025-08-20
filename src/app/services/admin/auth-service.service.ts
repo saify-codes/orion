@@ -51,7 +51,7 @@ export class AdminAuthService {
     return new Promise((resolve, reject) => {
       this
         .http
-        .post('http://localhost:8000/api/admin/auth/login', { email, password, remember })
+        .post('https://orion-backend-main-l6ntcw.laravel.cloud/api/admin/auth/login', { email, password, remember })
         .subscribe({
           next: (res:any) => {
             const { user, token, maxAge } = res.data
