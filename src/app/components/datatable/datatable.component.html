@@ -41,26 +41,9 @@
             <table class="min-w-full divide-y divide-gray-200">
               <thead class="bg-gray-50">
                 <tr>
-                  <th
-                    scope="col"
-                    class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase cursor-pointer"
-                  >
-                    id
-                  </th>
-                 
-                  <th
-                    scope="col"
-                    class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase cursor-pointer"
-                  >
-                    name
-                  </th>
-                  <th
-                    scope="col"
-                    class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase"
-                  >
-                    email
-                  </th>
-                  
+                  @for (header of headers; track $index) {
+                    <th scope="col" class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase cursor-pointer">{{ header }}</th>
+                  } 
                 </tr>
               </thead>
   
@@ -126,8 +109,6 @@
                     </button>
                   </div>
                 </div>
-              
-                
               }              
           </div>
         </div>

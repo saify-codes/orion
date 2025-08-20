@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-datatable',
@@ -10,7 +10,11 @@ export class DatatableComponent implements OnInit{
 
   public x:any[] = []
 
-  public dataSourceURL = null;
+  @Input() 
+  public dataSourceURL:string | null = null;
+  @Input() 
+  public headers:string[]  = [];
+
   public serverSide = false;
   public loading = false;
   public records:any[] = [];
