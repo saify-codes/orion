@@ -14,6 +14,10 @@ export class DatatableComponent implements OnInit{
   public dataSourceURL:string | null = null;
   @Input() 
   public headers:string[]  = [];
+  @Input() 
+  public columns:any[]  = [];
+  @Input() 
+  public foo:any;
 
   public serverSide = false;
   public loading = false;

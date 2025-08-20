@@ -9,4 +9,8 @@ import { DatatableComponent } from "../../../components/datatable/datatable.comp
 })
 export class AdminHomeComponent {
 
+  renderStatusColum(){
+    
+  }
+
 }
