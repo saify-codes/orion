@@ -1,1 +1,17 @@
-<p>not-found works!</p>
+<div class="max-w-screen-xl mx-auto px-4 flex items-center justify-start h-screen md:px-8">
+    <div class="max-w-lg mx-auto space-y-3 text-center">
+        <h3 class="text-gray-800 text-4xl font-semibold sm:text-5xl">
+            Page not found
+        </h3>
+        <p class="text-gray-600">
+            Sorry, the page you are looking for could not be found or has been removed.
+        </p>
+        <button type="button"
+            class="text-secondary duration-150 hover:text-secondary-400 font-medium inline-flex items-center gap-x-1"
+            (click)="goBack()">
+            Go back
+            <i class="fas fa-arrow-right-long"></i>
+        </button>
+
+    </div>
+</div>
