@@ -8,7 +8,7 @@ import { HomeComponent } from './pages/merchant/home/home.component';
 import { AdminLayout } from './layouts/admin/admin.component';
 import { AdminHomeComponent } from './pages/admin/admin-home/admin-home.component';
 import { MerchantsComponent } from './pages/admin/merchants/merchants.component';
-import { AdminLoginComponent } from './pages/admin/admin-signin/admin-signin.component';
+import { SigninComponent as AdminSigninComponent } from './pages/admin/signin/signin.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { authGuardGuard } from './guards/admin/auth-guard.guard';
 import { DatatableComponent } from './components/datatable/datatable.component';
@@ -93,7 +93,7 @@ export const routes: Routes = [
   },
 
   // Admin guest route (outside the shell)
-  { path: 'admin/auth/login', component: AdminLoginComponent },
+  { path: 'admin/auth/login', component: AdminSigninComponent },
 
   // Merchant guest route (outside the shell)
   { path: 'auth/signin', component: SigninComponent },

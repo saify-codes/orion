@@ -7,10 +7,10 @@ import { withLoader } from '../../../utils';
 @Component({
   selector: 'app-admin-signin',
   imports: [ReactiveFormsModule],
-  templateUrl: './admin-signin.component.html',
-  styleUrl: './admin-signin.component.css',
+  templateUrl: './signin.component.html',
+  styleUrl: './signin.component.css',
 })
-export class AdminLoginComponent {
+export class SigninComponent {
   
   public  loading         = false;
   private auth            = inject(AdminAuthService)
