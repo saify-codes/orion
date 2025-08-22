@@ -7,11 +7,12 @@ import { HomeComponent } from './pages/merchant/home/home.component';
 
 import { AdminLayout } from './layouts/admin/admin.component';
 import { AdminHomeComponent } from './pages/admin/admin-home/admin-home.component';
-import { AdminMerchantsComponent } from './pages/admin/admin-merchants/admin-merchants.component';
+import { MerchantsComponent } from './pages/admin/merchants/merchants.component';
 import { AdminLoginComponent } from './pages/admin/admin-signin/admin-signin.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { authGuardGuard } from './guards/admin/auth-guard.guard';
 import { DatatableComponent } from './components/datatable/datatable.component';
+import { AddMerchantComponent } from './pages/admin/merchants/add/add.component';
 
 export const routes: Routes = [
   // admin routes
@@ -20,9 +21,10 @@ export const routes: Routes = [
     component: AdminLayout,
     canActivate: [],
     children: [
-      { path: '', component: AdminHomeComponent },
-      { path: 'dashboard', component: DatatableComponent },
-      { path: 'merchant', component: AdminMerchantsComponent },
+      { path: '',             component: AdminHomeComponent },
+      { path: 'dashboard',    component: DatatableComponent },
+      { path: 'merchant',     component: MerchantsComponent },
+      { path: 'merchant/add', component: AddMerchantComponent },
     ],
   },
 

@@ -20,10 +20,10 @@ interface Merchant {
   selector: 'app-admin-merchants',
   standalone: true,
   imports: [RouterLink, PaginationComponent, FormsModule],
-  templateUrl: './admin-merchants.component.html',
-  styleUrl: './admin-merchants.component.css',
+  templateUrl: './merchants.component.html',
+  styleUrl: './merchants.component.css',
 })
-export class AdminMerchantsComponent implements OnInit {
+export class MerchantsComponent implements OnInit {
   public page:                number                                  = 1;
   public totalRecords:        number                                  = 0;
   public totalPages:          number                                  = 0;
