@@ -1,4 +1,5 @@
-<div id="app-sidebar" class="[--auto-close:lg] lg:block lg:translate-x-0 lg:end-auto lg:bottom-0 w-64 hs-ovey-open:translate-x-0 -translate-x-full transition-all duration-300 transform h-full hidden top-0 start-0 bottom-0 z-60 bg-white border-e border-gray-200 fixed lg:static">
+<div id="app-sidebar"
+  class="[--auto-close:lg] lg:block lg:translate-x-0 lg:end-auto lg:bottom-0 w-64 hs-ovey-open:translate-x-0 -translate-x-full transition-all duration-300 transform h-full hidden top-0 start-0 bottom-0 z-60 bg-white border-e border-gray-200 fixed lg:static">
   <div class="relative flex flex-col h-full max-h-full">
     <header class="py-4 px-2.5 flex justify-between items-center">
       <a routerLink="/home">
@@ -6,23 +7,11 @@
       </a>
       <div class="lg:hidden -me-2">
         <!-- Close Button -->
-        <button
-          type="button"
+        <button type="button"
           class="flex justify-center items-center gap-x-3 size-6 bg-white border border-gray-200 text-sm text-gray-600 hover:bg-gray-100 rounded-full disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden focus:bg-gray-100 "
-          data-hs-ovey="#app-sidebar"
-        >
-          <svg
-            class="shrink-0 size-4"
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
+          data-hs-ovey="#app-sidebar">
+          <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M18 6 6 18" />
             <path d="m6 6 12 12" />
           </svg>
@@ -32,46 +21,35 @@
       </div>
     </header>
 
-    <nav class="h-full overflow-y-auto [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300 ">
+    <nav
+      class="h-full overflow-y-auto [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300 ">
       <ul class="space-y-1 px-2.5">
-        
+
         <h6 class="font-bold text-neutral-400 uppercase text-sm px-2.5 py-2">Main</h6>
 
         <li class="group" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
-          <a
-            class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 group-[&:not(.active)]:hover:bg-gray-100 font-semibold rounded-lg group-[.active]:bg-secondary"
-            routerLink="/admin"
-          >
-           <i class="fa-duotone fa-solid fa-house text-lg group-[.active]:text-white"></i>
+          <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 group-[&:not(.active)]:hover:bg-gray-100 font-semibold rounded-lg group-[.active]:bg-secondary"
+            routerLink="/admin">
+            <i class="fa-duotone fa-solid fa-house text-lg group-[.active]:text-white"></i>
             Home
           </a>
         </li>
-        
+
         <li class="group" routerLinkActive="active">
-          <a
-            class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 group-[&:not(.active)]:hover:bg-gray-100 font-semibold rounded-lg group-[.active]:bg-secondary"
-            routerLink="/admin/dashboard"
-          >
-           <i class="fa-duotone fa-solid fa-fire text-lg group-[.active]:text-white"></i>
+          <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 group-[&:not(.active)]:hover:bg-gray-100 font-semibold rounded-lg group-[.active]:bg-secondary"
+            routerLink="/admin/dashboard">
+            <i class="fa-duotone fa-solid fa-fire text-lg group-[.active]:text-white"></i>
             Dashboard
           </a>
         </li>
-        
+
         <h6 class="font-bold text-neutral-400 uppercase text-sm px-2.5 py-2">Management</h6>
-        
+
         <!-- Merchnats -->
-        <li
-          class="dropdown group/parent"
-          routerLinkActive="active"
-          [class.open]="isOpen('merchants')"
-        >
-          <button
-            type="button"
-            class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800
+        <li class="dropdown group/parent" routerLinkActive="active" [class.open]="isOpen('merchants')">
+          <button type="button" class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800
                   group-[&:not(.active)]/parent:hover:bg-gray-100
-                  group-[.active]/parent:bg-secondary font-semibold rounded-lg w-full"
-            (click)="toggle('merchants')"
-          >
+                  group-[.active]/parent:bg-secondary font-semibold rounded-lg w-full" (click)="toggle('merchants')">
             <i class="fa-duotone fa-solid fa-users text-lg group-[.active]/parent:text-white"></i>
             Merchants
             <i class="fa-solid fa-chevron-down ms-auto transition group-[.open]/parent:rotate-180"></i>
@@ -79,8 +57,8 @@
 
           <div class="w-full my-5 overflow-hidden transition-[height] duration-300 hidden group-[.open]/parent:block">
             <ul class="border-gray-400 border-l-2 ml-5 pl-2.5 space-y-1">
-              
-              <li class="group" routerLinkActive="active">
+
+              <li class="group" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
                 <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 group-[&:not(.active)]:hover:bg-gray-100 font-semibold rounded-lg group-[.active]:bg-secondary"
                   routerLink="/admin/merchant">
                   <i class="fa-duotone fa-solid fa-list text-lg group-[.active]:text-white"></i>
@@ -88,6 +66,7 @@
                 </a>
 
               </li>
+              
               <li class="group" routerLinkActive="active">
                 <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 group-[&:not(.active)]:hover:bg-gray-100 font-semibold rounded-lg group-[.active]:bg-secondary"
                   routerLink="/admin/merchant/add">
@@ -102,39 +81,19 @@
       </ul>
     </nav>
 
-    <footer
-      class="mt-auto p-2 border-t border-gray-200 "
-    >
+    <footer class="mt-auto p-2 border-t border-gray-200 ">
       <!-- Account Dropdown -->
-      <div
-        class="hs-dropdown [--strategy:absolute] [--auto-close:inside] relative w-full inline-flex"
-      >
-        <button
-          id="hs-sidebar-footer-example-with-dropdown"
-          type="button"
+      <div class="hs-dropdown [--strategy:absolute] [--auto-close:inside] relative w-full inline-flex">
+        <button id="hs-sidebar-footer-example-with-dropdown" type="button"
           class="w-full inline-flex shrink-0 items-center gap-x-2 p-2 text-start text-sm text-gray-800 rounded-md hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 "
-          aria-haspopup="menu"
-          aria-expanded="false"
-          aria-label="Dropdown"
-        >
-          <img
-            class="shrink-0 size-5 rounded-full"
+          aria-haspopup="menu" aria-expanded="false" aria-label="Dropdown">
+          <img class="shrink-0 size-5 rounded-full"
             src="https://images.unsplash.com/photo-1734122415415-88cb1d7d5dc0?q=80&w=320&h=320&auto=format&fit=facearea&facepad=3&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-            alt="Avatar"
-          />
+            alt="Avatar" />
           Mia Hudson
-          <svg
-            class="shrink-0 size-3.5 ms-auto"
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
+          <svg class="shrink-0 size-3.5 ms-auto" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round">
             <path d="m7 15 5 5 5-5" />
             <path d="m7 9 5-5 5 5" />
           </svg>
@@ -143,33 +102,22 @@
         <!-- Account Dropdown -->
         <div
           class="hs-dropdown-menu hs-dropdown-open:opacity-100 w-60 transition-[opacity,margin] duration opacity-0 hidden z-20 bg-white border border-gray-200 rounded-lg shadow-lg "
-          role="menu"
-          aria-orientation="vertical"
-          aria-labelledby="hs-sidebar-footer-example-with-dropdown"
-        >
+          role="menu" aria-orientation="vertical" aria-labelledby="hs-sidebar-footer-example-with-dropdown">
           <div class="p-1">
-            <a
-              class="flex items-center gap-x-3 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden focus:bg-gray-100 "
-              href="#"
-            >
+            <a class="flex items-center gap-x-3 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden focus:bg-gray-100 "
+              href="#">
               My account
             </a>
-            <a
-              class="flex items-center gap-x-3 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden focus:bg-gray-100 "
-              href="#"
-            >
+            <a class="flex items-center gap-x-3 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden focus:bg-gray-100 "
+              href="#">
               Settings
             </a>
-            <a
-              class="flex items-center gap-x-3 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden focus:bg-gray-100 "
-              href="#"
-            >
+            <a class="flex items-center gap-x-3 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden focus:bg-gray-100 "
+              href="#">
               Billing
             </a>
-            <a
-              class="flex items-center gap-x-3 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden focus:bg-gray-100 "
-              href="#"
-            >
+            <a class="flex items-center gap-x-3 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden focus:bg-gray-100 "
+              href="#">
               Sign out
             </a>
           </div>
