@@ -1,187 +1,176 @@
-<form class="max-w-4xl px-4 py-10 sm:px-6 lg:px-8 mx-auto bg-white rounded-lg shadow">
+<form class="max-w-4xl px-4 py-10 sm:px-6 lg:px-8 mx-auto bg-white rounded-lg shadow"
+      [formGroup]="form"
+      (ngSubmit)="onSubmit()">
 
-    <h2 class="text-xl font-bold text-gray-800 mb-5">
-        Merchant details
-    </h2>
+  <!-- Merchant details -->
+  <h2 class="text-xl font-bold text-gray-800 mb-5">Merchant details</h2>
 
-    <!-- Grid -->
-    <div class="grid sm:grid-cols-12 gap-2 sm:gap-6 mb-5">
-        <!-- <div class="sm:col-span-3">
-      <label class="inline-block text-sm text-gray-800 mt-2.5 ">
-        Profile photo
-      </label>
-    </div> -->
-        <!-- End Col -->
+  <div class="grid sm:grid-cols-12 gap-2 sm:gap-6 mb-5" formGroupName="merchant">
+    <!-- First name -->
+    <div class="sm:col-span-3">
+      <label for="merchant-first-name" class="inline-block text-sm text-gray-800 mt-2.5">First name</label>
+    </div>
+    <div class="sm:col-span-9">
+      <input id="merchant-first-name" name="merchant_first_name" formControlName="firstName" type="text"
+             class="py-1.5 sm:py-2 px-3 block w-full border border-gray-200 shadow-2xs sm:text-sm rounded-lg outline-0
+                    focus:ring-2 ring-secondary ring-offset-2">
+      <p *ngIf="showError('merchant.firstName')" class="mt-1 text-xs text-red-600">First name is required.</p>
+    </div>
 
-        <!-- <div class="sm:col-span-9">
-      <div class="flex items-center gap-5">
-        <img class="inline-block size-16 rounded-full ring-2 ring-white ">
-        <div class="flex gap-x-2">
-          <div>
-            <button type="button" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-2xs hover:bg-gray-50focus:outline-hidden focus:bg-gray-50 ">
-              <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" x2="12" y1="3" y2="15"/></svg>
-              Upload photo
-            </button>
-          </div>
-        </div>
+    <!-- Last name -->
+    <div class="sm:col-span-3">
+      <label for="merchant-last-name" class="inline-block text-sm text-gray-800 mt-2.5">Last name</label>
+    </div>
+    <div class="sm:col-span-9">
+      <input id="merchant-last-name" name="merchant_last_name" formControlName="lastName" type="text"
+             class="py-1.5 sm:py-2 px-3 block w-full border border-gray-200 shadow-2xs sm:text-sm rounded-lg outline-0
+                    focus:ring-2 ring-secondary ring-offset-2">
+      <p *ngIf="showError('merchant.lastName')" class="mt-1 text-xs text-red-600">Last name is required.</p>
+    </div>
+
+    <!-- Email -->
+    <div class="sm:col-span-3">
+      <label for="merchant-email" class="inline-block text-sm text-gray-800 mt-2.5">Email</label>
+    </div>
+    <div class="sm:col-span-9">
+      <input id="merchant-email" name="merchant_email" formControlName="email" type="email"
+             class="py-1.5 sm:py-2 px-3 block w-full border border-gray-200 shadow-2xs sm:text-sm rounded-lg outline-0
+                    focus:ring-2 ring-secondary ring-offset-2">
+      <p *ngIf="showError('merchant.email')" class="mt-1 text-xs text-red-600">Enter a valid email.</p>
+    </div>
+
+    <!-- Gender -->
+    <div class="sm:col-span-3">
+      <span class="inline-block text-sm text-gray-800 mt-2.5">Gender</span>
+    </div>
+    <div class="sm:col-span-9">
+      <div class="sm:flex">
+        <label for="merchant-gender-male"
+               class="flex py-2 px-3 w-full border border-gray-200 shadow-2xs -mt-px -ms-px first:rounded-t-lg last:rounded-b-lg
+                      sm:first:rounded-s-lg sm:mt-0 sm:first:ms-0 sm:first:rounded-se-none sm:last:rounded-es-none sm:last:rounded-e-lg text-sm">
+          <input id="merchant-gender-male" type="radio" formControlName="gender" name="merchant_gender" value="male" class="shrink-0 rounded-full">
+          <span class="sm:text-sm text-gray-500 ms-3">Male</span>
+        </label>
+
+        <label for="merchant-gender-female"
+               class="flex py-2 px-3 w-full border border-gray-200 shadow-2xs -mt-px -ms-px first:rounded-t-lg last:rounded-b-lg
+                      sm:first:rounded-s-lg sm:mt-0 sm:first:ms-0 sm:first:rounded-se-none sm:last:rounded-es-none sm:last:rounded-e-lg text-sm">
+          <input id="merchant-gender-female" type="radio" formControlName="gender" name="merchant_gender" value="female" class="shrink-0 rounded-full">
+          <span class="sm:text-sm text-gray-500 ms-3">Female</span>
+        </label>
+
+        <label for="merchant-gender-other"
+               class="flex py-2 px-3 w-full border border-gray-200 shadow-2xs -mt-px -ms-px first:rounded-t-lg last:rounded-b-lg
+                      sm:first:rounded-s-lg sm:mt-0 sm:first:ms-0 sm:first:rounded-se-none sm:last:rounded-es-none sm:last:rounded-e-lg text-sm">
+          <input id="merchant-gender-other" type="radio" formControlName="gender" name="merchant_gender" value="other" class="shrink-0 rounded-full">
+          <span class="sm:text-sm text-gray-500 ms-3">Other</span>
+        </label>
       </div>
-    </div> -->
-        <!-- End Col -->
-
-        <!-- First name -->
-        <div class="sm:col-span-3">
-            <label for="af-account-email" class="inline-block text-sm text-gray-800 mt-2.5 ">
-                First name
-            </label>
-        </div>
-
-        <div class="sm:col-span-9">
-            <input id="af-account-email" type="text" class="py-1.5 sm:py-2 px-3 block w-full border border-gray-200 shadow-2xs sm:text-sm rounded-lg outline-0 focus:ring-2 ring-secondary ring-offset-2">
-        </div>
-        <!-- First name -->
-
-        <!-- Last name -->
-        <div class="sm:col-span-3">
-            <label for="af-account-email" class="inline-block text-sm text-gray-800 mt-2.5 ">
-                Last name
-            </label>
-        </div>
-
-        <div class="sm:col-span-9">
-            <input id="af-account-email" type="text"
-                class="py-1.5 sm:py-2 px-3 block w-full border border-gray-200 shadow-2xs sm:text-sm rounded-lg outline-0 focus:ring-2 ring-secondary ring-offset-2">
-        </div>
-        <!-- Last name -->
-
-        <!-- Email -->
-        <div class="sm:col-span-3">
-            <label for="af-account-email" class="inline-block text-sm text-gray-800 mt-2.5 ">
-                Email
-            </label>
-        </div>
-
-        <div class="sm:col-span-9">
-            <input id="af-account-email" type="email"
-                class="py-1.5 sm:py-2 px-3 block w-full border border-gray-200 shadow-2xs sm:text-sm rounded-lg outline-0 focus:ring-2 ring-secondary ring-offset-2">
-        </div>
-        <!-- Email -->
-        
-        <!-- Gender -->
-        <div class="sm:col-span-3">
-            <label for="af-account-gender-checkbox" class="inline-block text-sm text-gray-800 mt-2.5">
-                Gender
-            </label>
-        </div>
-
-        <div class="sm:col-span-9">
-            <div class="sm:flex">
-              <label for="af-account-gender-checkbox" class="flex py-2 px-3 w-full border border-gray-200 shadow-2xs -mt-px -ms-px first:rounded-t-lg last:rounded-b-lg sm:first:rounded-s-lg sm:mt-0 sm:first:ms-0 sm:first:rounded-se-none sm:last:rounded-es-none sm:last:rounded-e-lg text-sm">
-                <input type="radio" name="af-account-gender-checkbox" class="shrink-0 rounded-full" id="af-account-gender-checkbox" checked>
-                <span class="sm:text-sm text-gray-500 ms-3">Male</span>
-              </label>
-  
-              <label for="af-account-gender-checkbox-female" class="flex py-2 px-3 w-full border border-gray-200 shadow-2xs -mt-px -ms-px first:rounded-t-lg last:rounded-b-lg sm:first:rounded-s-lg sm:mt-0 sm:first:ms-0 sm:first:rounded-se-none sm:last:rounded-es-none sm:last:rounded-e-lg text-sm">
-                <input type="radio" name="af-account-gender-checkbox" class="shrink-0 border-gray-300 rounded-full" id="af-account-gender-checkbox-female">
-                <span class="sm:text-sm text-gray-500 ms-3">Female</span>
-              </label>
-  
-              <label for="af-account-gender-checkbox-other" class="flex py-2 px-3 w-full border border-gray-200 shadow-2xs -mt-px -ms-px first:rounded-t-lg last:rounded-b-lg sm:first:rounded-s-lg sm:mt-0 sm:first:ms-0 sm:first:rounded-se-none sm:last:rounded-es-none sm:last:rounded-e-lg text-sm">
-                <input type="radio" name="af-account-gender-checkbox" class="shrink-0 rounded-full" id="af-account-gender-checkbox-other">
-                <span class="sm:text-sm text-gray-500 ms-3">Other</span>
-              </label>
-            </div>
-        </div>
-        
-        <!-- End Col -->
-
-
+      <p *ngIf="showError('merchant.gender')" class="mt-1 text-xs text-red-600">Please select a gender.</p>
     </div>
-    <!-- End Grid -->
+  </div>
 
-    <h2 class="text-xl font-bold text-gray-800 mb-5">
-        Restaurant details
-    </h2>
+  <!-- Restaurant details -->
+  <h2 class="text-xl font-bold text-gray-800 mb-5">Restaurant details</h2>
 
-    <!-- Grid -->
-    <div class="grid sm:grid-cols-12 gap-2 sm:gap-6 mb-5">
-
-        <!-- Restaurant name -->
-        <div class="sm:col-span-3">
-            <label for="af-account-email" class="inline-block text-sm text-gray-800 mt-2.5 ">
-                Restaurant name
-            </label>
-        </div>
-
-        <div class="sm:col-span-9">
-            <input id="af-account-email" type="text" class="py-1.5 sm:py-2 px-3 block w-full border border-gray-200 shadow-2xs sm:text-sm rounded-lg outline-0 focus:ring-2 ring-secondary ring-offset-2">
-        </div>
-        <!-- First name -->
-
-        <!-- Email -->
-        <div class="sm:col-span-3">
-            <label for="af-account-email" class="inline-block text-sm text-gray-800 mt-2.5 ">
-                Email
-            </label>
-        </div>
-
-        <div class="sm:col-span-9">
-            <input id="af-account-email" type="email"
-                class="py-1.5 sm:py-2 px-3 block w-full border border-gray-200 shadow-2xs sm:text-sm rounded-lg outline-0 focus:ring-2 ring-secondary ring-offset-2">
-        </div>
-        <!-- Email -->
-        
-        <!-- phone -->
-        <div class="sm:col-span-3">
-            <label for="af-account-phone" class="inline-block text-sm text-gray-800 mt-2.5 ">
-                Phone
-            </label>
-        </div>
-
-        <div class="sm:col-span-9">
-            <input id="af-account-phone" type="tel" class="py-1.5 sm:py-2 px-3 block w-full border border-gray-200 shadow-2xs sm:text-sm rounded-lg outline-0 focus:ring-2 ring-secondary ring-offset-2">
-        </div>
-        <!-- phone -->
-        
-        <!-- password -->
-        <div class="sm:col-span-3">
-            <label for="af-account-password" class="inline-block text-sm text-gray-800 mt-2.5 ">
-                Username
-            </label>
-        </div>
-
-        <div class="sm:col-span-9">
-            <input id="af-account-password" type="tel" class="py-1.5 sm:py-2 px-3 block w-full border border-gray-200 shadow-2xs sm:text-sm rounded-lg outline-0 focus:ring-2 ring-secondary ring-offset-2">
-        </div>
-        <!-- phone -->
-
-        <!-- password -->
-        <div class="sm:col-span-3">
-            <label for="af-account-password" class="inline-block text-sm text-gray-800 mt-2.5 ">
-                Password
-            </label>
-        </div>
-
-        <div class="sm:col-span-9">
-            <input id="af-account-password" type="tel" class="py-1.5 sm:py-2 px-3 block w-full border border-gray-200 shadow-2xs sm:text-sm rounded-lg outline-0 focus:ring-2 ring-secondary ring-offset-2">
-        </div>
-        <!-- password -->
-        
-        
-        
-        
-        
+  <div class="grid sm:grid-cols-12 gap-2 sm:gap-6 mb-5" formGroupName="restaurant">
+    <!-- Restaurant name -->
+    <div class="sm:col-span-3">
+      <label for="restaurant-name" class="inline-block text-sm text-gray-800 mt-2.5">Restaurant name</label>
     </div>
-    <!-- End Grid -->
-    <h2 class="text-xl font-bold text-gray-800 mb-5">
-        Package details
-    </h2>
-
-    
-
-    <div class="mt-5 flex justify-end gap-x-2">
-        <button type="button"
-            class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-secondary text-white hover:bg-secondary-700 focus:outline-hidden focus:bg-secondary-700">
-            Save changes
-        </button>
+    <div class="sm:col-span-9">
+      <input id="restaurant-name" name="restaurant_name" formControlName="name" type="text"
+             class="py-1.5 sm:py-2 px-3 block w-full border border-gray-200 shadow-2xs sm:text-sm rounded-lg outline-0
+                    focus:ring-2 ring-secondary ring-offset-2">
+      <p *ngIf="showError('restaurant.name')" class="mt-1 text-xs text-red-600">Restaurant name is required.</p>
     </div>
+
+    <!-- Restaurant email -->
+    <div class="sm:col-span-3">
+      <label for="restaurant-email" class="inline-block text-sm text-gray-800 mt-2.5">Email</label>
+    </div>
+    <div class="sm:col-span-9">
+      <input id="restaurant-email" name="restaurant_email" formControlName="email" type="email"
+             class="py-1.5 sm:py-2 px-3 block w-full border border-gray-200 shadow-2xs sm:text-sm rounded-lg outline-0
+                    focus:ring-2 ring-secondary ring-offset-2">
+      <p *ngIf="showError('restaurant.email')" class="mt-1 text-xs text-red-600">Enter a valid email.</p>
+    </div>
+
+    <!-- Phone -->
+    <div class="sm:col-span-3">
+      <label for="restaurant-phone" class="inline-block text-sm text-gray-800 mt-2.5">Phone</label>
+    </div>
+    <div class="sm:col-span-9">
+      <input id="restaurant-phone" name="restaurant_phone" formControlName="phone" type="tel" inputmode="tel"
+             class="py-1.5 sm:py-2 px-3 block w-full border border-gray-200 shadow-2xs sm:text-sm rounded-lg outline-0
+                    focus:ring-2 ring-secondary ring-offset-2"
+             placeholder="+923001234567">
+      <p *ngIf="showError('restaurant.phone')" class="mt-1 text-xs text-red-600">Enter a valid phone number.</p>
+    </div>
+
+    <!-- Username -->
+    <div class="sm:col-span-3">
+      <label for="restaurant-username" class="inline-block text-sm text-gray-800 mt-2.5">Username</label>
+    </div>
+    <div class="sm:col-span-9">
+      <input id="restaurant-username" name="restaurant_username" formControlName="username" type="text" autocomplete="username"
+             class="py-1.5 sm:py-2 px-3 block w-full border border-gray-200 shadow-2xs sm:text-sm rounded-lg outline-0
+                    focus:ring-2 ring-secondary ring-offset-2">
+      <p *ngIf="showError('restaurant.username')" class="mt-1 text-xs text-red-600">Min 3 characters.</p>
+    </div>
+
+    <!-- Password -->
+    <div class="sm:col-span-3">
+      <label for="restaurant-password" class="inline-block text-sm text-gray-800 mt-2.5">Password</label>
+    </div>
+    <div class="sm:col-span-9">
+      <input id="restaurant-password" name="restaurant_password" formControlName="password" type="password" autocomplete="new-password"
+             class="py-1.5 sm:py-2 px-3 block w-full border border-gray-200 shadow-2xs sm:text-sm rounded-lg outline-0
+                    focus:ring-2 ring-secondary ring-offset-2">
+      <p *ngIf="showError('restaurant.password')" class="mt-1 text-xs text-red-600">Min 6 characters.</p>
+    </div>
+  </div>
+
+  <!-- Package details -->
+  <h2 class="text-xl font-bold text-gray-800 mb-5">Package details</h2>
+
+  <div class="grid sm:grid-cols-12 gap-2 sm:gap-6 mb-5" formGroupName="package">
+    <!-- Package select -->
+    <div class="sm:col-span-3">
+      <label for="package-tier" class="inline-block text-sm text-gray-800 mt-2.5">Package</label>
+    </div>
+    <div class="sm:col-span-9">
+      <select id="package-tier" name="package_tier" formControlName="tier"
+              class="py-1.5 sm:py-2 px-3 block w-full border border-gray-200 shadow-2xs sm:text-sm rounded-lg outline-0
+                     focus:ring-2 ring-secondary ring-offset-2 bg-white">
+        <option value="" disabled>Select a package</option>
+        <option value="basic">Basic</option>
+        <option value="standard">Standard</option>
+        <option value="premium">Premium</option>
+      </select>
+      <p *ngIf="showError('package.tier')" class="mt-1 text-xs text-red-600">Please choose a package.</p>
+    </div>
+
+    <!-- Monthly subscription price -->
+    <div class="sm:col-span-3">
+      <label for="package-monthly-price" class="inline-block text-sm text-gray-800 mt-2.5">Monthly subscription price</label>
+    </div>
+    <div class="sm:col-span-9">
+      <input id="package-monthly-price" name="package_monthly_price" formControlName="monthlyPrice"
+             type="number" step="0.01" min="0" placeholder="e.g., 2999.00"
+             class="py-1.5 sm:py-2 px-3 block w-full border border-gray-200 shadow-2xs sm:text-sm rounded-lg outline-0
+                    focus:ring-2 ring-secondary ring-offset-2">
+      <p *ngIf="showError('package.monthlyPrice')" class="mt-1 text-xs text-red-600">Enter a price ≥ 0.</p>
+    </div>
+  </div>
+
+  <div class="mt-5 flex justify-end gap-x-2">
+    <button type="submit"
+            [disabled]="form.invalid"
+            class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent
+                   bg-secondary text-white hover:bg-secondary-700 focus:outline-hidden focus:bg-secondary-700
+                   disabled:opacity-50 disabled:cursor-not-allowed">
+      Save changes
+    </button>
+  </div>
 </form>
