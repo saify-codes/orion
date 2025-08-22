@@ -1,0 +1,7 @@
+tbody.loading::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: #0003; 
+  z-index: 10;
+}

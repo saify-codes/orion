@@ -6,6 +6,7 @@ import { PaginationComponent } from '../../../components/pagination/pagination.c
 import { finalize } from 'rxjs';
 import Swal from 'sweetalert2';
 import { FormsModule } from '@angular/forms';
+import { DatatableComponent } from "../../../components/datatable/datatable.component";
 
 interface Merchant {
   id: number;
@@ -19,23 +20,23 @@ interface Merchant {
 @Component({
   selector: 'app-admin-merchants',
   standalone: true,
-  imports: [RouterLink, PaginationComponent, FormsModule],
+  imports: [RouterLink, PaginationComponent, FormsModule, DatatableComponent],
   templateUrl: './admin-merchants.component.html',
   styleUrl: './admin-merchants.component.css',
 })
 export class AdminMerchantsComponent implements OnInit {
-  public page = 1;
-  public totalRecords: number = 0;
-  public totalPages: number = 0;
-  public sort: { key: string; dir: 'asc' | 'desc' } = { key: 'id', dir: 'asc' };
-  public search: string = '';
-  public limit: number = 10;
-  public loading: boolean = false;
-  public currentOpenMenu: any = null;
-  public merchants: Merchant[] = [];
-  public http: HttpClient = inject(HttpClient);
-  public contextMenuStyle: Record<string, any> = {};
-  public statusBadgeClasses: Record<string, any> = {
+  public page:                number                                  = 1;
+  public totalRecords:        number                                  = 0;
+  public totalPages:          number                                  = 0;
+  public sort:                { key: string; dir: 'asc' | 'desc' }    = { key: 'id', dir: 'asc' };
+  public search:              string                                  = '';
+  public limit:               number                                  = 10;
+  public loading:             boolean                                 = false;
+  public currentOpenMenu:     any                                     = null;
+  public merchants:           Merchant[]                              = [];
+  public http:                HttpClient                              = inject(HttpClient);
+  public contextMenuStyle:    Record<string, any>                     = {};
+  public statusBadgeClasses:  Record<string, any>                     = {
     ACTIVE: 'bg-green-100 text-green-800 ring-1 ring-inset ring-green-200',
     DELETED: 'bg-red-100 text-red-800 ring-1 ring-inset ring-red-200',
     BLOCKED: 'bg-indigo-100 text-indigo-800 ring-1 ring-inset ring-indigo-200',
@@ -43,30 +44,6 @@ export class AdminMerchantsComponent implements OnInit {
   };
 
   ngOnInit(): void {
-    this.getMerchantList();
-  }
-
-  @debounce(300)
-  handleSearch() {
-    this.getMerchantList();
-  }
-
-  handleLimitChange() {
-    this.getMerchantList();
-  }
-
-  handleSort(key: string) {
-    if (key === this.sort.key) {
-      this.sort.dir = this.sort.dir === 'asc' ? 'desc' : 'asc';
-    } else {
-      this.sort = { key, dir: 'asc' };
-    }
-
-    this.getMerchantList();
-  }
-
-  onPageChange(nextPage: number) {
-    this.page = nextPage;
     this.getMerchantList();
   }
 
@@ -93,6 +70,7 @@ export class AdminMerchantsComponent implements OnInit {
           this.merchants = [];
         },
       });
+
   }
 
   toggleMenu(id: any, event: MouseEvent) {
@@ -140,6 +118,33 @@ export class AdminMerchantsComponent implements OnInit {
       }
     });
   }
+
+  // datatble methods
+  
+  @debounce(300)  
+  handleSearch() {
+    if (this.search.trim() === '') return
+    this.getMerchantList();
+  }
+
+  handleLimitChange() {
+    this.page = 1
+    this.getMerchantList();
+  }
+
+  handleSort(key: string) {
+    if (key === this.sort.key) {
+      this.sort.dir = this.sort.dir === 'asc' ? 'desc' : 'asc';
+    } else {
+      this.sort = { key, dir: 'asc' };
+    }
+    this.getMerchantList();
+  }
+
+  onPageChange(nextPage: number) {
+    this.page = nextPage;
+    this.getMerchantList();
+  } 
 
   private fakeDeleteRequest(id: number): Promise<void> {
     return new Promise((resolve) => setTimeout(resolve, 3000));
