@@ -6,7 +6,6 @@ import { PaginationComponent } from '../../../components/pagination/pagination.c
 import { finalize } from 'rxjs';
 import Swal from 'sweetalert2';
 import { FormsModule } from '@angular/forms';
-import { DatatableComponent } from "../../../components/datatable/datatable.component";
 
 interface Merchant {
   id: number;
@@ -20,7 +19,7 @@ interface Merchant {
 @Component({
   selector: 'app-admin-merchants',
   standalone: true,
-  imports: [RouterLink, PaginationComponent, FormsModule, DatatableComponent],
+  imports: [RouterLink, PaginationComponent, FormsModule],
   templateUrl: './admin-merchants.component.html',
   styleUrl: './admin-merchants.component.css',
 })
