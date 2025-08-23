@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-add',
@@ -32,19 +32,17 @@ export class AddMerchantComponent {
     }),
   });
 
-  // convenience getters
-  get merchant()   { return this.form.get('merchant') as FormGroup; }
-  get restaurant() { return this.form.get('restaurant') as FormGroup; }
-  get pkg()        { return this.form.get('package') as FormGroup; }
-
-  showError(path: string): boolean {
+  hasError(path: string): boolean {
     const c = this.form.get(path);
     return !!c && c.invalid && (c.touched || c.dirty);
   }
 
   onSubmit(): void {
-    // TODO: replace with your API call
+    if (this.form.invalid) {
+      this.form.markAllAsTouched();
+      return;
+    }
     console.log('Form payload:', this.form.value);
-    // this.form.reset({ merchant: { gender: 'male' } }); // optional
+    // TODO: call your API here
   }
 }

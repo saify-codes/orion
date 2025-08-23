@@ -14,7 +14,9 @@
       <input id="merchant-first-name" name="merchant_first_name" formControlName="firstName" type="text"
              class="py-1.5 sm:py-2 px-3 block w-full border border-gray-200 shadow-2xs sm:text-sm rounded-lg outline-0
                     focus:ring-2 ring-secondary ring-offset-2">
-      <p *ngIf="showError('merchant.firstName')" class="mt-1 text-xs text-red-600">First name is required.</p>
+      @if (hasError('merchant.firstName')) {
+        <p class="mt-1 text-xs text-red-600">First name is required.</p>
+      }
     </div>
 
     <!-- Last name -->
@@ -25,7 +27,9 @@
       <input id="merchant-last-name" name="merchant_last_name" formControlName="lastName" type="text"
              class="py-1.5 sm:py-2 px-3 block w-full border border-gray-200 shadow-2xs sm:text-sm rounded-lg outline-0
                     focus:ring-2 ring-secondary ring-offset-2">
-      <p *ngIf="showError('merchant.lastName')" class="mt-1 text-xs text-red-600">Last name is required.</p>
+      @if (hasError('merchant.lastName')) {
+        <p class="mt-1 text-xs text-red-600">Last name is required.</p>
+      }
     </div>
 
     <!-- Email -->
@@ -36,7 +40,9 @@
       <input id="merchant-email" name="merchant_email" formControlName="email" type="email"
              class="py-1.5 sm:py-2 px-3 block w-full border border-gray-200 shadow-2xs sm:text-sm rounded-lg outline-0
                     focus:ring-2 ring-secondary ring-offset-2">
-      <p *ngIf="showError('merchant.email')" class="mt-1 text-xs text-red-600">Enter a valid email.</p>
+      @if (hasError('merchant.email')) {
+        <p class="mt-1 text-xs text-red-600">Enter a valid email.</p>
+      }
     </div>
 
     <!-- Gender -->
@@ -66,7 +72,9 @@
           <span class="sm:text-sm text-gray-500 ms-3">Other</span>
         </label>
       </div>
-      <p *ngIf="showError('merchant.gender')" class="mt-1 text-xs text-red-600">Please select a gender.</p>
+      @if (hasError('merchant.gender')) {
+        <p class="mt-1 text-xs text-red-600">Please select a gender.</p>
+      }
     </div>
   </div>
 
@@ -82,7 +90,9 @@
       <input id="restaurant-name" name="restaurant_name" formControlName="name" type="text"
              class="py-1.5 sm:py-2 px-3 block w-full border border-gray-200 shadow-2xs sm:text-sm rounded-lg outline-0
                     focus:ring-2 ring-secondary ring-offset-2">
-      <p *ngIf="showError('restaurant.name')" class="mt-1 text-xs text-red-600">Restaurant name is required.</p>
+      @if (hasError('restaurant.name')) {
+        <p class="mt-1 text-xs text-red-600">Restaurant name is required.</p>
+      }
     </div>
 
     <!-- Restaurant email -->
@@ -93,7 +103,9 @@
       <input id="restaurant-email" name="restaurant_email" formControlName="email" type="email"
              class="py-1.5 sm:py-2 px-3 block w-full border border-gray-200 shadow-2xs sm:text-sm rounded-lg outline-0
                     focus:ring-2 ring-secondary ring-offset-2">
-      <p *ngIf="showError('restaurant.email')" class="mt-1 text-xs text-red-600">Enter a valid email.</p>
+      @if (hasError('restaurant.email')) {
+        <p class="mt-1 text-xs text-red-600">Enter a valid email.</p>
+      }
     </div>
 
     <!-- Phone -->
@@ -105,7 +117,9 @@
              class="py-1.5 sm:py-2 px-3 block w-full border border-gray-200 shadow-2xs sm:text-sm rounded-lg outline-0
                     focus:ring-2 ring-secondary ring-offset-2"
              placeholder="+923001234567">
-      <p *ngIf="showError('restaurant.phone')" class="mt-1 text-xs text-red-600">Enter a valid phone number.</p>
+      @if (hasError('restaurant.phone')) {
+        <p class="mt-1 text-xs text-red-600">Enter a valid phone number.</p>
+      }
     </div>
 
     <!-- Username -->
@@ -116,7 +130,9 @@
       <input id="restaurant-username" name="restaurant_username" formControlName="username" type="text" autocomplete="username"
              class="py-1.5 sm:py-2 px-3 block w-full border border-gray-200 shadow-2xs sm:text-sm rounded-lg outline-0
                     focus:ring-2 ring-secondary ring-offset-2">
-      <p *ngIf="showError('restaurant.username')" class="mt-1 text-xs text-red-600">Min 3 characters.</p>
+      @if (hasError('restaurant.username')) {
+        <p class="mt-1 text-xs text-red-600">Min 3 characters.</p>
+      }
     </div>
 
     <!-- Password -->
@@ -127,7 +143,9 @@
       <input id="restaurant-password" name="restaurant_password" formControlName="password" type="password" autocomplete="new-password"
              class="py-1.5 sm:py-2 px-3 block w-full border border-gray-200 shadow-2xs sm:text-sm rounded-lg outline-0
                     focus:ring-2 ring-secondary ring-offset-2">
-      <p *ngIf="showError('restaurant.password')" class="mt-1 text-xs text-red-600">Min 6 characters.</p>
+      @if (hasError('restaurant.password')) {
+        <p class="mt-1 text-xs text-red-600">Min 6 characters.</p>
+      }
     </div>
   </div>
 
@@ -148,7 +166,9 @@
         <option value="standard">Standard</option>
         <option value="premium">Premium</option>
       </select>
-      <p *ngIf="showError('package.tier')" class="mt-1 text-xs text-red-600">Please choose a package.</p>
+      @if (hasError('package.tier')) {
+        <p class="mt-1 text-xs text-red-600">Please choose a package.</p>
+      }
     </div>
 
     <!-- Monthly subscription price -->
@@ -160,7 +180,9 @@
              type="number" step="0.01" min="0" placeholder="e.g., 2999.00"
              class="py-1.5 sm:py-2 px-3 block w-full border border-gray-200 shadow-2xs sm:text-sm rounded-lg outline-0
                     focus:ring-2 ring-secondary ring-offset-2">
-      <p *ngIf="showError('package.monthlyPrice')" class="mt-1 text-xs text-red-600">Enter a price ≥ 0.</p>
+      @if (hasError('package.monthlyPrice')) {
+        <p class="mt-1 text-xs text-red-600">Enter a price ≥ 0.</p>
+      }
     </div>
   </div>
 
