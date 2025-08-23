@@ -13,6 +13,7 @@ import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { authGuardGuard } from './guards/admin/auth-guard.guard';
 import { DatatableComponent } from './components/datatable/datatable.component';
 import { AddMerchantComponent } from './pages/admin/merchants/add/add.component';
+import { EditMerchantComponent } from './pages/admin/merchants/edit/edit.component';
 
 export const routes: Routes = [
   // admin routes
@@ -24,6 +25,7 @@ export const routes: Routes = [
       { path: '',             component: AdminHomeComponent,  pathMatch: 'full' },
       { path: 'dashboard',    component: DatatableComponent },
       { path: 'merchant',     component: MerchantsComponent },
+      { path: 'merchant/:id', component: EditMerchantComponent },
       { path: 'merchant/add', component: AddMerchantComponent },
     ],
   },
