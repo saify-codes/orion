@@ -21,7 +21,7 @@ export const routes: Routes = [
     component: AdminLayout,
     canActivate: [],
     children: [
-      { path: '',             component: AdminHomeComponent },
+      { path: '',             component: AdminHomeComponent,  pathMatch: 'full' },
       { path: 'dashboard',    component: DatatableComponent },
       { path: 'merchant',     component: MerchantsComponent },
       { path: 'merchant/add', component: AddMerchantComponent },
