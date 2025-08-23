@@ -51,30 +51,23 @@
     </div>
     <div class="sm:col-span-9">
       <div class="sm:flex">
-        <label for="merchant-gender-male"
-               class="flex py-2 px-3 w-full border border-gray-200 shadow-2xs -mt-px -ms-px first:rounded-t-lg last:rounded-b-lg
-                      sm:first:rounded-s-lg sm:mt-0 sm:first:ms-0 sm:first:rounded-se-none sm:last:rounded-es-none sm:last:rounded-e-lg text-sm">
-          <input id="merchant-gender-male" type="radio" formControlName="gender" name="merchant_gender" value="male" class="shrink-0 rounded-full">
+        
+        <label for="gender-male" class="flex py-2 px-3 w-full border border-gray-200 shadow-2xs rounded-t-lg sm:rounded-t-none sm:rounded-l-lg!">
+          <input id="gender-male" type="radio" formControlName="gender" value="male">
           <span class="sm:text-sm text-gray-500 ms-3">Male</span>
         </label>
-
-        <label for="merchant-gender-female"
-               class="flex py-2 px-3 w-full border border-gray-200 shadow-2xs -mt-px -ms-px first:rounded-t-lg last:rounded-b-lg
-                      sm:first:rounded-s-lg sm:mt-0 sm:first:ms-0 sm:first:rounded-se-none sm:last:rounded-es-none sm:last:rounded-e-lg text-sm">
-          <input id="merchant-gender-female" type="radio" formControlName="gender" name="merchant_gender" value="female" class="shrink-0 rounded-full">
+        
+        <label for="gender-female" class="flex py-2 px-3 w-full border border-gray-200 shadow-2xs">
+          <input id="gender-female" type="radio" formControlName="gender" value="female">
           <span class="sm:text-sm text-gray-500 ms-3">Female</span>
         </label>
 
-        <label for="merchant-gender-other"
-               class="flex py-2 px-3 w-full border border-gray-200 shadow-2xs -mt-px -ms-px first:rounded-t-lg last:rounded-b-lg
-                      sm:first:rounded-s-lg sm:mt-0 sm:first:ms-0 sm:first:rounded-se-none sm:last:rounded-es-none sm:last:rounded-e-lg text-sm">
-          <input id="merchant-gender-other" type="radio" formControlName="gender" name="merchant_gender" value="other" class="shrink-0 rounded-full">
+        <label for="gender-other" class="flex py-2 px-3 w-full border border-gray-200 shadow-2xs rounded-b-lg sm:rounded-b-none sm:rounded-r-lg!">
+          <input id="gender-other" type="radio" formControlName="gender" value="other">
           <span class="sm:text-sm text-gray-500 ms-3">Other</span>
         </label>
+
       </div>
-      @if (hasError('merchant.gender')) {
-        <p class="mt-1 text-xs text-red-600">Please select a gender.</p>
-      }
     </div>
   </div>
 
