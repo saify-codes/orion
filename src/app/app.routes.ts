@@ -25,8 +25,8 @@ export const routes: Routes = [
       { path: '',             component: AdminHomeComponent,  pathMatch: 'full' },
       { path: 'dashboard',    component: DatatableComponent },
       { path: 'merchant',     component: MerchantsComponent },
-      { path: 'merchant/:id', component: EditMerchantComponent },
       { path: 'merchant/add', component: AddMerchantComponent },
+      { path: 'merchant/:id', component: EditMerchantComponent },
     ],
   },
 
