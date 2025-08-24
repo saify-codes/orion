@@ -79,6 +79,40 @@
           </div>
         </li>
         
+        <!-- Users -->
+        <li class="dropdown group/parent" routerLinkActive="active" [class.open]="isOpen('user')">
+          <button type="button" class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800
+                  group-[&:not(.active)]/parent:hover:bg-gray-100
+                  group-[.active]/parent:bg-secondary font-semibold rounded-lg w-full" (click)="toggle('user')">
+            <i class="fa-duotone fa-solid fa-user-tie text-lg group-[.active]/parent:text-white"></i>
+            Admins
+            <i class="fa-solid fa-chevron-down ms-auto transition group-[.open]/parent:rotate-180"></i>
+          </button>
+
+          <div class="w-full my-5 overflow-hidden transition-[height] duration-300 hidden group-[.open]/parent:block">
+            <ul class="border-gray-400 border-l-2 ml-5 pl-2.5 space-y-1">
+
+              <li class="group" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+                <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 group-[&:not(.active)]:hover:bg-gray-100 font-semibold rounded-lg group-[.active]:bg-secondary"
+                  routerLink="/admin/user">
+                  <i class="fa-duotone fa-solid fa-list text-lg group-[.active]:text-white"></i>
+                  List
+                </a>
+
+              </li>
+              
+              <li class="group" routerLinkActive="active">
+                <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 group-[&:not(.active)]:hover:bg-gray-100 font-semibold rounded-lg group-[.active]:bg-secondary"
+                  routerLink="/admin/user/add">
+                  <i class="fa-duotone fa-solid fa-user-plus text-lg group-[.active]:text-white"></i>
+                  Add
+                </a>
+              </li>
+
+            </ul>
+          </div>
+        </li>
+        
 
         <h6 class="font-bold text-neutral-400 uppercase text-sm px-2.5 py-2">Places</h6>
         <!-- Merchnats -->
@@ -118,6 +152,76 @@
                 </a>
               </li>
 
+            </ul>
+          </div>
+        </li>
+
+        <h6 class="font-bold text-neutral-400 uppercase text-sm px-2.5 py-2">Settings</h6>
+       
+        <!-- Settings -->
+        <li
+          class="dropdown group/parent"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: false }"
+          #settings="routerLinkActive"
+          [class.open]="isOpen('settings') || settings.isActive"
+        >
+          <button
+            type="button"
+            class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800
+                  group-[&:not(.active)]/parent:hover:bg-gray-100
+                  group-[.active]/parent:bg-secondary font-semibold rounded-lg w-full"
+            (click)="toggle('settings')"
+          >
+            <i class="fa-duotone fa-solid fa-gear text-lg group-[.active]/parent:text-white"></i>
+            Settings
+            <i class="fa-solid fa-chevron-down ms-auto transition group-[.open]/parent:rotate-180"></i>
+          </button>
+
+          <div class="w-full my-5 overflow-hidden transition-[height] duration-300 hidden group-[.open]/parent:block">
+            <ul class="border-gray-400 border-l-2 ml-5 pl-2.5 space-y-1">
+              <li class="group" routerLinkActive="active">
+                <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 group-[&:not(.active)]:hover:bg-gray-100 font-semibold rounded-lg group-[.active]:bg-secondary"
+                  routerLink="/settings/general">
+                  <i class="fa-duotone fa-solid fa-info-circle text-lg group-[.active]:text-white"></i>
+                  General
+                </a>
+              </li>
+              <li class="group" routerLinkActive="active">
+                <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 group-[&:not(.active)]:hover:bg-gray-100 font-semibold rounded-lg group-[.active]:bg-secondary"
+                  routerLink="/settings/branches">
+                  <i class="fa-duotone fa-solid fa-map-location-dot text-lg group-[.active]:text-white"></i>
+                  Branches
+                </a>
+              </li>
+              <li class="group" routerLinkActive="active">
+                <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 group-[&:not(.active)]:hover:bg-gray-100 font-semibold rounded-lg group-[.active]:bg-secondary"
+                  routerLink="/settings/theme">
+                  <i class="fa-duotone fa-solid fa-grid-2 text-lg group-[.active]:text-white"></i>
+                  Theme
+                </a>
+              </li>
+              <li class="group" routerLinkActive="active">
+                <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 group-[&:not(.active)]:hover:bg-gray-100 font-semibold rounded-lg group-[.active]:bg-secondary"
+                  routerLink="/settings/app">
+                  <i class="fa-duotone fa-solid fa-mobile-button text-lg group-[.active]:text-white"></i>
+                  App
+                </a>
+              </li>
+              <li class="group" routerLinkActive="active">
+                <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 group-[&:not(.active)]:hover:bg-gray-100 font-semibold rounded-lg group-[.active]:bg-secondary"
+                  routerLink="/settings/tax">
+                  <i class="fa-duotone fa-solid fa-percent text-lg group-[.active]:text-white"></i>
+                  Tax
+                </a>
+              </li>
+              <li class="group" routerLinkActive="active">
+                <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 group-[&:not(.active)]:hover:bg-gray-100 font-semibold rounded-lg group-[.active]:bg-secondary"
+                  routerLink="/settings/tip">
+                  <i class="fa-duotone fa-solid fa-hand-holding-dollar text-lg group-[.active]:text-white"></i>
+                  Tip
+                </a>
+              </li>
             </ul>
           </div>
         </li>
