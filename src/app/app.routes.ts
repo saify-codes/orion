@@ -14,6 +14,7 @@ import { authGuardGuard } from './guards/admin/auth-guard.guard';
 import { DatatableComponent } from './components/datatable/datatable.component';
 import { AddMerchantComponent } from './pages/admin/merchants/add/add.component';
 import { EditMerchantComponent } from './pages/admin/merchants/edit/edit.component';
+import { AddAdminComponent } from './pages/admin/admins/add/add.component';
 
 export const routes: Routes = [
   // admin routes
@@ -27,6 +28,9 @@ export const routes: Routes = [
       { path: 'merchant',     component: MerchantsComponent },
       { path: 'merchant/add', component: AddMerchantComponent },
       { path: 'merchant/:id', component: EditMerchantComponent },
+      { path: 'admins',       component: MerchantsComponent },
+      { path: 'admins/add',   component: AddAdminComponent },
+      { path: 'admins/:id',   component: EditMerchantComponent },
     ],
   },
 
