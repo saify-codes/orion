@@ -106,13 +106,9 @@ export class MerchantsComponent implements OnInit {
       // 🔽 run async work here (simulated 3s API)
       preConfirm: () => this.fakeDeleteRequest(merchant.id),
 
-      // 🔽 keep the modal open while loading
-      allowOutsideClick: () => !Swal.isLoading(),
     }).then((result) => {
       if (result.isConfirmed) {
-        // optimistic update after the "API" finishes
-        this.merchants = this.merchants.filter((m) => m.id !== merchant.id);
-
+        this.getMerchantList()
         Swal.fire('Deleted!', 'Merchant deleted', 'success');
       }
     });
