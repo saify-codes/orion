@@ -1,4 +1,4 @@
-<div class="mx-auto max-w-2xl p-5 bg-white rounded-lg">
+<div class="mx-auto  p-5 bg-white rounded-lg">
     <h1 class="text-2xl font-semibold text-gray-900">Add admin user</h1>
     <p class="mt-1 text-sm text-gray-500">Create a new admin account and assign permissions.</p>
 
@@ -6,18 +6,24 @@
         <!-- Email -->
         <div>
             <label for="email" class="block text-sm font-medium text-gray-800">Email</label>
-            <input id="email" name="email" type="email" required class="mt-2 block w-full rounded-md border border-gray-200 outline-0 focus:ring-2 ring-secondary ring-offset-3  px-3 py-2 bg-white" placeholder="admin@example.com" />
+            <input id="email" name="email" type="email" required
+                class="mt-2 block w-full rounded-md border border-gray-200 outline-0 focus:ring-2 ring-secondary ring-offset-3  px-3 py-2 bg-white"
+                placeholder="admin@example.com" />
         </div>
 
         <!-- Passwords -->
         <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
             <div>
                 <label for="password" class="block text-sm font-medium text-gray-800">Password</label>
-                <input id="password" name="password" type="password" required class="mt-2 block w-full rounded-md border border-gray-200 outline-0 focus:ring-2 ring-secondary ring-offset-3  px-3 py-2 bg-white" placeholder="••••••••" />
+                <input id="password" name="password" type="password" required
+                    class="mt-2 block w-full rounded-md border border-gray-200 outline-0 focus:ring-2 ring-secondary ring-offset-3  px-3 py-2 bg-white"
+                    placeholder="••••••••" />
             </div>
             <div>
                 <label for="confirm" class="block text-sm font-medium text-gray-800">Confirm password</label>
-                <input id="confirm" name="confirm" type="password" required class="mt-2 block w-full rounded-md border border-gray-200 outline-0 focus:ring-2 ring-secondary ring-offset-3  px-3 py-2 bg-white" placeholder="••••••••" />
+                <input id="confirm" name="confirm" type="password" required
+                    class="mt-2 block w-full rounded-md border border-gray-200 outline-0 focus:ring-2 ring-secondary ring-offset-3  px-3 py-2 bg-white"
+                    placeholder="••••••••" />
 
             </div>
         </div>
@@ -25,31 +31,56 @@
         <!-- Avatar -->
         <div>
             <label for="avatar" class="block text-sm font-medium text-gray-800">Avatar</label>
-            <input id="avatar" name="avatar" type="file" accept="image/*" class="mt-2 block w-full text-sm file:mr-3 file:rounded-md file:border-0 file:bg-gray-100 file:px-3 file:py-2 file:text-gray-800 hover:file:bg-gray-200" />
+            <input id="avatar" name="avatar" type="file" accept="image/*"
+                class="mt-2 block w-full text-sm file:mr-3 file:rounded-md file:border-0 file:bg-gray-100 file:px-3 file:py-2 file:text-gray-800 hover:file:bg-gray-200" />
         </div>
 
         <!-- Permissions -->
         <fieldset class="pt-2">
             <legend class="text-sm font-medium text-gray-900">Permissions</legend>
-            <p class="mt-1 text-sm text-gray-500">Select the actions this admin can perform.</p>
+
+            <div class="flex max-w-max ml-auto overflow-hidden rounded-md border border-gray-300">
+                <button type="button" (click)="toggleAll(true)"
+                    class="px-3 py-1.5 text-xs font-medium hover:bg-gray-50">
+                    <i class="fa-light fa-check-double mr-1.5"></i>
+                    Select all
+                </button>
+                <div class="w-px bg-gray-300"></div>
+                <button type="button" (click)="toggleAll(false)"
+                    class="px-3 py-1.5 text-xs font-medium hover:bg-gray-50">
+                    <i class="fa-light fa-rotate-left mr-1.5"></i>
+                    Clear
+                </button>
+            </div>
 
             <!-- Minimal, borderless custom checkboxes (Font Awesome tick) -->
-            <div class="mt-4 grid grid-cols-1 gap-y-2 gap-x-6 sm:grid-cols-2 lg:grid-cols-3">
-                @for (perm of permissions; track perm; let i = $index) {
-                <label class="inline-flex items-center gap-3 cursor-pointer select-none">
-                    <input class="peer sr-only" type="checkbox" name="permissions" [value]="perm" [id]="'perm-' + i" />
+            <div class="mt-4">
 
-                    <!-- box -->
-                    <span class="relative inline-flex h-5 w-5 items-center justify-center rounded bg-white ring ring-gray-300
-                       peer-checked:bg-secondary peer-checked:ring-secondary peer-checked:ring-offset-2
-                       peer-checked:[&_i]:opacity-100">
-                        <!-- FA check (shows only when checked) -->
-                        <i class="fa-solid fa-check text-white opacity-0 text-[10px]"></i>
-                    </span>
+                <ul class="space-y-5">
+                    @for (group of permissionGroups; track $index) {
+                    <li>
+                        <h6 class="font-bold text-neutral-400 uppercase text-xs mb-3">{{ group.name }}</h6>
+                        <div class="grid grid-cols-1 gap-y-2 gap-x-6 sm:grid-cols-2 lg:grid-cols-5">
+                            @for (permission of group.permissions; track $index) {
+                            <label class="inline-flex items-center gap-3 cursor-pointer">
+                                <input class="peer sr-only" type="checkbox" name="permissions[]" [value]="permission"
+                                    [id]="permission" />
 
-                    <span class="text-sm text-gray-800">{{ perm }}</span>
-                </label>
-                }
+                                <!-- box -->
+                                <span class="relative inline-flex h-5 w-5 items-center justify-center rounded bg-white ring ring-gray-300
+                                           peer-checked:bg-secondary peer-checked:ring-secondary peer-checked:ring-offset-2
+                                           peer-checked:[&_i]:opacity-100">
+                                    <!-- FA check (shows only when checked) -->
+                                    <i class="fa-solid fa-check text-white opacity-0 text-[10px]"></i>
+                                </span>
+
+                                <span class="text-sm text-gray-800 uppercase">{{ permission }}</span>
+                            </label>
+                            }
+                        </div>
+                    </li>
+                    }
+                </ul>
             </div>
         </fieldset>
 

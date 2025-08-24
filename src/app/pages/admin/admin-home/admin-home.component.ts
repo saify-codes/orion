@@ -3,7 +3,7 @@ import { DatatableComponent } from "../../../components/datatable/datatable.comp
 
 @Component({
   selector: 'app-admin-home',
-  imports: [DatatableComponent],
+  imports: [],
   templateUrl: './admin-home.component.html',
   styleUrl: './admin-home.component.css'
 })

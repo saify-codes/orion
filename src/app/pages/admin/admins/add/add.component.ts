@@ -8,15 +8,21 @@ import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
   styleUrl: './add.component.css'
 })
 export class AddAdminComponent {
-  permissions = [
-    'users.read','users.create','users.update','users.delete',
-    'roles.read','roles.create','roles.update','roles.delete',
-    'posts.read','posts.create','posts.update','posts.delete',
-    'comments.read','comments.create','comments.update','comments.delete',
-    'settings.read','settings.update',
-    'billing.read','billing.update',
-    'analytics.view','support.respond','notifications.send','backups.run','system.reboot',
+  permissionGroups = [
+    { name: 'dashboard',
+      permissions: ['analytics', 'settings', 'geolocation', 'reports', 'export']
+    },
+    { name: 'merchant',
+      permissions: ['create', 'edit', 'delete', 'suspend', 'restore']
+    },
+    { name: 'integrations',
+      permissions: ['connect', 'disconnect', 'configure']
+    },
+    { name: 'system',
+      permissions: ['backup', 'restore', 'maintenance', 'feature flags']
+    },
   ];
+  
   
   private fb = inject(FormBuilder)
   public form:FormGroup = this.fb.group({
@@ -26,5 +32,11 @@ export class AddAdminComponent {
   hasError(path:string){
     const c = this.form.get(path);
     return !!c && c.invalid && (c.touched || c.dirty);
+  }
+
+  toggleAll(check: boolean){
+    document
+      .querySelectorAll<HTMLInputElement>('input[type="checkbox"]')
+      .forEach(b => b.checked = check);
   }
 }
