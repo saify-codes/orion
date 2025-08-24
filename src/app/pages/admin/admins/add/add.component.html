@@ -1,210 +1,64 @@
-<div class="mx-auto max-w-3xl">
-    <div class="bg-white shadow-sm ring-1 ring-gray-200 rounded-xl overflow-hidden">
-        <!-- Header -->
-        <div class="px-6 py-5 border-b border-gray-200">
-            <h1 class="text-xl font-semibold text-gray-900">Add admin user</h1>
-            <p class="mt-1 text-sm text-gray-500">Create a new admin account and assign permissions.</p>
+<div class="mx-auto max-w-2xl p-5 bg-white rounded-lg">
+    <h1 class="text-2xl font-semibold text-gray-900">Add admin user</h1>
+    <p class="mt-1 text-sm text-gray-500">Create a new admin account and assign permissions.</p>
+
+    <form class="mt-8 space-y-6" method="post" enctype="multipart/form-data">
+        <!-- Email -->
+        <div>
+            <label for="email" class="block text-sm font-medium text-gray-800">Email</label>
+            <input id="email" name="email" type="email" required class="mt-2 block w-full rounded-md border border-gray-200 outline-0 focus:ring-2 ring-secondary ring-offset-3  px-3 py-2 bg-white" placeholder="admin@example.com" />
         </div>
 
-        <!-- Form -->
-        <form action="#" method="POST" enctype="multipart/form-data" class="px-6 py-6">
-            <!-- Account details -->
-            <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
-                <div class="sm:col-span-2">
-                    <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
-                    <input id="email" name="email" type="email" autocomplete="email" required
-                        class="mt-2 block w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-                        placeholder="admin@example.com" />
-                </div>
-
-                <div>
-                    <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
-                    <input id="password" name="password" type="password" autocomplete="new-password" minlength="8"
-                        required
-                        class="mt-2 block w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-                        placeholder="••••••••" />
-                    <p class="mt-1 text-xs text-gray-500">At least 8 characters.</p>
-                </div>
-
-                <div>
-                    <label for="confirm-password" class="block text-sm font-medium text-gray-700">Confirm
-                        password</label>
-                    <input id="confirm-password" name="confirm_password" type="password" autocomplete="new-password"
-                        minlength="8" required
-                        class="mt-2 block w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-                        placeholder="••••••••" />
-                </div>
-
-                <div class="sm:col-span-2">
-                    <label for="avatar" class="block text-sm font-medium text-gray-700">Avatar</label>
-                    <input id="avatar" name="avatar" type="file" accept="image/*"
-                        class="mt-2 block w-full text-sm text-gray-900 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-medium file:bg-gray-50 file:text-gray-700 hover:file:bg-gray-100" />
-                    <p class="mt-1 text-xs text-gray-500">PNG, JPG, or GIF.</p>
-                </div>
+        <!-- Passwords -->
+        <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+            <div>
+                <label for="password" class="block text-sm font-medium text-gray-800">Password</label>
+                <input id="password" name="password" type="password" required class="mt-2 block w-full rounded-md border border-gray-200 outline-0 focus:ring-2 ring-secondary ring-offset-3  px-3 py-2 bg-white" placeholder="••••••••" />
             </div>
+            <div>
+                <label for="confirm" class="block text-sm font-medium text-gray-800">Confirm password</label>
+                <input id="confirm" name="confirm" type="password" required class="mt-2 block w-full rounded-md border border-gray-200 outline-0 focus:ring-2 ring-secondary ring-offset-3  px-3 py-2 bg-white" placeholder="••••••••" />
 
-            <!-- Permissions -->
-            <fieldset class="mt-8">
-                <legend class="text-sm font-medium text-gray-900">Permissions</legend>
-                <p class="mt-1 text-sm text-gray-500">Select the actions this admin can perform.</p>
-
-                <div class="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
-                    <!-- 25 checkboxes -->
-                    <!-- users.* -->
-                    <label class="flex items-start gap-3 rounded-lg border border-gray-200 px-3 py-2">
-                        <input type="checkbox" name="permissions[]" value="users.read"
-                            class="mt-1 h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500" />
-                        <span class="text-sm text-gray-700">users.read</span>
-                    </label>
-                    <label class="flex items-start gap-3 rounded-lg border border-gray-200 px-3 py-2">
-                        <input type="checkbox" name="permissions[]" value="users.create"
-                            class="mt-1 h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500" />
-                        <span class="text-sm text-gray-700">users.create</span>
-                    </label>
-                    <label class="flex items-start gap-3 rounded-lg border border-gray-200 px-3 py-2">
-                        <input type="checkbox" name="permissions[]" value="users.update"
-                            class="mt-1 h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500" />
-                        <span class="text-sm text-gray-700">users.update</span>
-                    </label>
-                    <label class="flex items-start gap-3 rounded-lg border border-gray-200 px-3 py-2">
-                        <input type="checkbox" name="permissions[]" value="users.delete"
-                            class="mt-1 h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500" />
-                        <span class="text-sm text-gray-700">users.delete</span>
-                    </label>
-
-                    <!-- roles.* -->
-                    <label class="flex items-start gap-3 rounded-lg border border-gray-200 px-3 py-2">
-                        <input type="checkbox" name="permissions[]" value="roles.read"
-                            class="mt-1 h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500" />
-                        <span class="text-sm text-gray-700">roles.read</span>
-                    </label>
-                    <label class="flex items-start gap-3 rounded-lg border border-gray-200 px-3 py-2">
-                        <input type="checkbox" name="permissions[]" value="roles.create"
-                            class="mt-1 h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500" />
-                        <span class="text-sm text-gray-700">roles.create</span>
-                    </label>
-                    <label class="flex items-start gap-3 rounded-lg border border-gray-200 px-3 py-2">
-                        <input type="checkbox" name="permissions[]" value="roles.update"
-                            class="mt-1 h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500" />
-                        <span class="text-sm text-gray-700">roles.update</span>
-                    </label>
-                    <label class="flex items-start gap-3 rounded-lg border border-gray-200 px-3 py-2">
-                        <input type="checkbox" name="permissions[]" value="roles.delete"
-                            class="mt-1 h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500" />
-                        <span class="text-sm text-gray-700">roles.delete</span>
-                    </label>
-
-                    <!-- posts.* -->
-                    <label class="flex items-start gap-3 rounded-lg border border-gray-200 px-3 py-2">
-                        <input type="checkbox" name="permissions[]" value="posts.read"
-                            class="mt-1 h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500" />
-                        <span class="text-sm text-gray-700">posts.read</span>
-                    </label>
-                    <label class="flex items-start gap-3 rounded-lg border border-gray-200 px-3 py-2">
-                        <input type="checkbox" name="permissions[]" value="posts.create"
-                            class="mt-1 h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500" />
-                        <span class="text-sm text-gray-700">posts.create</span>
-                    </label>
-                    <label class="flex items-start gap-3 rounded-lg border border-gray-200 px-3 py-2">
-                        <input type="checkbox" name="permissions[]" value="posts.update"
-                            class="mt-1 h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500" />
-                        <span class="text-sm text-gray-700">posts.update</span>
-                    </label>
-                    <label class="flex items-start gap-3 rounded-lg border border-gray-200 px-3 py-2">
-                        <input type="checkbox" name="permissions[]" value="posts.delete"
-                            class="mt-1 h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500" />
-                        <span class="text-sm text-gray-700">posts.delete</span>
-                    </label>
-
-                    <!-- comments.* -->
-                    <label class="flex items-start gap-3 rounded-lg border border-gray-200 px-3 py-2">
-                        <input type="checkbox" name="permissions[]" value="comments.read"
-                            class="mt-1 h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500" />
-                        <span class="text-sm text-gray-700">comments.read</span>
-                    </label>
-                    <label class="flex items-start gap-3 rounded-lg border border-gray-200 px-3 py-2">
-                        <input type="checkbox" name="permissions[]" value="comments.create"
-                            class="mt-1 h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500" />
-                        <span class="text-sm text-gray-700">comments.create</span>
-                    </label>
-                    <label class="flex items-start gap-3 rounded-lg border border-gray-200 px-3 py-2">
-                        <input type="checkbox" name="permissions[]" value="comments.update"
-                            class="mt-1 h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500" />
-                        <span class="text-sm text-gray-700">comments.update</span>
-                    </label>
-                    <label class="flex items-start gap-3 rounded-lg border border-gray-200 px-3 py-2">
-                        <input type="checkbox" name="permissions[]" value="comments.delete"
-                            class="mt-1 h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500" />
-                        <span class="text-sm text-gray-700">comments.delete</span>
-                    </label>
-
-                    <!-- settings.* -->
-                    <label class="flex items-start gap-3 rounded-lg border border-gray-200 px-3 py-2">
-                        <input type="checkbox" name="permissions[]" value="settings.read"
-                            class="mt-1 h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500" />
-                        <span class="text-sm text-gray-700">settings.read</span>
-                    </label>
-                    <label class="flex items-start gap-3 rounded-lg border border-gray-200 px-3 py-2">
-                        <input type="checkbox" name="permissions[]" value="settings.update"
-                            class="mt-1 h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500" />
-                        <span class="text-sm text-gray-700">settings.update</span>
-                    </label>
-
-                    <!-- billing.* -->
-                    <label class="flex items-start gap-3 rounded-lg border border-gray-200 px-3 py-2">
-                        <input type="checkbox" name="permissions[]" value="billing.read"
-                            class="mt-1 h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500" />
-                        <span class="text-sm text-gray-700">billing.read</span>
-                    </label>
-                    <label class="flex items-start gap-3 rounded-lg border border-gray-200 px-3 py-2">
-                        <input type="checkbox" name="permissions[]" value="billing.update"
-                            class="mt-1 h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500" />
-                        <span class="text-sm text-gray-700">billing.update</span>
-                    </label>
-
-                    <!-- singletons -->
-                    <label class="flex items-start gap-3 rounded-lg border border-gray-200 px-3 py-2">
-                        <input type="checkbox" name="permissions[]" value="analytics.view"
-                            class="mt-1 h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500" />
-                        <span class="text-sm text-gray-700">analytics.view</span>
-                    </label>
-                    <label class="flex items-start gap-3 rounded-lg border border-gray-200 px-3 py-2">
-                        <input type="checkbox" name="permissions[]" value="support.respond"
-                            class="mt-1 h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500" />
-                        <span class="text-sm text-gray-700">support.respond</span>
-                    </label>
-                    <label class="flex items-start gap-3 rounded-lg border border-gray-200 px-3 py-2">
-                        <input type="checkbox" name="permissions[]" value="notifications.send"
-                            class="mt-1 h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500" />
-                        <span class="text-sm text-gray-700">notifications.send</span>
-                    </label>
-                    <label class="flex items-start gap-3 rounded-lg border border-gray-200 px-3 py-2">
-                        <input type="checkbox" name="permissions[]" value="backups.run"
-                            class="mt-1 h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500" />
-                        <span class="text-sm text-gray-700">backups.run</span>
-                    </label>
-                    <label class="flex items-start gap-3 rounded-lg border border-gray-200 px-3 py-2">
-                        <input type="checkbox" name="permissions[]" value="system.reboot"
-                            class="mt-1 h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500" />
-                        <span class="text-sm text-gray-700">system.reboot</span>
-                    </label>
-                </div>
-            </fieldset>
-
-            <!-- Actions -->
-            <div class="mt-8 flex items-center justify-end gap-3">
-                <a href="#"
-                    class="inline-flex items-center rounded-lg border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">Cancel</a>
-                <button type="submit"
-                    class="inline-flex items-center rounded-lg bg-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
-                    Create user
-                </button>
             </div>
-        </form>
-    </div>
+        </div>
 
-    <!-- Tiny footer note -->
-    <p class="mt-4 text-center text-xs text-gray-500">
-        Tip: validate password match on the server (and client if you like).
-    </p>
+        <!-- Avatar -->
+        <div>
+            <label for="avatar" class="block text-sm font-medium text-gray-800">Avatar</label>
+            <input id="avatar" name="avatar" type="file" accept="image/*" class="mt-2 block w-full text-sm file:mr-3 file:rounded-md file:border-0 file:bg-gray-100 file:px-3 file:py-2 file:text-gray-800 hover:file:bg-gray-200" />
+        </div>
+
+        <!-- Permissions -->
+        <fieldset class="pt-2">
+            <legend class="text-sm font-medium text-gray-900">Permissions</legend>
+            <p class="mt-1 text-sm text-gray-500">Select the actions this admin can perform.</p>
+
+            <!-- Minimal, borderless custom checkboxes (Font Awesome tick) -->
+            <div class="mt-4 grid grid-cols-1 gap-y-2 gap-x-6 sm:grid-cols-2 lg:grid-cols-3">
+                @for (perm of permissions; track perm; let i = $index) {
+                <label class="inline-flex items-center gap-3 cursor-pointer select-none">
+                    <input class="peer sr-only" type="checkbox" name="permissions" [value]="perm" [id]="'perm-' + i" />
+
+                    <!-- box -->
+                    <span class="relative inline-flex h-5 w-5 items-center justify-center rounded bg-white ring ring-gray-300
+                       peer-checked:bg-secondary peer-checked:ring-secondary peer-checked:ring-offset-2
+                       peer-checked:[&_i]:opacity-100">
+                        <!-- FA check (shows only when checked) -->
+                        <i class="fa-solid fa-check text-white opacity-0 text-[10px]"></i>
+                    </span>
+
+                    <span class="text-sm text-gray-800">{{ perm }}</span>
+                </label>
+                }
+            </div>
+        </fieldset>
+
+        <!-- Actions -->
+        <div class="pt-2 flex items-center justify-end gap-3">
+            <button type="submit"
+                class="inline-flex items-center rounded-md bg-secondary px-4 py-2 text-sm font-semibold text-white hover:bg-black">
+                Create user
+            </button>
+        </div>
+    </form>
 </div>
