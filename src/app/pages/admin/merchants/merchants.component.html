@@ -167,7 +167,16 @@
                         <li>
                           <a
                             routerLink="/admin/merchant/{{ merchant.id }}"
-                            class="block px-2 py-1 hover:bg-green-100 hover:text-green-800 rounded w-full text-start"
+                            class="block px-2 py-1 hover:bg-secondary-100 rounded w-full text-start"
+                          >
+                            <i class="fa-light fa-eye"></i>
+                            View
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            routerLink="/admin/merchant/{{ merchant.id }}/edit"
+                            class="block px-2 py-1 hover:bg-secondary-100 rounded w-full text-start"
                           >
                             <i class="fa-light fa-pen-to-square"></i>
                             Edit
@@ -175,7 +184,7 @@
                         </li>
                         <li>
                           <button
-                            class="px-2 py-1 hover:bg-red-100 hover:text-red-500 rounded w-full text-start"
+                            class="px-2 py-1 hover:bg-secondary-100 rounded w-full text-start"
                             (click)="deleteMerchant(merchant)"
                           >
                             <i class="fa-light fa-trash"></i>
@@ -184,7 +193,7 @@
                         </li>
                         <li>
                           <button
-                            class="px-2 py-1 hover:bg-amber-100 hover:text-amber-800 rounded w-full text-start"
+                            class="px-2 py-1 hover:bg-secondary-100 rounded w-full text-start"
                           >
                             <i class="fa-light fa-key"></i>
                             Auto login
