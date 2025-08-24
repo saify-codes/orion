@@ -17,9 +17,7 @@ export class Cookie {
     if (!this.available()) return;
 
     const v = this.stringify(value);
-    const parts: string[] = [
-      `${encodeURIComponent(name)}=${encodeURIComponent(v)}`
-    ];
+    const parts: string[] = [`${encodeURIComponent(name)}=${encodeURIComponent(v)}`];
 
     // expiry
     if (opts.expires !== undefined) {

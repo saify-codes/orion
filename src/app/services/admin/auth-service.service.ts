@@ -36,7 +36,6 @@ export class AdminAuthService {
     this.user = user;
     this.token = token;
     this.status = user ? 'authenticated' : 'unauthenticated';
-
   }
   
   
