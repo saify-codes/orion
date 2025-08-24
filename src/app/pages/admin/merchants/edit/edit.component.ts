@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Component, inject, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-edit',
@@ -6,9 +8,17 @@ import { Component } from '@angular/core';
   templateUrl: './edit.component.html',
   styleUrl: './edit.component.css'
 })
-export class EditMerchantComponent {
+export class EditMerchantComponent implements OnInit{
 
-  public currentTab:string = 'payments' 
+  public  currentTab:string = 'payments' 
+  public  merchantData: any;
+  public  loading: boolean = true;
+  private activeRoute = inject(ActivatedRoute)
+  private http = inject(HttpClient)
+
+  ngOnInit(): void {
+    console.log(this.activeRoute.snapshot.params['id'])
+  }
 
   isTabOpen(tab: string){
     return tab === this.currentTab
@@ -16,6 +26,10 @@ export class EditMerchantComponent {
 
   openTab(tab:string){
     this.currentTab = tab
+  }
+
+  getMerchantData(){
+
   }
 
 }
