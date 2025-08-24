@@ -18,6 +18,9 @@ export class EditMerchantComponent implements OnInit{
 
   ngOnInit(): void {
     console.log(this.activeRoute.snapshot.params['id'])
+    setTimeout(() => {
+      this.loading = false
+    }, 2000);
   }
 
   isTabOpen(tab: string){

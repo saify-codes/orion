@@ -1,4 +1,5 @@
 <div class="bg-white p-5 rounded-lg shadow">
+
     <div class="border-b border-gray-200 ">
         <nav class="flex gap-x-1">
             <button type="button"
@@ -13,183 +14,200 @@
         </nav>
     </div>
 
-    <div class="mt-3">
-        @if(isTabOpen('payments')){
-
-        <form class="space-y-4">
-            <!-- GRID -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-4">
-
-                <!-- Paypal -->
-                <label class="relative block cursor-pointer" for="gw-paypal">
-                    <input type="checkbox" id="gw-paypal" name="gateways[]" value="paypal" class="peer sr-only">
-
-                    <div class="rounded-lg border border-gray-200 bg-white p-4 transition
-                        peer-checked:border-secondary
-                        peer-checked:[&_.title]:text-secondary
-                        peer-checked:[&_.icon]:text-secondary
-                        peer-checked:[&_.tick]:bg-secondary peer-checked:[&_.tick]:border-secondary">
-
-                        <div class="flex items-start gap-3">
-                            <div class="mt-1 h-9 w-9 grid place-items-center rounded-md bg-gray-100">
-                                <i class="fa-brands fa-paypal"></i>
-                            </div>
-
-                            <div class="flex-1">
-                                <p class="title font-medium text-gray-900">Paypal</p>
-                                <p class="text-xs text-gray-500">Cards, wallets, BNPL</p>
-                            </div>
-
-                            <span class="tick mt-1 h-4 w-4 rounded-full border border-gray-300 grid place-items-center"></span>
-                        </div>
-                    </div>
-                </label>
-                
-                <!-- Stripe -->
-                <label class="relative block cursor-pointer" for="gw-stripe">
-                    <input type="checkbox" id="gw-stripe" name="gateways[]" value="stripe" class="peer sr-only">
-
-                    <div class="rounded-lg border border-gray-200 bg-white p-4 transition
-                        peer-checked:border-secondary
-                        peer-checked:[&_.title]:text-secondary
-                        peer-checked:[&_.icon]:text-secondary
-                        peer-checked:[&_.tick]:bg-secondary peer-checked:[&_.tick]:border-secondary">
-
-                        <div class="flex items-start gap-3">
-                            <div class="mt-1 h-9 w-9 grid place-items-center rounded-md bg-gray-100">
-                                <i class="fa-brands fa-stripe"></i>
-                            </div>
-
-                            <div class="flex-1">
-                                <p class="title font-medium text-gray-900">Stripe</p>
-                                <p class="text-xs text-gray-500">Cards, wallets, BNPL</p>
-                            </div>
-
-                            <span class="tick mt-1 h-4 w-4 rounded-full border border-gray-300 grid place-items-center"></span>
-                        </div>
-                    </div>
-                </label>
-                
-                <!-- Payfast -->
-                <label class="relative block cursor-pointer" for="gw-payfast">
-                    <input type="checkbox" id="gw-payfast" name="gateways[]" value="payfast" class="peer sr-only">
-
-                    <div class="rounded-lg border border-gray-200 bg-white p-4 transition
-                        peer-checked:border-secondary
-                        peer-checked:[&_.title]:text-secondary
-                        peer-checked:[&_.icon]:text-secondary
-                        peer-checked:[&_.tick]:bg-secondary peer-checked:[&_.tick]:border-secondary">
-
-                        <div class="flex items-start gap-3">
-                            <div class="mt-1 h-9 w-9 grid place-items-center rounded-md bg-gray-100">
-                                <i class="fa-duotone fa-solid fa-credit-card"></i>
-                            </div>
-
-                            <div class="flex-1">
-                                <p class="title font-medium text-gray-900">Payfast</p>
-                                <p class="text-xs text-gray-500">Cards, wallets</p>
-                            </div>
-
-                            <span class="tick mt-1 h-4 w-4 rounded-full border border-gray-300 grid place-items-center"></span>
-                        </div>
-                    </div>
-                </label>
-                
-                <!-- Alfalah -->
-                <label class="relative block cursor-pointer" for="gw-alfa">
-                    <input type="checkbox" id="gw-alfa" name="gateways[]" value="alfa" class="peer sr-only">
-
-                    <div class="rounded-lg border border-gray-200 bg-white p-4 transition
-                        peer-checked:border-secondary
-                        peer-checked:[&_.title]:text-secondary
-                        peer-checked:[&_.icon]:text-secondary
-                        peer-checked:[&_.tick]:bg-secondary peer-checked:[&_.tick]:border-secondary">
-
-                        <div class="flex items-start gap-3">
-                            <div class="mt-1 h-9 w-9 grid place-items-center rounded-md bg-gray-100">
-                                <i class="fa-duotone fa-solid fa-credit-card"></i>
-                            </div>
-
-                            <div class="flex-1">
-                                <p class="title font-medium text-gray-900">Alfa</p>
-                                <p class="text-xs text-gray-500">Cards, wallets</p>
-                            </div>
-
-                            <span class="tick mt-1 h-4 w-4 rounded-full border border-gray-300 grid place-items-center"></span>
-                        </div>
-                    </div>
-                </label>
-                
-                <!-- Paymob -->
-                <label class="relative block cursor-pointer" for="gw-paymob">
-                    <input type="checkbox" id="gw-paymob" name="gateways[]" value="paymob" class="peer sr-only">
-
-                    <div class="rounded-lg border border-gray-200 bg-white p-4 transition
-                        peer-checked:border-secondary
-                        peer-checked:[&_.title]:text-secondary
-                        peer-checked:[&_.icon]:text-secondary
-                        peer-checked:[&_.tick]:bg-secondary peer-checked:[&_.tick]:border-secondary">
-
-                        <div class="flex items-start gap-3">
-                            <div class="mt-1 h-9 w-9 grid place-items-center rounded-md bg-gray-100">
-                                <i class="fa-duotone fa-solid fa-credit-card"></i>
-                            </div>
-
-                            <div class="flex-1">
-                                <p class="title font-medium text-gray-900">Paymob</p>
-                                <p class="text-xs text-gray-500">Cards</p>
-                            </div>
-                            <span class="tick mt-1 h-4 w-4 rounded-full border border-gray-300 grid place-items-center"></span>
-                        </div>
-                    </div>
-                </label>
-                
-                <!-- Jazzcash -->
-                <label class="relative block cursor-pointer" for="gw-jazzcash">
-                    <input type="checkbox" id="gw-jazzcash" name="gateways[]" value="jazzcash" class="peer sr-only">
-
-                    <div class="rounded-lg border border-gray-200 bg-white p-4 transition
-                        peer-checked:border-secondary
-                        peer-checked:[&_.title]:text-secondary
-                        peer-checked:[&_.icon]:text-secondary
-                        peer-checked:[&_.tick]:bg-secondary peer-checked:[&_.tick]:border-secondary">
-
-                        <div class="flex items-start gap-3">
-                            <div class="mt-1 h-9 w-9 grid place-items-center rounded-md bg-gray-100">
-                                <i class="fa-duotone fa-solid fa-credit-card"></i>
-                            </div>
-
-                            <div class="flex-1">
-                                <p class="title font-medium text-gray-900">Jazzcash</p>
-                                <p class="text-xs text-gray-500">Mobile wallet</p>
-                            </div>
-                            <span class="tick mt-1 h-4 w-4 rounded-full border border-gray-300 grid place-items-center"></span>
-                        </div>
-                    </div>
-                </label>
-
-
-            </div>
-
-            <!-- ACTIONS -->
-            <div class="pt-2 flex items-center justify-end">
-                <button type="submit" class="inline-flex items-center rounded-md bg-secondary px-4 py-2 text-white text-sm font-medium hover:bg-secondary/90 focus:outline-none focus-visible:ring-2 focus-visible:ring-secondary/50">
-                    Save gateways
-                </button>
-            </div>
-        </form>
-
-        }@else if(isTabOpen('integrations')){
-        <div>
-            Integration ipsum dolor sit amet consectetur adipisicing elit. Iusto, quos animi corrupti autem,
-            reprehenderit dignissimos tempore vitae magnam deserunt quidem consequuntur laboriosam aliquid, distinctio
-            voluptatem non repellat? Totam, consectetur obcaecati.
+    @if(loading){
+        <div class="mt-3">
+            <div class="h-6 w-3/4 bg-gray-200 rounded-md mb-2 animate-pulse"></div>
+            <div class="h-6 w-full bg-gray-200 rounded-md mb-2 animate-pulse"></div>
+            <div class="h-6 w-2/3 bg-gray-200 rounded-md animate-pulse"></div>
         </div>
-        }
-        @else{
-        <div>
-            Nothing here
+    }@else{
+
+        <div class="mt-3">
+            <div [class]="isTabOpen('payments') ? 'block' : 'hidden'">
+                <form>
+                    <!-- GRID -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-4">
+    
+                        <!-- Paypal -->
+                        <label class="relative block cursor-pointer" for="gw-paypal">
+                            <input type="checkbox" id="gw-paypal" name="gateways[]" value="paypal" class="peer sr-only">
+    
+                            <div class="rounded-lg border border-gray-200 bg-white p-4 transition
+                                peer-checked:border-secondary
+                                peer-checked:[&_.title]:text-secondary
+                                peer-checked:[&_.icon]:text-secondary
+                                peer-checked:[&_.tick]:bg-secondary peer-checked:[&_.tick]:border-secondary">
+    
+                                <div class="flex items-start gap-3">
+                                    <div class="mt-1 h-9 w-9 grid place-items-center rounded-md bg-gray-100">
+                                        <i class="fa-brands fa-paypal"></i>
+                                    </div>
+    
+                                    <div class="flex-1">
+                                        <p class="title font-medium text-gray-900">Paypal</p>
+                                        <p class="text-xs text-gray-500">Cards, wallets, BNPL</p>
+                                    </div>
+    
+                                    <span
+                                        class="tick mt-1 h-4 w-4 rounded-full border border-gray-300 grid place-items-center"></span>
+                                </div>
+                            </div>
+                        </label>
+    
+                        <!-- Stripe -->
+                        <label class="relative block cursor-pointer" for="gw-stripe">
+                            <input type="checkbox" id="gw-stripe" name="gateways[]" value="stripe" class="peer sr-only">
+    
+                            <div class="rounded-lg border border-gray-200 bg-white p-4 transition
+                                peer-checked:border-secondary
+                                peer-checked:[&_.title]:text-secondary
+                                peer-checked:[&_.icon]:text-secondary
+                                peer-checked:[&_.tick]:bg-secondary peer-checked:[&_.tick]:border-secondary">
+    
+                                <div class="flex items-start gap-3">
+                                    <div class="mt-1 h-9 w-9 grid place-items-center rounded-md bg-gray-100">
+                                        <i class="fa-brands fa-stripe"></i>
+                                    </div>
+    
+                                    <div class="flex-1">
+                                        <p class="title font-medium text-gray-900">Stripe</p>
+                                        <p class="text-xs text-gray-500">Cards, wallets, BNPL</p>
+                                    </div>
+    
+                                    <span
+                                        class="tick mt-1 h-4 w-4 rounded-full border border-gray-300 grid place-items-center"></span>
+                                </div>
+                            </div>
+                        </label>
+    
+                        <!-- Payfast -->
+                        <label class="relative block cursor-pointer" for="gw-payfast">
+                            <input type="checkbox" id="gw-payfast" name="gateways[]" value="payfast" class="peer sr-only">
+    
+                            <div class="rounded-lg border border-gray-200 bg-white p-4 transition
+                                peer-checked:border-secondary
+                                peer-checked:[&_.title]:text-secondary
+                                peer-checked:[&_.icon]:text-secondary
+                                peer-checked:[&_.tick]:bg-secondary peer-checked:[&_.tick]:border-secondary">
+    
+                                <div class="flex items-start gap-3">
+                                    <div class="mt-1 h-9 w-9 grid place-items-center rounded-md bg-gray-100">
+                                        <i class="fa-duotone fa-solid fa-credit-card"></i>
+                                    </div>
+    
+                                    <div class="flex-1">
+                                        <p class="title font-medium text-gray-900">Payfast</p>
+                                        <p class="text-xs text-gray-500">Cards, wallets</p>
+                                    </div>
+    
+                                    <span
+                                        class="tick mt-1 h-4 w-4 rounded-full border border-gray-300 grid place-items-center"></span>
+                                </div>
+                            </div>
+                        </label>
+    
+                        <!-- Alfalah -->
+                        <label class="relative block cursor-pointer" for="gw-alfa">
+                            <input type="checkbox" id="gw-alfa" name="gateways[]" value="alfa" class="peer sr-only">
+    
+                            <div class="rounded-lg border border-gray-200 bg-white p-4 transition
+                                peer-checked:border-secondary
+                                peer-checked:[&_.title]:text-secondary
+                                peer-checked:[&_.icon]:text-secondary
+                                peer-checked:[&_.tick]:bg-secondary peer-checked:[&_.tick]:border-secondary">
+    
+                                <div class="flex items-start gap-3">
+                                    <div class="mt-1 h-9 w-9 grid place-items-center rounded-md bg-gray-100">
+                                        <i class="fa-duotone fa-solid fa-credit-card"></i>
+                                    </div>
+    
+                                    <div class="flex-1">
+                                        <p class="title font-medium text-gray-900">Alfa</p>
+                                        <p class="text-xs text-gray-500">Cards, wallets</p>
+                                    </div>
+    
+                                    <span
+                                        class="tick mt-1 h-4 w-4 rounded-full border border-gray-300 grid place-items-center"></span>
+                                </div>
+                            </div>
+                        </label>
+    
+                        <!-- Paymob -->
+                        <label class="relative block cursor-pointer" for="gw-paymob">
+                            <input type="checkbox" id="gw-paymob" name="gateways[]" value="paymob" class="peer sr-only">
+    
+                            <div class="rounded-lg border border-gray-200 bg-white p-4 transition
+                                peer-checked:border-secondary
+                                peer-checked:[&_.title]:text-secondary
+                                peer-checked:[&_.icon]:text-secondary
+                                peer-checked:[&_.tick]:bg-secondary peer-checked:[&_.tick]:border-secondary">
+    
+                                <div class="flex items-start gap-3">
+                                    <div class="mt-1 h-9 w-9 grid place-items-center rounded-md bg-gray-100">
+                                        <i class="fa-duotone fa-solid fa-credit-card"></i>
+                                    </div>
+    
+                                    <div class="flex-1">
+                                        <p class="title font-medium text-gray-900">Paymob</p>
+                                        <p class="text-xs text-gray-500">Cards</p>
+                                    </div>
+                                    <span
+                                        class="tick mt-1 h-4 w-4 rounded-full border border-gray-300 grid place-items-center"></span>
+                                </div>
+                            </div>
+                        </label>
+    
+                        <!-- Jazzcash -->
+                        <label class="relative block cursor-pointer" for="gw-jazzcash">
+                            <input type="checkbox" id="gw-jazzcash" name="gateways[]" value="jazzcash" class="peer sr-only">
+    
+                            <div class="rounded-lg border border-gray-200 bg-white p-4 transition
+                                peer-checked:border-secondary
+                                peer-checked:[&_.title]:text-secondary
+                                peer-checked:[&_.icon]:text-secondary
+                                peer-checked:[&_.tick]:bg-secondary peer-checked:[&_.tick]:border-secondary">
+    
+                                <div class="flex items-start gap-3">
+                                    <div class="mt-1 h-9 w-9 grid place-items-center rounded-md bg-gray-100">
+                                        <i class="fa-duotone fa-solid fa-credit-card"></i>
+                                    </div>
+    
+                                    <div class="flex-1">
+                                        <p class="title font-medium text-gray-900">Jazzcash</p>
+                                        <p class="text-xs text-gray-500">Mobile wallet</p>
+                                    </div>
+                                    <span
+                                        class="tick mt-1 h-4 w-4 rounded-full border border-gray-300 grid place-items-center"></span>
+                                </div>
+                            </div>
+                        </label>
+    
+    
+                    </div>
+    
+                    <!-- ACTIONS -->
+                    <div class="pt-2 flex items-center justify-end">
+                        <button type="submit"
+                            class="inline-flex items-center rounded-md bg-secondary px-4 py-2 text-white text-sm font-medium hover:bg-secondary/90 focus:outline-none focus-visible:ring-2 focus-visible:ring-secondary/50">
+                            Save gateways
+                        </button>
+                    </div>
+                </form>
+            </div>
+    
+            <div [class]="isTabOpen('integrations') ? 'block' : 'hidden'">
+                Integration ipsum dolor sit amet consectetur adipisicing elit. Iusto, quos animi corrupti autem,
+                reprehenderit dignissimos tempore vitae magnam deserunt quidem consequuntur laboriosam aliquid, distinctio
+                voluptatem non repellat? Totam, consectetur obcaecati.
+            </div>
+    
+            <div [class]="isTabOpen('authentication') ? 'block' : 'hidden'">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi ex reprehenderit officia, similique nesciunt amet, qui nisi labore explicabo eos sequi natus sit at tenetur harum saepe nam perferendis debitis.
+            </div>
         </div>
-        }
-    </div>
+    }
+
+
+    
+
 </div>
