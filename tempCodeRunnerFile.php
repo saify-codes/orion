@@ -1,42 +1,82 @@
 <?php
 
+$version = '0.0.0.0';
+$secret  = 'secvariableret';
 
-$version = "0.0.0.0";
+$items   = [
+    [
+        'item_id'       => 1,
+        'item_name'     => 'burger',
+        'item_price'    => 1000,
+        'addons'        => [
+            [
+                'addon_id'      => 1,
+                'addon_name'    => 'extra sauce',
+                'addon_price'   => 10,
+            ]
+        ]
+    ],
+    [
+        'item_id'       => 2,
+        'item_name'     => 'sandwitch',
+        'item_price'    => 500,
+    ],
+    [
+        'item_id'       => 3,
+        'item_name'     => 'cake',
+        'item_price'    => 100,
+    ],
+];
 
+foreach ($items as &$item) {
+    
 
-function increment(){
+    if (isset($item['addons'])) {
+        foreach ($item['addons'] as &$addon) {
+            $addon['signed_token'] = signAddon($addon);
+        }
+    }
+    
+    $item['signed_token'] = signItem($item);
+}
 
+function signItem($item){
+    global $secret;
     global $version;
+    return hash_hmac('sha256', sprintf("%d.%d.%s", $item['item_id'], $item['item_price'], $version), $secret);
+}
 
-    [$a, $b, $c, $d] = array_map('intval', explode(".",$version));
+function signAddon($addon){
+    global $secret;
+    global $version;
+    return hash_hmac('sha256', sprintf("%d.%d.%s", $addon['addon_id'], $addon['addon_price'], $version), $secret);
+}
 
-    $d++;
+function verifyItemSignature($item){
 
-    if ($d > 100) {
-        $c++;
-        $d = 0;
+    if (!isset($item['signed_token'])) {
+        return false;
     }
 
-    if ($c > 100) {
-        $b++;
-        $c = 0;
+    print $item['signed_token'];
+    print "\n";
+    print signItem($item);
+    print "\n";
+
+    return hash_equals($item['signed_token'], signItem($item));
+}
+
+function placeOrder($item){
+
+    if(verifyItemSignature($item)){
+        echo "Order placed";
+    }else{
+        echo "Payload corrupted";
     }
 
-    if ($b > 100) {
-        $a++;
-        $b = 0;
-    }
-
-    // reset
-    if ($a > 100) {
-        $a = $b = $c = $d = 0;
-    }
-
-    $version = sprintf("%s.%s.%s.%s", $a, $b, $c, $d);
 }
 
 
-for ($i=0; $i < 100000000; $i++) { 
-    increment();
-    print $version . "\n";
-}
+// placeOrder($items);
+
+print_r($items);
