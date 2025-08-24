@@ -11,8 +11,7 @@ import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angula
 })
 export class AddMerchantComponent {
   private fb = inject(FormBuilder);
-
-  form: FormGroup = this.fb.group({
+  public form: FormGroup = this.fb.group({
     merchant: this.fb.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
