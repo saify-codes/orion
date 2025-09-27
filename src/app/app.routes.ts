@@ -102,7 +102,7 @@ export const routes: Routes = [
   { path: 'admin/auth/login', component: AdminSigninComponent },
 
   // Merchant guest route (outside the shell)
-  { path: 'auth/signin', component: SigninComponent },
+  { path: 'signin', component: SigninComponent },
 
   // 404
   { path: '**', component: NotFoundComponent },
