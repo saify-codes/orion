@@ -1,0 +1,138 @@
+<div class="flex flex-col">
+    <div class="overflow-x-auto">
+        <div class="w-full inline-block align-middle">
+            <div class="rounded-lg divide-y divide-gray-200 bg-white shadow">
+                <div class="py-3 px-4">
+                    <div class="flex items-center gap-2">
+                        <div class="relative max-w-xs">
+                            <input name="search" type="text"
+                                class="py-1.5 sm:py-2 px-3 ps-9 block w-full border border-gray-200 rounded-lg sm:text-sm outline-0"
+                                placeholder="Search for items" />
+                            <div class="absolute inset-y-0 start-0 flex items-center pointer-events-none ps-3">
+                                <i class="fa-light fa-magnifying-glass"></i>
+                            </div>
+                        </div>
+                        <select
+                            class="py-1.5 sm:py-2 px-3 block border border-gray-200 rounded-lg sm:text-sm outline-0">
+                            <option value="10">10</option>
+                            <option value="25">25</option>
+                            <option value="50">50</option>
+                            <option value="100">100</option>
+                            <option value="500">500</option>
+                        </select>
+                        @if(true){
+                        <div
+                            class="animate-spin inline-block align-middle size-6 border-3 border-current border-t-transparent text-gray-800 rounded-full">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                        }
+                    </div>
+                </div>
+                <div class="max-h-[700px] overflow-y-auto">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th scope="col"
+                                    class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">
+                                    <!-- empty  -->
+                                </th>
+                                <th scope="col"
+                                    class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">
+                                    sku
+                                </th>
+                                <th scope="col"
+                                    class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">
+                                    name
+                                </th>
+                                <th scope="col"
+                                    class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">
+                                    categories
+                                </th>
+                                <th scope="col"
+                                    class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">
+                                    price
+                                </th>
+                                <th scope="col"
+                                    class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">
+                                    created at
+                                </th>
+                                <th scope="col"
+                                    class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">
+                                    action
+                                </th>
+                            </tr>
+                        </thead>
+
+                        <tbody class="divide-y divide-gray-200 relative table-fixed">
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800">
+                                    <label class="inline-flex items-center gap-3 cursor-pointer">
+                                        <input type="checkbox" class="peer sr-only">
+                                        <span class="relative inline-flex h-5 w-5 items-center justify-center rounded bg-white ring ring-gray-300 peer-checked:bg-secondary peer-checked:ring-secondary peer-checked:ring-offset-2 peer-checked:[&_i]:opacity-100">
+                                            <i class="fa-solid fa-check text-white opacity-0 text-[10px]"></i>
+                                        </span>
+                                    </label>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800">
+                                    8ew
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800">
+                                    Big fest
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 space-x-2.5">
+                                    <span
+                                        class="inline-flex items-center gap-x-1.5 py-1.5 px-3 rounded-full text-xs font-bold bg-teal-500 text-white">Lunch</span>
+                                    <span
+                                        class="inline-flex items-center gap-x-1.5 py-1.5 px-3 rounded-full text-xs font-bold bg-teal-500 text-white">Appetizer</span>
+                                    <span
+                                        class="inline-flex items-center gap-x-1.5 py-1.5 px-3 rounded-full text-xs font-bold bg-teal-500 text-white">Midnight</span>
+                                    <span
+                                        class="inline-flex items-center gap-x-1.5 py-1.5 px-3 rounded-full text-xs font-bold bg-teal-500 text-white">Crazy
+                                        sunday</span>
+                                    <span
+                                        class="inline-flex items-center gap-x-1.5 py-1.5 px-3 rounded-full text-xs font-bold bg-teal-500 text-white">Extras</span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800">
+                                    Rs. 1200
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800">
+                                    2025-02-1 06:00 PM
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 space-x-2.5">
+                                    <button
+                                        class="size-10 text-sm font-medium rounded-lg border border-green-200 bg-white text-green-500 shadow-2xs hover:bg-green-50">
+                                        <i class="fas fa-pen"></i>
+                                    </button>
+                                    <button
+                                        class="size-10 text-sm font-medium rounded-lg border border-red-200 bg-white text-red-500 shadow-2xs hover:bg-red-50">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            @for (item of items; track $index) {
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800">
+                                    {{ item.id }}
+                                </td>
+                            </tr>
+                            }
+
+                            @if(items.length === 0 && false){
+                            <tr>
+                                <td colspan="6"
+                                    class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 text-center">
+                                    No records.
+                                </td>
+                            </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <!-- pagination -->
+                <div class="p-5">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

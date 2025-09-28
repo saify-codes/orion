@@ -15,6 +15,7 @@ import { DatatableComponent } from './components/datatable/datatable.component';
 import { AddMerchantComponent } from './pages/admin/merchants/add/add.component';
 import { EditMerchantComponent } from './pages/admin/merchants/edit/edit.component';
 import { AddAdminComponent } from './pages/admin/admins/add/add.component';
+import { ItemsComponent } from './pages/merchant/menu/items/items.component';
 
 export const routes: Routes = [
   // admin routes
@@ -50,7 +51,7 @@ export const routes: Routes = [
       {
         path: 'menu',
         children: [
-          { path: 'items', component: GeneralComponent },
+          { path: 'items', component: ItemsComponent },
           { path: 'item-category', component: GeneralComponent },
           { path: 'sizes', component: GeneralComponent },
           { path: 'addons', component: GeneralComponent },
