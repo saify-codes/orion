@@ -37,6 +37,7 @@ export const routes: Routes = [
   // merchant routes
   {
     path: '',
+    canActivate: [],
     component: MerchantLayout,
     children: [
       { path: '', component: HomeComponent },
