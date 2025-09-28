@@ -1,12 +1,13 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Cookie } from '../../utils/cookie';
 import { Router } from '@angular/router';
+import { Cookie } from '../../utils/cookie';
 
 export type User = {
   name: string;
   email: string;
   avatar: string | null;
+  type: 'ADMIN' | 'STAFF';
   additionalData: any
 };
 
@@ -45,16 +46,13 @@ export class MerchantAuthService {
   // ----------- Actions -----------
 
   async login(
-    email: string,
+    username: string,
     password: string,
     remember: boolean
   ): Promise<void> {
     return new Promise((resolve, reject) => {
       this.http
-        .post(
-          'https://orion-backend-main-l6ntcw.laravel.cloud/api/admin/auth/login',
-          { email, password, remember }
-        )
+        .post('https://orion-backend-main-l6ntcw.laravel.cloud/api/admin/auth/login', { username, password, remember })
         .subscribe({
           next: (res: any) => {
             const { user, token, maxAge } = res.data;
@@ -64,7 +62,7 @@ export class MerchantAuthService {
 
             Cookie.set(COOKIE_KEY, { user, token }, { maxAge });
 
-            this.router.navigate(['admin/']);
+            this.router.navigate(['/']);
 
             resolve();
           },
