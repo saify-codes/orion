@@ -117,7 +117,7 @@
           routerLinkActive="active"
           [routerLinkActiveOptions]="{ exact: false }"
           #Menu="routerLinkActive"
-          [class.open]="isOpen('menu') || Menu.isActive"
+          [class.open]="isOpen('menu')"
         >
           <button
             type="button"
@@ -183,8 +183,7 @@
         <li
           class="dropdown group/parent"
           routerLinkActive="active"
-          #marketing="routerLinkActive"
-          [class.open]="isOpen('marketing') || marketing.isActive"
+          [class.open]="isOpen('marketing')"
         >
           <button
             type="button"
@@ -230,8 +229,7 @@
         <li
           class="dropdown group/parent"
           routerLinkActive="active"
-          #promotions="routerLinkActive"
-          [class.open]="isOpen('promotions') || promotions.isActive"
+          [class.open]="isOpen('promotions')"
         >
           <button
             type="button"
@@ -272,8 +270,7 @@
           class="dropdown group/parent"
           routerLinkActive="active"
           [routerLinkActiveOptions]="{ exact: false }"
-          #settings="routerLinkActive"
-          [class.open]="isOpen('settings') || settings.isActive"
+          [class.open]="isOpen('settings')"
         >
           <button
             type="button"
@@ -342,8 +339,7 @@
           class="dropdown group/parent"
           routerLinkActive="active"
           [routerLinkActiveOptions]="{ exact: false }"
-          #reports="routerLinkActive"
-          [class.open]="isOpen('reports') || reports.isActive"
+          [class.open]="isOpen('reports')"
         >
           <button
             type="button"
