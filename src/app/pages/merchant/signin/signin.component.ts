@@ -1,5 +1,4 @@
 import { Component, inject } from '@angular/core';
-import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MerchantAuthService } from '../../../services/merchant/auth.service';
 import { withLoader } from '../../../utils';

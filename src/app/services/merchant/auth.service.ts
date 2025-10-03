@@ -64,6 +64,7 @@ export class MerchantAuthService {
     Object.assign(this, { user, token, status: 'authenticated' });
     Cookie.set(COOKIE_KEY, { user, token }, { maxAge });
     
+    this.router.navigate(['/'])
   }
 
   async logout(): Promise<void> {
