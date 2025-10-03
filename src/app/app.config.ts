@@ -4,6 +4,7 @@ import { routes } from './app.routes';
 import { provideClientHydration,  withEventReplay} from '@angular/platform-browser';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { AdminAuthService } from './services/admin/auth-service.service';
+import { MerchantAuthService } from './services/merchant/auth.service';
 import { BaseUrlInterceptor } from './interceptors/base-url.interceptor';
 
 export const appConfig: ApplicationConfig = {
@@ -13,6 +14,7 @@ export const appConfig: ApplicationConfig = {
     provideClientHydration(withEventReplay()),
     provideHttpClient(withInterceptors([BaseUrlInterceptor])),
     provideAppInitializer( () => inject(AdminAuthService).init()),
+    provideAppInitializer( () => inject(MerchantAuthService).init()),
     
   ],
 };

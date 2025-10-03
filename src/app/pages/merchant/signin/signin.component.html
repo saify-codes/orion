@@ -8,17 +8,17 @@
     </div>
     <form [formGroup]="form" (ngSubmit)="onSubmit()" class="space-y-5">
       <div>
-        <label class="font-medium">Email</label>
+        <label class="font-medium">Username</label>
         <input
-          formControlName="email"
-          type="email"
+          formControlName="username"
+          type="text"
           required
           class="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-primary shadow-sm rounded-lg"
         />
         <small class="text-red-500 font-bold block mt-2">
-          @if (form.controls['email'].touched && form.controls['email'].invalid) {
-            {{ form.controls['email'].hasError('required')  ? 'Email is required.' : '' }}
-            {{ form.controls['email'].hasError('email')     ? 'Please enter a valid email.' : '' }}
+          @if (form.controls['username'].touched && form.controls['username'].invalid) {
+            {{ form.controls['username'].hasError('required')  ? 'Username is required.' : '' }}
+            {{ form.controls['username'].hasError('minlength') ? 'Please enter a valid username.' : '' }}
           }
         </small>        
       </div>
@@ -59,10 +59,15 @@
       </div>
       <button
         type="submit"
-        class="w-full px-4 py-2 text-white font-medium bg-primary hover:bg-primary-500 disabled:bg-gray-300 rounded-lg duration-150"
-        [disabled]="form.invalid"
+        class="w-full px-4 py-2 text-white font-medium bg-primary hover:bg-primary-500 disabled:bg-gray-300 rounded-lg duration-150 flex items-center justify-center gap-2"
+        [class.pointer-events-none]="loading"
       >
-        Sign in
+        @if (loading) {
+          <span class="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
+        }@else{
+          <span>Sign in</span>
+        }
+
       </button>
     </form>
     <!-- <button
@@ -91,4 +96,3 @@
     <div class="wave"></div>
   </div>
 </main>
-
