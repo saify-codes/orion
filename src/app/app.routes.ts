@@ -52,9 +52,9 @@ export const routes: Routes = [
       {
         path: 'menu',
         children: [
-          { path: 'items', component: ItemsComponent },
-          { path: 'items/create', component: ItemsComponent },
-          { path: 'items/{id}', component: ItemsComponent },
+          { path: 'item', component: ItemsComponent },
+          { path: 'item/create', component: ItemsComponent },
+          { path: 'item/{id}', component: ItemsComponent },
           { path: 'category', component: GeneralComponent },
           { path: 'sizes', component: GeneralComponent },
           { path: 'addons', component: GeneralComponent },
