@@ -4,8 +4,8 @@ import { RouterLink } from "@angular/router";
 @Component({
   selector: 'app-items',
   imports: [RouterLink],
-  templateUrl: './items.component.html',
-  styleUrl: './items.component.css'
+  templateUrl: './index.component.html',
+  styleUrl: './index.component.css'
 })
 export class ItemsComponent {
 
