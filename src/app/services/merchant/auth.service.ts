@@ -36,6 +36,9 @@ export class MerchantAuthService {
     this.user   = user;
     this.token  = token;
     this.status = user ? 'authenticated' : 'unauthenticated';
+
+    console.log(`Auth initialized: ${this.status}`);
+    
   }
 
   isAuthenticated(): boolean {
