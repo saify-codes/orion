@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
+import { MerchantAuthService } from '../../../../services/merchant/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -6,11 +7,12 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
 })
-export class HeaderComponent implements OnInit{
+export class HeaderComponent{
 
   public currentOpenMenu: string|null;
   public notificaitions: any[];
   public isFlushing: boolean
+  private auth = inject(MerchantAuthService)
 
   constructor() {
     this.currentOpenMenu = null
@@ -39,8 +41,8 @@ export class HeaderComponent implements OnInit{
     return this.notificaitions;
   }
 
-  ngOnInit(): void {
-    
+  logout() {
+    this.auth.logout();
   }
 
 }

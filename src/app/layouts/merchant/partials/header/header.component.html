@@ -179,7 +179,7 @@
       </button>
 
       <ul
-        class="bg-white top-12 right-0 mt-5 w-56 absolute rounded shadow"
+        class="bg-white top-12 right-0 mt-5 w-56 absolute rounded shadow z-50"
         [class.hidden]="!isOpen('profile')"
       >
 
@@ -220,7 +220,7 @@
         <hr class="text-gray-200">
 
         <li class="hover:bg-gray-100 m-2 py-1 px-2 rounded">
-          <a href="javascript:void(0)" class="flex items-center gap-2 text-gray-600 text-sm">
+          <a href="javascript:void(0)" class="flex items-center gap-2 text-gray-600 text-sm" (click)="logout()">
             <i class="fas fa-arrow-left"></i>
             Sign out
           </a>

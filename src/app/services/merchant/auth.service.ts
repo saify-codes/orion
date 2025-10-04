@@ -36,9 +36,6 @@ export class MerchantAuthService {
     this.user   = user;
     this.token  = token;
     this.status = user ? 'authenticated' : 'unauthenticated';
-
-    console.log(`Auth initialized: ${this.status}`);
-    
   }
 
   isAuthenticated(): boolean {
@@ -72,7 +69,7 @@ export class MerchantAuthService {
 
   async logout(): Promise<void> {
     this.clearAuthSession();
-    this.router.navigate(['/login']);
+    this.router.navigate(['/signin']);
   }
 
   // ----------- Helpers -----------
