@@ -1,5 +1,4 @@
 import { Injectable, inject } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Cookie } from '../../utils/cookie';
 import { environment } from '../../../environments/environment';
@@ -18,9 +17,9 @@ const COOKIE_KEY = 'merchant_auth_session';
 @Injectable({ providedIn: 'root' })
 export class MerchantAuthService {
 
-  public user: User | null = null;
-  public token: string | null = null;
-  public status: string = 'loading';
+  private user: User | null = null;
+  private token: string | null = null;
+  private status: string = 'loading';
   private router: Router = inject(Router);
 
   // ----------- Lifecycle -----------
@@ -40,6 +39,14 @@ export class MerchantAuthService {
 
   isAuthenticated(): boolean {
     return this.status === 'authenticated';
+  }
+
+  getToken(): string | null {
+    return this.token;
+  }
+
+  getUser(): User | null {
+    return this.user;
   }
 
   // ----------- Actions -----------

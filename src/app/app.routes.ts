@@ -19,6 +19,8 @@ import { redirectIfAuthGuard } from './guards/merchant/redirect-if-auth.guard';
 
 import { CreateItemComponent } from './pages/merchant/menu/items/create/create-item.component';
 import { ItemComponent } from './pages/merchant/menu/items/index/index.component';
+import { CategoryComponent } from './pages/merchant/menu/category/category.component';
+import { CreateCategoryComponent } from './pages/merchant/menu/category/create/create-category.component';
 
 export const routes: Routes = [
   // admin routes
@@ -58,7 +60,10 @@ export const routes: Routes = [
           { path: 'item/create', component: CreateItemComponent },
           { path: 'item/:id', component: ItemComponent },
           { path: 'item/:id/edit', component: ItemComponent },
-          { path: 'category', component: GeneralComponent },
+         
+          { path: 'category', component: CategoryComponent },
+          { path: 'category/create', component: CreateCategoryComponent },
+
           { path: 'sizes', component: GeneralComponent },
           { path: 'addons', component: GeneralComponent },
           { path: 'addon-category', component: GeneralComponent },
