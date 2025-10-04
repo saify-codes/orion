@@ -15,8 +15,10 @@ import { DatatableComponent } from './components/datatable/datatable.component';
 import { AddMerchantComponent } from './pages/admin/merchants/add/add.component';
 import { EditMerchantComponent } from './pages/admin/merchants/edit/edit.component';
 import { AddAdminComponent } from './pages/admin/admins/add/add.component';
-import { ItemComponent } from './pages/merchant/menu/items/index/index.component';
 import { redirectIfAuthGuard } from './guards/merchant/redirect-if-auth.guard';
+
+import { CreateItemComponent } from './pages/merchant/menu/items/create/create-item.component';
+import { ItemComponent } from './pages/merchant/menu/items/index/index.component';
 
 export const routes: Routes = [
   // admin routes
@@ -53,7 +55,7 @@ export const routes: Routes = [
         path: 'menu',
         children: [
           { path: 'item', component: ItemComponent },
-          { path: 'item/create', component: ItemComponent },
+          { path: 'item/create', component: CreateItemComponent },
           { path: 'item/:id', component: ItemComponent },
           { path: 'item/:id/edit', component: ItemComponent },
           { path: 'category', component: GeneralComponent },
