@@ -7,7 +7,7 @@ import { RouterLink } from "@angular/router";
   templateUrl: './index.component.html',
   styleUrl: './index.component.css'
 })
-export class ItemsComponent {
+export class ItemComponent {
 
   public items: any[] = []
 
